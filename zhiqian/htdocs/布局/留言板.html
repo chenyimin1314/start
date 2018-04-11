@@ -1,0 +1,39 @@
+<!DOCTYPE html>  
+<html>  
+    <head>  
+        <style>  
+            #ly{  
+                width:auto;  
+                height: auto;  
+            }  
+        </style>  
+        <meta charset="utf-8" />  
+        <title></title>  
+    </head>  
+    <body>  
+        <input type="text" id="tx" /><button value="留言" id="bt" >留言</button>  
+        <div id="ly"></div>  
+      
+    <script>  
+        var tx=document.getElementById("tx");  
+        var ly=document.getElementById("ly");  
+        var obt=document.getElementById("bt");   
+        function tj(){  
+            var oli =document.createElement("a");  
+            oli.innerHTML=tx.value+'删除'+'</br>';  
+            oli.onclick=function ck(){  
+                ly.removeChild(this);  
+            }  
+            oli.href="#";  
+            if(ly.firstChild){  
+                ly.insertBefore(oli,ly.firstChild);  
+            }  
+            else{ly.firstChild=oli;}  
+            ly.appendChild(oli);  
+        };  
+        obt.onclick =function a(){tj();}  
+              
+          
+    </script>  
+    </body>  
+</html>  

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="public/main.css" rel="stylesheet">
+  <style lang="">
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      display: none;
+    }
+
+    .loading img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!--这里要加载header.html-->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="javascript:;">Dashboard</a></li>
+          <li><a href="javascript:;">Settings</a></li>
+          <li><a href="javascript:;">Profile</a></li>
+          <li><a href="javascript:;">Help</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="nav-plist"><a href="javascript:;">商品管理</a></li>
+          <li class="nav-olist"><a href="javascript:;">订单管理</a></li>
+          <li class="nav-chart active"><a href="javascript:;">运营数据</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="plist main-content">
+          <h2 class="sub-header">
+            运营数据
+            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+              <select class="form-control" id="daysSelect" style="display:inline-block;float: left;width: auto;margin-right: 5px;">
+                <option value="7">最近7天</option>
+                <option value="30">最近30天</option>
+              </select>
+              <!--<button type="button" class="btn btn-default pay-btn btn-success">已付款数据</button>
+              <button type="button" class="btn btn-default pay-btn">销售额</button>-->
+              <!--<button type="button" class="btn btn-default plup-btn">批量上架</button>
+              <button type="button" class="btn btn-default pldown-btn">批量下架</button>
+              <button type="button" class="btn btn-default pldel-btn">批量删除</button>-->
+            </div>
+          </h2>
+          <div id="chart-box" style="width:100%;min-height:300px;"></div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="loading">
+    <div class="mask"></div>
+    <img src="../public/loading.gif" alt="">
+  </div>
+
+
+  <script src="../public/jquery.min.js"></script>
+  <script src="./11-canvas插件/public/echarts.min.js"></script>
+  <script type='text/javascript'>
+    $(document).ajaxStart(function () {
+      $('.loading').show();
+    })
+
+    $(document).ajaxComplete(function (event, xhr) {
+      $('.loading').hide();
+      if (xhr.responseJSON.status == 1001) {
+        location.href = './login-jquery-2.html';
+      }
+    })
+
+
+    let chartBox = document.querySelector('#chart-box');
+    let chart = echarts.init(chartBox);
+
+
+$('#daysSelect').on('change', function(){
+  renderChart()
+})
+renderChart()
+function renderChart(){
+    $.get('../api/cart/order.php', function (data) {
+      console.log(data);
+      if (data.status == 1) {
+        var chartTitle = ['下单额', '销售额'];
+        var dataList = [];
+        var xAxis = [];
+        var list = data.list;
+        var newList = [];
+        var today = new Date();
+        var endTimeStamp = new Date(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()).getTime();
+        var startTimeStamp = 0;
+        var days = parseInt( $('#daysSelect').val() );
+
+        startTimeStamp = endTimeStamp - days * 24 * 60 * 60 * 1000
+
+        for (var i = days; i > 0; i--) {
+          var date = new Date(endTimeStamp - i * 24 * 60 * 60 * 1000);
+          xAxis.push((date.getMonth() + 1) + '-' + date.getDate())
+        }
+
+        newList = list.filter(function (item) {
+          return item.createTime * 1000 > startTimeStamp && item.createTime * 1000 < endTimeStamp
+        })
+
+        var payList = newList.filter(function (item) {
+          return item.status == 1
+        })
+
+        var tradeList = newList.filter(function (item) {
+          return item.status == 3
+        })
+
+        chartTitle.forEach(function (title) {
+          var data = [];
+          for (var j = 0; j < days; j++) {
+            data.push(0)
+          }
+
+          if(title == '下单额'){
+            payList.forEach(function(item){
+              var date = new Date(item.createTime*1000);
+              for (var i = 0; i < days; i++) {
+                
+                if( ( (date.getMonth() + 1) + '-' + date.getDate() ) == xAxis[i] ){        
+                  data[i] += parseInt(item.total)
+                  break;
+                }
+              }
+              
+            })
+          }else if(title == '销售额'){
+            tradeList.forEach(function(item){
+              var date = new Date(item.createTime*1000);
+              for (var i = 0; i < days; i++) {
+                
+                if( ( (date.getMonth() + 1) + '-' + date.getDate() ) == xAxis[i] ){        
+                  data[i] += parseInt(item.total)
+                  break;
+                }
+              }
+              
+            })
+          }
+
+          dataList.push({
+            name: title,
+            type: 'line',
+            stack: '总量',
+            areaStyle: {
+              normal: {}
+            },
+            data: data
+          })
+
+        })
+
+      }
+
+      var options = {
+        title: {
+          //            标题文本
+          text: '电商销售图表'
+        },
+        tooltip: {
+          //            通过坐标显示提示信息
+          trigger: ''
+        },
+        legend: {
+          //            图表头标识  每个数据名字要与图表数据相应的name一样
+          data: chartTitle
+        },
+        grid: {
+          //            表格距离左边 右边 下边 上边的空白
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true //这个不用管,加上即可
+        },
+        xAxis: [{
+          type: 'category',
+          //                图表X轴左右留白
+          boundaryGap: false,
+          //                X轴值
+          data: xAxis
+        }],
+        yAxis: [{
+          type: 'value'
+        }],
+        //        图表数据数组
+        series: dataList
+      };
+
+      chart.setOption(options);
+
+    }, 'json')
+
+}
+
+  </script>
+</body>
+
+</html>

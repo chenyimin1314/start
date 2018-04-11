@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no" />
+  <title>品类</title>
+  <link rel="stylesheet" href="public/css/style_ios.css">
+  <script src="public/js/fontsize.js" type="text/javascript"></script>
+  <script type="text/javascript" src="public/vue2.min.js"></script>
+  <script type="text/javascript" src="public/vue-resource.js"></script>
+
+</head>
+
+<body class="bf8">
+  <div id="app">
+    <!--header-->
+    <header class="header clearfix">
+      <div class="left">
+      </div>
+      <div class="middle"><span class="god bold">商品列表</span></div>
+    </header>
+    <div class="h1r"></div>
+    <section class="list" @scroll="scroll" ref="listDom">
+      <ul class=" clearfix">
+
+        <prod v-for="item in list" :item="item"></prod>
+
+      </ul>
+      <section class="list-bottomla clearfix">
+        <div class="itemEnd" v-if="!isEnd">拖动,显示更多珠宝</div>
+        <div class="itemEnd nol" v-if="isEnd">到底了</div>
+      </section>
+    </section>
+    
+    <nav class="m_nav clearfix">
+      <a href="index.html">
+        <dl>
+          <dd class="ico1"></dd>
+          <dt>首页</dt>
+        </dl>
+      </a>
+      <a href="list.html">
+        <dl>
+          <dd class="ico2"></dd>
+          <dt>列表</dt>
+        </dl>
+      </a>
+      <a href="zbox.html">
+        <dl>
+          <dd class="ico3"></dd>
+          <dt>购物车</dt>
+        </dl>
+      </a>
+      <a href="order.html">
+        <dl>
+          <dd class="ico4"></dd>
+          <dt>我的</dt>
+        </dl>
+      </a>
+    </nav>
+    
+  </div>
+
+
+
+  <script>
+  // 声明组件
+  
+    Vue.component('prod', {
+      template: '<li><a href="javascript:;">
+      <dl><dd><img :src="item.img" @error="imgErr"></dd>
+      <dt><p>卡地亚</p><p>{{item.name}}</p></dt></dl></a></li>',
+
+      // 告诉用这个组件的人，可接受的参数
+      props: {
+        item: {
+          // 该参数的类型，如果类型不符合，那会直接使用默认值
+          type: Object,
+          // 默认值，引用类型默认值，要通过函数 return 一个该类型的值
+          default: function () {
+            return new Object()
+          }
+          // default: function () {
+          //   return new Array()
+          // }
+          // 基础数据类型默认值，可以直接写值
+          // default: 1
+          // default: 'asdasd'
+        }
+      },
+      // 跟普通vue对象，data写法有些区别
+      data:function(){
+        return {
+          nopic: '../public/nopic.png'
+        }
+      },
+      methods: {
+        imgErr: function () {
+          this.item.img = this.nopic;
+        }
+      }
+    })
+
+    var vm = new Vue({
+      data: {
+        loading: false,
+        p: 1,
+        list: [],
+        total: 1,
+        isEnd: false
+        
+      },
+      created: function () {
+        this.selectProducts()
+      },
+      methods: {
+        imgErr: function (id) {
+          var item = this.list.find(function (item) {
+            return item.id == id
+          })
+          item.img = this.nopic;
+        },
+        scroll: function () {
+          if (this.loading || this.isEnd) {
+            return false
+          }
+          if (this.$refs.listDom.scrollHeight - this.$refs.listDom.clientHeight - this.$refs.listDom.scrollTop <
+            150) {
+            this.selectProducts()
+          }
+        },
+        selectProducts: function () {
+          this.$http.get('../api/cart/product.php', {
+            params: {
+              p: this.p,
+              pnum: 6
+            }
+          }).then(function (data) {
+            var obj = JSON.parse(data.body);
+            if (obj.status == 1) {
+              obj.list.forEach(function (item) {
+                item.img = '../api/cart' + item.img;
+              })
+              this.list = this.list.concat(obj.list);
+              this.total = obj.total;
+              if (this.p < this.total) {
+                this.p++;
+              } else {
+                this.isEnd = true;
+              }
+
+            }
+          })
+        }
+      }
+    }).$mount('#app')
+
+
+    Vue.http.interceptors.push(function (req, next) {
+      vm.loading = true;
+      next(function (data) {
+        // var obj = JSON.parse(data.body);
+        // if(obj.status == 1001){
+
+        // }
+        vm.loading = false;
+      })
+    })
+  </script>
+
+</body>
+
+</html>

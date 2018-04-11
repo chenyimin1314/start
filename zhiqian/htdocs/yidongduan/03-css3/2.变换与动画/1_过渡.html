@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>无标题文档</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: rgba(0, 0, 0, 0);
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      /*设置样式变动后的过渡时间*/
+      transition: 500ms;
+    }
+
+    .box.on {
+      background: blue;
+      width: 200px;
+      height: 200px;
+      visibility: visible;
+      top: 100px;
+      left: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <script type='text/javascript'>
+    setTimeout(function () {
+      document.querySelector('.box').classList.add('on')
+    }, 1000)
+  </script>
+</body>
+
+</html>

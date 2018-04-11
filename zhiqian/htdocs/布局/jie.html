@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="format-detection" content="telephone=no" />
+<title>珠宝盒</title>
+<link rel="stylesheet" href="css/swiper.css">
+<link rel="stylesheet" href="css/style_ios.css">
+  <style>
+  	.header{
+  		z-index: 111111;
+  	}
+  	.clearfix:after{
+  		content: "";
+  		clear: both;
+ 
+  	}
+  	  .tou{
+  	  	margin: auto;
+  	  	 width: 320px;
+  	  	 height: 20px;
+  	  	font-size: 10px;
+  	  	position: absolute;
+  	
+  	  	z-index: 1000;
+  	  }
+  	 .tou  .l{
+  	  	float: left;
+  	  }
+  	 .tou .r{
+  	  	float: right;
+  	  
+  	  	margin-top: -15px;
+  	  }
+  	  .m_nav{
+  	  	z-index: 111111;
+  	  }
+  </style>
+</head>
+
+<body>
+	<!--header-->
+	  <header class="header clearfix">
+    	  <div class="left"></div>
+        <div class="middle jewelryBox"><span>珠宝盒</span><em>(6)</em></div>
+        <div class="right"><div class="editor"></div></div>
+    </header>
+
+	  <section class="zboxmain">
+    	
+    </section>
+
+<div class="out-login" style="display: none;">
+    	<div class="po-re">
+        	<a href="javascript:;" class="out-del"></a>
+            <div class="lo-topimg"></div>
+            <p class="lo-toptitle">为了您的财产安全请填写身份信息</p>
+            <div class="lo-inputbox">
+                <input type="text" placeholder="输入账号" id="account" class="lo-input ">
+                <input type="password" placeholder="输入密码" id="password" class="lo-input lo-input1">
+                <a href="javascript:;" class="lo-dell"></a>
+            </div>
+            <a href="javascript:;" class="lo-btn">确定</a>
+        </div>
+    </div>
+        
+    <nav class="m_nav clearfix">
+    	<a href="首页.html">
+        	<dl>
+            	<dd class="ico1"></dd>
+                <dt>首页</dt>
+            </dl>
+        </a>
+        <a href="奢侈专qu.html">
+        	<dl>
+            	<dd class="ico2"></dd>
+                <dt>品类</dt>
+            </dl>
+        </a>
+        <a href="购物车er.html">
+        	<dl>
+            	<dd class="ico3"></dd>
+                <dt>购物车</dt>
+            </dl>
+        </a>
+        <a href="jie.html">
+        	<dl>
+            	<dd class="ico4"></dd>
+                <dt>我的</dt>
+            </dl>
+        </a>
+    </nav>
+
+<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="js/fontsize.js" type="text/javascript"></script>
+<script src="js/swiper.min.js" type="text/javascript"></script>
+<script src="com.js"></script>
+<script>     
+	login();
+	fc();
+	function fc(){
+	     $.get('../api/cart/order.php',function(data){
+	     	    if(data.status==1){
+	     	      var list=data.list;
+	     	        html='';
+	     	      for (var i=0;i<list.length;i++) {
+	     	      	 var item=list[i];
+	     	      	 var cs='';
+	     	      	if(item.status==0){
+	     	      		cs='<button class="que">未付款</button>'
+	     	      	}else if(item.status==1){
+	     	      		cs='已付款等待发货'
+	     	      	}else if(item.status==2){
+	     	      		cs='<button class="queren">确认收货</button>';
+	     	      	}else if(item.status==3){
+	     	      		cs='交易完成';
+	     	      	}
+	     	         	html+='<div class="zboxb borderTop clearfix" id="'+item.id+'">\
+				          <div class="tou">\
+				          	<div class="l">定单号：'+item.id+'，总价：'+item.total+'，</div><br />\
+				              <div class="r">'+cs+'</div>\
+				             </div>';
+//				             console.log(data);
+				             for (var j=0;j<item.prods.length;j++){
+				             	var prod=item.prods[j];
+//				             	 console.log(item);
+				             	html+='<div class="zbox-list borderBottom">\
+				                <div class="thrbox clearfix">\
+				                    <div class="left"></div>\
+				                    <div class="middle">\
+				                        <dl class="clearfix">\
+				                            <dd><img  onerror="this.src=\'../public/nopic.png\'" src="../api/cart'+prod.img+'"></dd>\
+				                            <dt>\
+				                                <p class="title"><a href="###">'+prod.name+'</a></p>\
+				                                <p class="tow"><a href="###">数量：'+prod.cnum+'</a></p>\
+				                                <p class="god f24">￥'+prod.price+'</p>\
+				                            </dt>\
+				                        </dl>\
+				                    </div>\
+				                    <div class="right"><span></span></div>\
+				                </div>\
+				            </div>';
+				             }
+                     html+='</div>';
+	     	      }
+	     	      $('.zboxmain').html(html);
+	     	    }
+	      },'json')
+	    }
+	$('.zboxmain').on('click','.que',function(){
+		 var id=$(this).parents('.zboxb').prop('id');
+		$.ajax({
+			type:"put",
+			url:"../api/cart/order.php",
+			data:JSON.stringify({id:id,status:1}),
+            dataType:'json',
+            success:function(data){
+            	if(data.status==1){
+            		fc();
+            	}
+            }
+		});
+	}).on('click','.queren',function(){
+		 var id=$(this).parents('.zboxb').prop('id');
+		$.ajax({
+			type:"put",
+			url:"../api/cart/order.php",
+			data:JSON.stringify({id:id,status:3}),
+            dataType:'json',
+            success:function(data){
+            	if(data.status==1){
+            		fc();
+            	}
+            }
+		});
+	})
+  </script>
+</body>
+</html>

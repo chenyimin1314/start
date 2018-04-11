@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul li{
+				height: 100px;
+				width: 100px;
+			}
+			/*ul li:first-child[name='111']{
+				background: red;
+			}*/
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li name="111">1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<script src="../Jqku/jquery-1.11.3.min.js"></script>
+		<script>
+			$('ul li[name="111"]').css('background','blue')
+			
+			function a(){
+				this.name='chen'
+			}
+//			function b(){
+//				this.age=12
+//			}
+//           a.prototype.age=12
+//			var a=new a()
+			
+//			 b.prototype=a;
+			 
+//			 var m=new b()
+            var ae='1'
+             String.prototype.re=function(){
+             	return this+''+this+''+this
+             }
+              
+//			console.log(a.age)
+	  console.log(ae.re())
+		</script>
+	</body>
+</html>

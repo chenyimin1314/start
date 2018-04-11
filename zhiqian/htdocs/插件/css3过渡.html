@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				height: 100px;
+				width: 100px;
+				background: red;
+				transition: height 2s width 2s; 
+				-webkit-transition:width 2s, height 2s, -webkit-transform 2s;
+			}
+			.box:hover{
+				width:200px;
+                height:200px;
+				transform: rotate(180deg);
+				-webkit-transform:rotate(180deg)
+			}
+			/*.box.on{
+				width:200px;
+                height:200px;
+				transform: rotate(180deg);
+				-webkit-transform:rotate(180deg)
+			}*/
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+	</body>
+	<script>
+//		setTimeout(function(){
+//			document.querySelector('.box').classList.add("on");
+//		},1000)
+	</script>
+</html>

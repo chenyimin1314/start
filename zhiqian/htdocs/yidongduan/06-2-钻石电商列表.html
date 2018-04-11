@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style lang="">
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .clearfix:after {
+      content: '';
+      clear: both;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3rem;
+      background-color: white;
+    }
+
+    header .left {
+      position: absolute;
+      left: .5rem;
+      top: .75rem;
+    }
+
+    header .middle {
+      text-align: center;
+    }
+
+    header .right {
+      position: absolute;
+      right: .5rem;
+      top: 1rem;
+    }
+
+    header .left img {
+      width: 3rem;
+    }
+
+    header .middle img {
+      width: 2.2rem;
+      margin-top: 8px;
+    }
+
+    header #search-btn {
+      background: url('./public/images/s-icon.png') no-repeat 0 0;
+      width: 1.2rem;
+      height: 1.2rem;
+      display: inline-block;
+      background-size: cover;
+    }
+
+    main {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      height: 2000px;
+      background-color: green;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3rem;
+      background-color: #000000;
+    }
+
+    footer a {
+      width: 25%;
+      display: inline-block;
+      float: left;
+      text-align: center;
+    }
+
+    footer a dl {
+      line-height: .9rem;
+      margin-top: .4rem;
+    }
+
+    footer a dt {
+      color: #BABABA;
+    }
+
+    footer a dd {
+      background: no-repeat;
+      background-size: cover;
+      width: 1rem;
+      height: 1rem;
+      display: inline-block;
+    }
+
+    .ico1 {
+      background-image: url(./public/images/icon_l1.png)
+    }
+
+    .ico2 {
+      background-image: url(./public/images/icon_l2.png)
+    }
+
+    .ico3 {
+      background-image: url(./public/images/icon_l3.png)
+    }
+
+    .ico4 {
+      background-image: url(./public/images/icon_l4.png)
+    }
+
+    html {
+      font-size: 40px;
+    }
+    /*手机屏样式*/
+
+    @media ALL and (max-width:600px) {
+      html {
+        font-size: 20px;
+      }
+    }
+    /*平板样式*/
+
+    @media ALL and (max-width:800px) and (min-width:600px) {
+      html {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="left">
+      <img src="./public/images/tiel.png" alt="">
+    </div>
+    <div class="middle">
+      <img src="./public/images/logo.png" alt="">
+    </div>
+    <div class="right">
+      <a href="javascript:;" id="search-btn"></a>
+    </div>
+  </header>
+  <main>2</main>
+  <footer class="clearfix">
+    <a href="index.html">
+      <dl>
+        <dd class="ico1"></dd>
+        <dt>首页</dt>
+      </dl>
+    </a>
+    <a href="list.html">
+      <dl>
+        <dd class="ico2"></dd>
+        <dt>品类</dt>
+      </dl>
+    </a>
+    <a href="zbox.html">
+      <dl>
+        <dd class="ico3"></dd>
+        <dt>珠宝盒</dt>
+      </dl>
+    </a>
+    <a href="zbox-login.html">
+      <dl>
+        <dd class="ico4"></dd>
+        <dt>我的</dt>
+      </dl>
+    </a>
+  </footer>
+
+</body>
+
+</html>

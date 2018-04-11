@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		   <div>
+		  </div>
+		</style>
+	</head>
+  
+
+<body >  
+<p>产品一</p>   
+<p>产品二</p>   
+<p>产品三</p>   
+<p>产品四</p>   
+<p>产品五</p> 
+		<script>
+//			var ar=[1,1,23,2,3,42,123,123,45,23,45,23,11,11,7,1,9,0,11,23,2,2]
+//			var ab=[11,1,23,21,3,42,123,123,452,23,45,23,211,11,7,1,9,02,11,23,12,223]
+        var a = [1, 2, 3, 1, 2]
+       var b = [3, 2, 1, 2, 5, 4, 1]
+
+      a = fn(a)
+      b = fn(b)
+			
+			var flag=true;
+			 for (var i=0;i<a.length;i++) {
+			 	if(b.indexOf(a[i]==-1)){
+			 		flag=false
+			 	}
+			 }
+			 if(flag){
+			 	alert('a是b的子集')
+			 }else{
+			 	alert('a不是b的子集')
+			 }
+		  function fn(arr){
+				var arrr=[]
+			 for (var i=0;i<arr.length;i++) {
+			 	if(arrr.indexOf(arr[i]==-1)){
+			 		arrr.push(arr[i])
+			 	}
+			  }
+			return arrr
+			}
+//			console.log(ar.splice(2,6))
+//			console.log(new Set(ar))
+//			function a(arr){
+//				var array=[]
+//				for(var i=0;i<arr.length;i++){
+//					if(array.indexOf(arr[i])==-1){
+//						array.push(arr[i])
+//					}
+//				}
+//				return array
+//			}
+//			function b(arr){
+//				for(var i=0;i<arr.length;i++){
+//				  for(var j=0;j<arr.length-1;j++){
+//				   if(arr[j]>arr[j+1]){
+//				   	var a=arr[j+1]
+//				   	arr[j+1]=arr[j]
+//				   	arr[j]=a;
+//				   }
+//				
+//				}
+//				}
+//				return arr
+//			}
+//			
+//			document.write(b(ar))
+
+//   for(var a=i=0;i<5;i++){
+//   	console.log(i)
+//   	(function(i){
+//   		console.log(i)
+//	   	   setTimeout(function(){
+//	   	 	console.log(i+'')
+//	     	  },100*i)
+//   	})(i)
+    
+//   setTimeout(function(){
+//   	var i=a++
+//   	console.log(i)
+//   },100*i)
+     
+//   }''
+// function init() {   
+//var pAry = document.getElementsByTagName("p");   
+//for( var i=0; i<pAry.length; i++ ) {   
+//  pAry[i].i=i;
+//   pAry[i].onclick = function() {   
+//     alert(this.i);   
+//}   
+// (function(a){
+// 	   pAry[i].onclick = function() {   
+//     alert(a);   
+//   }  
+// })(i)
+// 
+// }   
+//} 
+		</script>
+	</body>
+</html>

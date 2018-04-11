@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .sec {
+            background-color: red;
+            width: 25%;
+            height: 300px;
+            display: inline-block;
+            float: left;
+        }
+        
+        .sec:nth-of-type(2) {
+            background-color: blue;
+        }
+        
+        .sec:nth-of-type(3) {
+            background-color: green;
+        }
+        
+        .sec:nth-of-type(4) {
+            background-color: purple;
+        }
+        /*手机屏样式*/
+        
+        @media ALL and (max-width:600px) {
+            .sec {
+                width: 100%;
+            }
+        }
+        /*平板样式*/
+        
+        @media ALL and (max-width:800px) and (min-width:600px) {
+            .sec {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="sec">111</div>
+        <div class="sec">222</div>
+        <div class="sec">333</div>
+        <div class="sec">444</div>
+    </div>
+</body>
+
+</html>

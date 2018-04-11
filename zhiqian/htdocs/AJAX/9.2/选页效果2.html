@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			li{
+				list-style: none;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>	
+		
+		</ul>
+		<div id="box">	 
+		</div>
+		<script>
+		fn(1);
+		function fn(num){
+			 var b=new XMLHttpRequest();
+			 b.open('get','../php/02-page.php?p='+num);
+			 b.send();
+			 b.onreadystatechange=function(){
+			 	if(b.readyState==4){
+			 		var shu='';
+			 		var page='';
+			 		var data=JSON.parse(b.response);
+			        var list=data.list;
+			        var total=data.total;
+//			      console.log(data);
+			      /显示数据/
+		        for(var i=0;i<list.length;i++){
+		        	 var s=list[i];
+		        	 shu+='	<li><span>编号:'+s.id+'</span><span>姓名:'+s.name+'</span><span>作者:'+s.author+'</span></li>'
+		        }
+                document.querySelector("ul").innerHTML=shu;
+                /显示上一页/
+                if(num>1){
+                	page+='<button class="prev">上一页</button>';
+                }
+                 
+//               /显示页数/     
+                for(var i=1;i<=total;i++){
+                     if(num==i){
+                	   page+='<a href="javascript:;" style="color:red" class="atv">'+i+'</a>';
+                	}else{
+                		page+='<a href="javascript:;" >'+i+'</a>';
+                	}
+                }
+                
+                /显示下一页/
+                if(num<total){
+                	page+='<button class="next">下一页</button>';
+                }
+		       document.querySelector("#box").innerHTML=page;
+		       
+//		         /点击翻页/
+		         var sou=document.querySelectorAll("#box a");
+		           for(var i=0;i<sou.length;i++){
+		           	  var el=sou[i];
+		           	   el.index=i;
+		           	   el.onclick=function(){
+		           	   	fn(this.index+1);
+		           	   }
+		           }
+//		           /点击下一页/
+               if(num<total){
+		           document.querySelector(".next").onclick=function(){
+		           	var p=parseFloat(document.querySelector(".atv").innerHTML)+1;
+		           	     fn(p);
+		           }
+		           }
+//		           /点击上一页/
+                  if(num>1){
+		           document.querySelector(".prev").onclick=function(){
+		           	var p=parseFloat(document.querySelector(".atv").innerHTML)-1;
+		           	     fn(p);
+		           }
+		           }
+			 	
+			  }}
+			}
+		
+		</script>
+	</body>
+</html>

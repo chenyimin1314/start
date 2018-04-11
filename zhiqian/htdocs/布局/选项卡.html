@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+
+			  <input type="button" value="1" />
+		      <input type="button" value="2" />
+		      <input type="button" value="3" />
+		      <input type="button" value="4" />
+		 
+		      <div>1</div>
+		     <div>2</div>
+		     <div>3</div>
+		     <div>4</div>
+	
+		<script>
+			var input=document.querySelectorAll('input');
+			var div=document.querySelectorAll('div')
+			for(var i=0;i<input.length;i++){ 
+//				input[i].index=i;
+			   input[i].onclick=function(){
+			   	console.log(this)
+			     for(var i=0;i<input.length;i++){
+			     	if(this==input[i]){
+			     		console.log(this)
+			     	  div[i].style.display='block'	
+			     	}else{
+			     		 div[i].style.display='none'	
+			     	}
+			     }
+
+			   }
+		  };
+//       for(var i=0;i<input.length;i++){
+//      	input[i].index=i;
+//      	input[i].onclick=function(){
+//    		for(var i=0;i<input.length;i++){
+//    			div[i].style.display='none'
+//   		}
+//      		div[this.index].style.display='block'
+//      	}
+//       }
+		</script>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{
+				
+			}
+			li{
+				height: 100px;
+				width: 100px;
+			}
+			/*li:nth-of-type(odd){
+				background: blue;
+			}*/
+		</style>
+	</head>
+	<body>
+		<ul id="test">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		<select name="">
+			<option value="">1</option>
+			<option value="">2</option>
+			<option value="">3</option>
+		</select>
+		<script>
+		    var pp=document.createElement('button')
+			var ppp=document.createTextNode('this is button')
+			pp.appendChild(ppp)
+	        pp.style.color='red';
+		  document.body.appendChild(pp)
+		  
+//	  var b=document.querySelectorAll('ul li')
+		  var ul = document.getElementById('test');
+        var b = ul.getElementsByTagName('li');
+        
+		  for(var i=0;i<b.length;i++){
+//		  	b[i].style.background=i%2?'':'blue'
+		  	 b[i].onclick=function(){
+		  	 	alert(this.innerText);
+		  	 }
+		  }
+		</script>
+	</body>
+</html>

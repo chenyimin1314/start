@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			/*li:nth-child(3n+2){
+				 color:red
+			}*/
+			ul>li>p{
+				 color:red
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li></li>
+		<li><p>变色</p></li>
+		</ul>
+		
+		<script>
+			function fn(){
+				console.log(a)
+				console.log(fc())
+				var a=1;
+				function fc(){
+					return 2
+				}
+			}
+			fn()
+			
+			var str = 'http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e';
+		       var tmp = str.split('?')[1];
+		       var arr = tmp.split('&');
+		          console.log(arr)
+		       var obj = {};
+		     for (var i = 0; i < arr.length; i++) {
+				  var s = arr[i].split('=');
+				   console.log(s)
+				  if(s[1] == undefined){
+				    s[1] = "";
+				  }
+				  obj[s[0]] = s[1];
+
+		      }
+     console.log(obj)
+     var a=[1,223,4123,213,213,12,213,213,325,324]
+     
+     console.log(a.splice(1,2))
+		</script>
+	</body>
+</html>

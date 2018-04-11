@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul></ul>
+		<div id="box"></div>
+    <script>
+		   fn(1);
+		function fn(num){
+//			/创建异步调用对象(创建ajax)/
+			   var a=new XMLHttpRequest();
+	            a.open("get","02-page.php?p="+num);
+	            a.send();
+	            a.onreadystatechange=function(){
+	           	if(a.readyState==4){
+			    var b="";
+			    var ye="";
+			    var data=JSON.parse(a.responseText);
+			    var list=data.list;
+			    var total=data.total;
+			    
+//			    /遍历list并把数据渲染给页面/
+			    for(var i=0;i<list.length;i++){
+			      var c=list[i];
+		
+	              b+= '<li><span>id:'+c.id+'</span>：<span>标号:'+c.author+'</span>：<span>姓名:'+c.name+'</span> </li>';
+	           }
+			     document.querySelector("ul").innerHTML=b;
+			      
+			      
+//			      /假如页码大于1显示上一页/
+			     if(num>1){
+			     ye+='<button class="prev">上一页</button>';
+			    }
+//			     
+			     
+//			  /显示页码并显示页码颜色/
+	            for(var i=1;i<=total;i++){
+	            	if(num==i){
+	           	     ye+='<a href="javascript:;" style="color:red" class="atv">'+i+'</a>';
+	            	}else{
+	            	 ye+='<a href="javascript:;">'+i+'</a>';
+	            	}
+	           	   
+	            }
+//	            
+////	        /假如页码小于总页数显示下一页/
+	            if(num<total){
+	            	ye+='<button class="next">下一页</button>';
+	            }
+	              
+	        document.querySelector("#box").innerHTML=ye;
+	   
+//	       / 点击翻页/
+           var sou=document.querySelectorAll("#box a");
+           console.log(sou)
+             for(var i=0;i<sou.length;i++){
+            	var el=sou[i];
+            	 el.index=i;
+            	 el.onclick=function(){
+            		fn(this.index+1);
+            	}
+            }
+             
+//           /下一页/
+             if(num<total){         
+             document.querySelector(".next").onclick=function(){
+         	 var g=parseInt(document.querySelector('.atv').innerHTML)+1;
+        	  fn(g);
+              }
+            }
+//           
+//           /上一页/
+             if(num>1){
+              document.querySelector(".prev").onclick=function(){
+         	 var g=parseInt(document.querySelector('.atv').innerHTML)-1;
+        	  fn(g);
+             }
+            }
+////           
+	      }
+	      } 
+	    }
+		
+	</script>
+	</body>
+</html>

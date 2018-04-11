@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+  <!-- Bootstrap -->
+  <link href="../../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../../public/main.css" rel="stylesheet">
+     <style>
+     	  .num{
+     	  	background: blue;
+     	  }
+     	  .che{
+     	  	  z-index: 999;
+     	  	position: absolute;
+     	  	height: 100%;
+     	  	width: 100%;
+     	  	left: 0;
+     	  	top: 0;
+     	  	right: 0;
+     	  	bottom:0;
+     	  	margin: auto;
+     	   background-color: rgba(0,0,0,.1);
+     	   display: none;
+     	  }
+     	  .che img{
+     	  	/* z-index: 1000;*/
+     	  	position: absolute;
+				  top: 0;
+				  left: 0;
+				  bottom: 0;
+				  right: 0;
+				  margin: auto;
+				display: none;
+     	  }
+     </style>
+</head>
+<body>
+  <!--这里要加载header.html-->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="javascript:;">Dashboard</a></li>
+          <li><a href="javascript:;">Settings</a></li>
+          <li><a href="javascript:;">Profile</a></li>
+          <li><a href="javascript:;">Help</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="nav-plist active"><a href="javascript:;">商品管理</a></li>
+          <li class="nav-olist"><a href="javascript:;">订单管理</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="plist main-content">
+          <h2 class="sub-header">
+            商品管理
+            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+              <button type="button" class="btn btn-default newp-btn">新增商品</button>
+              <button type="button" class="btn btn-default plup-btn">批量上架</button>
+              <button type="button" class="btn btn-default pldown-btn">批量下架</button>
+              <button type="button" class="btn btn-default pldel-btn">批量删除</button>
+            </div>
+          </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="check-all"></th>
+                  <th>商品ID</th>
+                  <th>商品图片</th>
+                  <th>商品名称</th>
+                  <th>商品详情</th>
+                  <th>上下架状态</th>
+                  <th>价格(元)</th>1
+                  <th>创建日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="list">
+                 
+              </tbody>
+            </table>
+
+            <nav>
+              <ul class="pagination pull-right">
+               
+              </ul>
+            </nav>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="popup" id="addp">
+    <div class="popup-content">
+      <h4 class="sub-header">
+        商品添加
+      </h4>
+      <form class="form-horizontal">
+        <div class="popup-main-content">
+          <div class="form-group">
+            <label for="inputPName" class="col-sm-2 control-label">商品名称</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputPName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品详情</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" id="inputDetail"></textarea>
+            </div>
+          </div>
+           <div class="form-group">
+            <label for="inputUp" class="col-sm-2 control-label">商品图片</label>
+            <div class="col-sm-10">
+              <div class="checkbox" >
+                <label >
+              <input type="file" value="" id="inputImg">
+            </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputUp" class="col-sm-2 control-label">是否上架</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label>
+              <input type="checkbox" value="" id="inputUp">
+            </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPrice" class="col-sm-2 control-label">价格</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="inputPrice">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-default save-btn" href="javascript:;">确认保存</a>
+            <a class="btn btn-default saves-btn" style='display: none;' href="javascript:;">确认修改</a>
+            <a class="btn btn-default cancel-btn" href="javascript:;">取消</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="mask"></div>
+  </div>
+ <div class="che">
+ 	    <img src="../public/loading.gif" alt="" />
+ </div>
+<script src="../9.4/ajax封装.js"></script>
+<script>
+    fn(1);
+      function fn(num){
+        var a=new XMLHttpRequest();
+         a.open('get','../php/product.php?pnum=3&p='+num);
+          a.send();
+         a.onreadystatechange=function(){
+      	if(a.readyState==4){
+		  		if(a.status==200){
+     	      var  data=JSON.parse(a.responseText);
+     	     if(data.status==1){
+	     	     var list=data.list;
+	     	      var total=data.total;
+	     	      var html='';  
+	     	      var page='';
+				       var d=new Date();
+		           var y=d.getMonth()+1;
+		            var y=y<10?'0'+y:y; 
+		         var time=d.getFullYear()+"-"+y+"-"+d.getDate();     
+//                /渲染页面/
+			      
+          for (var i=0;i<list.length;i++) {
+			        	   var item=list[i];
+			        	
+			        	    var locks="上架";
+			       	      var locksup='<button type="button" class="btn btn-default btn-down">下架</button>'; 
+			              if(item.lock==1){
+			       	  	    locks="下架";
+			       	  	    locksup='<button type="button" class="btn btn-default btn-up">上架</button>';
+			       	     }     
+			        	    html+='<tr id="'+item.id+'"><td><input type="checkbox" class="check"></td>\
+		                  <td>'+item.id+'</td>\
+		                  <td class="nt-img" ><img style=\"\width:80px;" onerror="this.src=\'../public/nopic.png\'" src="../api/cart'+item.img+'"/></td>\
+		                  <td class="nt-name">'+item.name+'</td>\
+		                  <td class="nt-xiang">'+item.detail+'</td>\
+		                  <td class="nt-lock">'+locks+'</td>\
+		                  <td class="nt-price">'+item.price+'</td>\
+		                  <td>'+time+'</td>\
+		                  <td><div class="btn-group btn-group-sm" role="group" aria-label="...">\
+		                  <button type="button" class="btn btn-default btn-edit">编辑</button>'+locksup+'\
+		                  <button type="button" class="btn btn-default btn-del">删除</button>\
+		                  </div>\
+		                  </td>\
+		                  </tr>';		       	
+			       	     
+			     };		       
+     	     document.querySelector("#list").innerHTML=html;
+             //页码
+//   	     	if(num>1){
+//			       	page+='<li><a href="javascript:;" class="prev"><span aria-hidden="true">&laquo;</span></a>\</li>';
+//			       	}
+//	             if(num<total){
+//	             	   page+='<li><a hef="javascript:;" class="next"><span aria-hidden="true">&raquo;</span></a></li>';
+//	               }
+//             for(var i=1;i<=total;i++){
+//            	    	if(num==i){
+//			       		 page+='<li class="activ"><a href="javascript:;" style="background:red"  class="num">'+i+'</a></li>';
+//			       	} else{
+//			       		page+='<li  class="activ"><a href="javascript:;" class="num" >'+i+'</a></li>';
+//                  }
+//				};
+       document.querySelector(".pagination").innerHTML=page;
+          //上一页下一页 点击翻页
+            var sou=document.querySelectorAll(".pagination .activ .num");
+//		           for(var i=0;i<sou.length;i++){
+//		           	  var el=sou[i];
+//		           	   el.index=i;
+//		           	   el.onclick=function(){
+//		           	    	fn(this.index+1);
+//		           	   	document.querySelector('#check-all').checked=false;
+//		           	   }
+//		           }
+//		           if(num<total){
+//		            document.querySelector('.next').onclick=function(){
+//		            	var g=parseInt(document.querySelector('.num[style]').innerHTML)+1;
+//		            	  	
+//		            	 fn(g);
+//		            	 document.querySelector('#check-all').checked=false;
+//		            }
+//		           }
+//		           if(num>1){
+//		           	document.querySelector('.prev').onclick=function(){
+//		           		 
+//		           		var p=parseInt(document.querySelector('.num[style]').innerHTML)-1;
+//		           		fn(p);
+//		           		document.querySelector('#check-all').checked=false;
+//		           	}
+//		           } 
+           }
+     	     }
+       	}
+    }
+  };
+             //新增商品
+          document.querySelector('.newp-btn').onclick=function(){
+		   	    document.querySelector('#addp').style.display='block';  
+		   	    	 document.querySelector("#addp .sub-header").innerHTML="商品添加";
+		   	    	  document.querySelector(" #addp .saves-btn").style.display='none';   
+		   		  document.querySelector(" #addp .save-btn").style.display='inline-block'; 
+		   		  	clear();
+		   }
+         //取消
+		   document.querySelector(".cancel-btn").onclick=function(){
+		   	    document.querySelector('#addp').style.display='none';   
+		        clear();
+		   }
+          //确定保存
+		   document.querySelector(".save-btn").onclick=function(){	
+		   	          var pro=fc();
+		   	          var a=new XMLHttpRequest();
+                      a.open('post','../api/cart/product.php');
+                      a.send(pro);
+                      a.onreadystatechange=function(){ 
+                    	if(a.readyState==4){
+                    		if(a.status==200){
+                    		var data=JSON.parse(a.response);
+                    		if(data.status==1){
+                    			var p=parseInt(document.querySelector('.activ .num').innerHTML);      
+                           fn(p);
+                    		}
+                    		 document.querySelector('#addp').style.display = 'none';
+                      clear();
+                    	}
+                    }
+	          }     
+		   }
+           //确定修改
+		   	   document.querySelector(".saves-btn").onclick=function(){	
+		   	   	    var pro=fc();
+		   	   	      pro.append('id',document.querySelector('#addp').pid)
+		   	          var a=new XMLHttpRequest();
+                      a.open('post','../api/cart/product/update.php');
+                      a.send(pro);
+                      a.onreadystatechange=function(){ 
+                    	if(a.readyState==4){
+                    		if(a.status==200){
+                    		var data=JSON.parse(a.response);
+                    		if(data.status==1){
+                             clear();
+                         var p=parseInt(document.querySelector('.activ .num').innerHTML);
+                           fn(p);
+                    		}
+                    	}
+                    }
+	          }     
+	          document.querySelector('#addp').style.display='none';
+		   	   };
+           //编辑商品
+		   document.querySelector('#list').onclick=function(e){
+		   	  var  ki=e.target;
+		    	if(ki.classList.contains('btn-edit')){
+		   		 document.querySelector('#addp').style.display='block';   
+		   		 document.querySelector(" #addp .save-btn").style.display='none';   
+		   		  document.querySelector(" #addp .saves-btn").style.display='inline-block';   
+		   		 
+		   		 var tr=ki.parentNode.parentNode.parentNode;
+		   	   document.querySelector("#addp").pid=tr.getAttribute('id');
+		      	document.querySelector('#inputPName').value=tr.querySelector('.nt-name').innerHTML;		  
+              document.querySelector('#inputDetail').value=tr.querySelector('.nt-xiang').innerHTML;		   	
+            document.querySelector('#inputUp').checked=tr.querySelector('.nt-lock').innerHTML='上架'?true:false;		   	
+            document.querySelector('#inputPrice').value=tr.querySelector('.nt-price').innerHTML;
+             document.querySelector('#inputImg').src=tr.querySelector('.nt-img').src;		
+           
+		   	}else if(ki.classList.contains('btn-del')){
+		   //删除商品
+		   		   var tr=ki.parentNode.parentNode.parentNode;
+		   		   var id=tr.getAttribute('id');
+		   	          	var a=new XMLHttpRequest();
+                      a.open('DELETE','../api/cart/product.php');
+                      a.send(JSON.stringify({id:id}));
+                      a.onreadystatechange=function(){ 
+                    	if(a.readyState==4){
+                    		if(a.status==200){
+                    		var data=JSON.parse(a.response);
+                    		if(data.status==1){
+                    			var p=parseInt(document.querySelector('.activ .num').innerHTML);
+                           fn(p);
+                    		}
+                }
+              }
+	          }     
+		   	}else if(ki.classList.contains('btn-up')||ki.classList.contains('btn-down')){
+		   		var tr=ki.parentNode.parentNode.parentNode;
+		   		var id=tr.getAttribute('id');
+		   			var a=new XMLHttpRequest();
+		   			  var lock=0;
+		   			    if(ki.classList.contains('btn-down')){
+		   			    	lock=1;
+		   			    }
+             a.open('PUT','../api/cart/product/update.php');
+             a.send(JSON.stringify({id:id,lock:lock}));
+              a.onreadystatechange=function(){ 
+               if(a.readyState==4){
+                    		if(a.status==200){
+                    		var data=JSON.parse(a.response);
+                    		if(data.status==1){
+                    			var p=parseInt(document.querySelector('.activ .num').innerHTML);
+                           fn(p);
+                    		}
+                }
+              }
+	          }     
+		   	}else if (tg.classList.contains('check')) {
+
+        if (!tg.checked) {
+          document.querySelector('#check-all').checked = false;
+        } else {
+          //如果 复选框的总数量 等于 打了勾的复选框的总数量
+          if (document.querySelectorAll('.check').length == document.querySelectorAll('.check:checked').length) {
+            document.querySelector('#check-all').checked = true;
+          }
+        }
+
+      }
+		   }	
+	
+		   document.querySelector('#check-all').onclick=function(){
+		   	//选中所有复选框/
+		   	  var check=this.checked;
+		   	  var checks=document.querySelectorAll('.check');
+		   	    for(var i=0;i<checks.length;i++){
+		   	    	var r=checks[i];
+		   	    	 r.checked=check;
+		   	    }
+		   };
+
+		   document.querySelector('.pldown-btn').onclick = function () {
+		   	//批量下架
+		   	document.querySelector('#check-all').checked=false;
+         //获取所有打钩了的复选框
+      var checks = document.querySelectorAll('.check:checked');
+      var arr = [];
+      // 把打钩了的复选框的相关商品的id放进arr数组吧
+      for (var i = 0; i < checks.length; i++) {
+        var check = checks[i];
+        var id = check.parentNode.parentNode.id;
+        arr.push(id);
+      }
+      // 通过数组把多个id的字符串拼接好
+      var ids = arr.join(',');
+      var xhr = new XMLHttpRequest();
+      xhr.open('put', '../api/cart/product/update.php');
+      xhr.send(JSON.stringify({id: ids,lock:1}));
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+            if (obj.status == 1) {
+             	var p=parseInt(document.querySelector('.activ .num').innerHTML);
+              fn(p);
+            }
+          }
+        }
+      }
+    };
+ document.querySelector('.plup-btn').onclick = function () {
+ 	//批量上架
+// 		document.querySelector('#check-all').checked=false;
+      // 获取所有打钩了的复选框
+      var checks = document.querySelectorAll('.check:checked');
+      var arr = [];
+      // 把打钩了的复选框的相关商品的id放进arr数组吧
+      for (var i = 0; i < checks.length; i++) {
+        var check = checks[i];
+        var id = check.parentNode.parentNode.id;
+        arr.push(id);
+      }
+      // 通过数组把多个id的字符串拼接好
+      var ids = arr.join(',');
+      var xhr = new XMLHttpRequest();
+      xhr.open('put', '../api/cart/product/update.php');
+      xhr.send(JSON.stringify({id: ids,lock:0}));
+      xhr.onreadystatechange=function(){
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+            if (obj.status == 1) {
+             	var p=parseInt(document.querySelector('.activ .num').innerHTML);
+              fn(p);
+            }
+          }
+        }
+      }
+
+   };
+    document.querySelector('.pldel-btn').onclick=function(){
+      //批量删除
+//     document.querySelector('#check-all').checked=false;
+      // 获取所有打钩了的复选框
+      var checks = document.querySelectorAll('.check:checked');
+      var arr = [];
+      // 把打钩了的复选框的相关商品的id放进arr数组吧
+      for (var i = 0; i < checks.length; i++) {
+        var check = checks[i];
+        var id = check.parentNode.parentNode.id;
+        arr.push(id);
+      }
+      var ids = arr.join(',');
+      var xhr = new XMLHttpRequest();
+      xhr.open('DELETE', '../api/cart/product.php');
+      xhr.send(JSON.stringify({id: ids,lock:0}));
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+            if (obj.status == 1) {
+              var p=parseInt(document.querySelector('.active .num').innerHTML);
+              fn(p);
+            }
+          }
+        }
+      }
+
+    };
+     	function  fc(){
+     		//获取数据函数
+          var name=document.querySelector('#inputPName').value;		  
+          var detail=document.querySelector('#inputDetail').value;		   	
+          var fil=document.querySelector('#inputImg').files;		   	
+          var lock=document.querySelector('#inputUp').checked?0:1;		   	
+          var price=document.querySelector('#inputPrice').value;		
+          
+            var pro=new FormData();
+             pro.append('name',name);
+             pro.append('detail',detail);
+             pro.append('lock',lock);
+             pro.append('price',price);
+             if(fil.length>0){
+             	 pro.append('file',fil[0]);
+             }
+             return pro
+         }
+     	function clear(){
+		   //清空数据函数
+     		   document.querySelector('#inputPName').value='';		  
+           document.querySelector('#inputDetail').value='';		   	
+           document.querySelector('#inputImg').value='';		   	
+           document.querySelector('#inputUp').checked=false;		   	
+          document.querySelector('#inputPrice').value='';		
+     	}
+</script>
+</body>
+</html>

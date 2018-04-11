@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#canvas{
+				height: 500px;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+	     <div id='canvas' ></div>
+	</body>
+		 <script src="public/jquery.min.js"></script>
+          <script src="public/echarts.min.js"></script>
+         <script type="text/javascript">
+  	 
+  	  var my = echarts.init(document.getElementById('canvas'));
+  	   $.get('public/echart.json',function(data){
+  	   	  var shuju=[];
+  	   	  var zhen=[];	  
+  	   	  data.forEach(function(item,index){
+  	   	  	 shuju.push(item.name);
+  	   	   	 zhen.push({
+              name:item.name,
+              type:'line',
+             stack: '总量',
+             areaStyle: {normal: {}},
+             data:item.data
+             })
+  	   	  })
+//	   	   for(var i=0;i<data.length;i++){
+//	   	   	 shuju.push(data[i].name);
+//	   	   	 zhen.push({
+//          name:data[i].name,
+//          type:'line',
+//          stack: '总量',
+//          areaStyle: {normal: {}},
+//          data:data[i].data
+//           })
+//	   	   }
+  	     
+			  	var option = {};
+				option = {
+				title: {
+					  text: '广告数据'
+				 },
+			      tooltip : {
+			        trigger: 'axis',
+			        axisPointer: {
+			            type: 'cross',
+			            label: {
+			                backgroundColor: '#6a7985'
+			            }
+			        }
+			    },
+			    legend: {
+			        data:shuju
+			    },
+			    toolbox: {
+			        feature: {
+			            saveAsImage: {}
+			        }
+			    },
+			    grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        containLabel: true
+			    },
+			    xAxis : [
+			        {
+			            type : 'category',
+			            boundaryGap : false,
+			            data : ['周一','周二','周三','周四','周五','周六','周日']
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'value'
+			        }
+			    ],
+			    series : zhen
+			};
+    my.setOption(option);
+    
+    })
+  	 </script>
+  	 
+</html>

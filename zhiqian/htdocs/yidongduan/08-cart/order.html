@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no" />
+  <title>珠宝盒</title>
+  <link rel="stylesheet" href="css/swiper.css">
+  <link rel="stylesheet" href="css/style_ios.css">
+
+</head>
+
+<body>
+  <!--header-->
+  <header class="header clearfix">
+    <div class="left">
+    </div>
+    <div class="middle jewelryBox"><span>订单</span>
+    </div>
+  </header>
+
+  <section class="zboxmain">
+    
+  </section>
+
+  <nav class="m_nav clearfix">
+    <a href="index.html">
+      <dl>
+        <dd class="ico1"></dd>
+        <dt>首页</dt>
+      </dl>
+    </a>
+    <a href="list.html">
+      <dl>
+        <dd class="ico2"></dd>
+        <dt>列表</dt>
+      </dl>
+    </a>
+    <a href="zbox.html">
+      <dl>
+        <dd class="ico3"></dd>
+        <dt>购物车</dt>
+      </dl>
+    </a>
+    <a href="order.html">
+      <dl>
+        <dd class="ico4"></dd>
+        <dt>我的</dt>
+      </dl>
+    </a>
+  </nav>
+
+
+  <div class="login-wrapper" style="display:none">
+    <div class="out-login">
+      <div class="po-re">
+        <a href="###" class="out-del"></a>
+        <div class="lo-topimg"></div>
+        <p class="lo-toptitle">登录</p>
+        <div class="lo-inputbox">
+          <input type="text" placeholder="输入账号" class="lo-input">
+          <input type="text" placeholder="输入密码" class="lo-input lo-input1">
+        </div>
+        <a href="###" class="lo-btn">确定</a>
+      </div>
+    </div>
+    <div class="bg1"></div>
+  </div>
+
+
+  <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+  <script src="js/fontsize.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    var list = []
+    var nopic = '../../public/nopic.png'
+
+    function renderOrder() {
+      $('.jewelryBox em em').html(list.length)
+      var html = ''
+      var isAll = 1;
+      var pay = 0;
+      list.forEach(function (item) {
+        var statusText = ''
+        if (item.status == 0) {
+          statusText = '<button class="order-status" status="'+item.status+'">付款</button>';
+        } else if (item.status == 1) {
+          statusText = '<span class="order-status" status="'+item.status+'">等待发货</span>';
+        } else if (item.status == 2) {
+          statusText = '<button class="order-status" status="'+item.status+'">确认收货</button>';
+        } else if (item.status == 3) {
+          statusText = '<span class="order-status" status="'+item.status+'">交易完成</span>';
+        } else if (item.status == 4) {
+          statusText = '<span class="order-status" status="'+item.status+'">交易关闭</span>';
+        }
+        html += '<div class="zboxb borderTop " id="order-' + item.id + '" ><div class="order-info clearfix"><span class="order-num">订单号：<span>' + item.id + '</span> 总价：￥<span class="total">'+item.total+'</span></span>' + statusText + '</div>'
+
+        if(item.prods.length > 0){
+
+          item.prods.forEach(function (prod) {
+
+            html += '<div class="zbox-list borderBottom" id="' + prod.id +
+          '"><div class="thrbox clearfix"><div class="middle"><dl class="clearfix"><dd><img src="../..' + prod.img +
+          '" onerror="this.src = \'' + nopic + '\'"></dd><dt><p class="title"><a href="javascript:;">' + prod.name +
+          '</a></p><p class="tow"><a href="###"></a></p><p class="god1 f24">￥' + prod.price +
+          '</p></dt><div class="num">数量：' + prod.cnum + '</div></dl></div></div></div>'
+
+          })
+
+        }
+        
+
+        html+='</div>'
+      });
+      $('.zboxmain').html(html)
+
+
+
+    }
+
+    $.ajax({
+      url: '../../api/cart/order.php',
+      type: 'get',
+      success: function (data) {
+        data = JSON.parse(data)
+        if (data.status == 1) {
+          list = data.list;
+
+          renderOrder()
+
+        }
+      }
+    })
+
+
+    
+$('.zboxmain').on('click', 'button.order-status', function (){
+
+  var id = $(this).siblings('.order-num').find('span').html()
+
+  $.ajax({
+      url: '../../api/cart/order.php',
+      type: 'put',
+      data:JSON.stringify({
+        status:1,
+        id:id
+      }),
+      success: function (data) {
+        data = JSON.parse(data)
+        if (data.status == 1) {
+          list.forEach(function (val){
+            if(val.id == id){
+              val.status = 1
+            }
+          })
+
+          renderOrder()
+
+        }
+      }
+    })
+
+})
+
+  
+  </script>
+</body>
+
+</html>

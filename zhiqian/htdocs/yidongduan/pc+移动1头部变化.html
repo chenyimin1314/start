@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--viewport标签 移动端开发必备-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        
+        header {
+            background-color: #F8F8F8;
+            width: 100%;
+            height: 52px;
+        }
+        
+        header .top {
+            margin: 0 auto;
+            width: 950px;
+        }
+        
+        @media ALL and (max-width:950px) {
+            header .top {
+                margin: 0;
+                width: 100%;
+            }
+        }
+        /*平板样式*/
+        
+        @media ALL and (max-width:950px) and (min-width:640px) {
+            /*header .top {
+        width: 100%;
+      }*/
+        }
+        
+        header .top .left {
+            float: left;
+        }
+        
+        header .top .logo {
+            float: left;
+            margin-right: 20px;
+        }
+        
+        header .top nav {
+            float: left;
+        }
+        
+        header .top nav a {
+            float: left;
+            margin-right: 10px;
+        }
+        
+        header .top .right {
+            float: right;
+        }
+        
+        header .top button {
+            float: left;
+            margin-right: 10px;
+        }
+        
+        header .top .menu-btn {
+            display: none;
+        }
+        /*手机屏样式*/
+        
+        @media ALL and (max-width:640px) {
+            header .top nav {
+                display: none;
+            }
+            header .top .menu-btn {
+                display: inline-block;
+            }
+            header .top .login {
+                display: none;
+            }
+            header .top .regist {
+                display: none;
+            }
+        }
+        
+        .ad {
+            background-color: #1E5B94;
+            width: 100%;
+            height: 430px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <header>
+            <div class="top clearfix">
+                <div class="left clearfix">
+                    <div class="logo">Amaze UI</div>
+                    <nav class="clearfix">
+                        <a href="javascript:;">首页</a>
+                        <a href="javascript:;">项目</a>
+                        <a href="javascript:;">下拉菜单</a>
+                    </nav>
+                </div>
+                <div class="right">
+                    <div class="btn-box clearfix">
+                        <button class="login">登录</button>
+                        <button class="regist">注册</button>
+                        <button class="menu-btn">菜单</button>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <div class="ad"></div>
+        <footer></footer>
+    </div>
+</body>
+
+</html>

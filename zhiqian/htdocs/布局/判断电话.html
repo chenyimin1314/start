@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="but"/>
+<input type="button" value="电话测试" id="but1"/>
+<input type="text" id="but3"/>
+<input type="button" value="邮箱测试" id="but4"/>
+<script>
+    var but=document.getElementById("but");
+    var but1=document.getElementById("but1");
+    var but3=document.getElementById("but3");
+    var but4=document.getElementById("but4");
+      but1.onclick=function(){
+          var a=/^1[0-9]{10}$/g;
+          var b=but.value;
+          var c=b.match(a);
+           if(c){
+               alert("输入正确")
+           }
+          else{
+               alert("请输入正确的号码")
+          }
+
+      }
+     but4.onclick=function(){
+         var a=/\w+@[0-9a-zA-Z]+\.[a-z]+/;
+         var j=but3.value;
+         var u= a.exec(j);
+         if(u){
+             alert("输入正确");
+             window.open("https://mail.qq.com/")
+         }
+
+         else{
+             alert("请输入正确的邮箱格式");
+
+         }
+
+
+     }
+</script>
+</body>
+</html>

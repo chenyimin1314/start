@@ -1,0 +1,22 @@
+﻿首先要安装nodejs
+
+设置淘宝npm镜像，加快npm下载速度，只要设置一次
+npm config set registry https://registry.npm.taobao.org
+
+安装vue脚手架
+npm install vue-cli -g
+ 
+新建vue项目
+vue init webpack 工程名字
+
+进入文件夹
+cd 你的项目文件夹
+
+把配置文件的插件安装一遍
+npm install
+
+运行开发环境
+npm run dev
+
+把项目编译成可以上线的静态html css js
+npm run build

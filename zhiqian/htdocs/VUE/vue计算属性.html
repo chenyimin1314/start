@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="box">
+			<ul >
+				<li v-for="item in todos"  v-if="curr=='aa'">
+					{{item.name}}</li>
+				<li v-for="item in bus"  v-if="curr=='bu'" >
+					{{item.name}}</li>
+				<li v-for="item in xings"  v-if="curr=='xing'" >
+					{{item.name}}</li>
+			</ul>
+			<br />
+			     <a href="#aa" v-on:click="datas('aa')">所有任务</a>
+				 <a href="#xing" v-on:click="datas('xing')">已完成任务</a>
+				 <a href="#bu"v-on:click="datas('bu')">未完成任务</a>
+				 <a href="#f">删除所有任务</a>
+		</div>
+	</body>
+	<script src="vue2.min.js"></script>
+	<script>
+		var vm=new Vue({
+			el:'.box',
+			data:{
+				todos: [{name:"a",isTick:0},{name:"c",isTick:0},{name:"b",isTick:1}],
+			    curr:"aa"
+			},
+			computed:{
+				bus:function() {
+			      var newArr = [];
+			      for (var i = 0; i < this.todos.length; i++) {
+			        var element = this.todos[i];
+			        if(element.isTick == 1){
+			          newArr.push(element);
+			        }
+			      }
+			      return newArr;
+			    },
+			    xings:function() {
+			      var newArr = [];
+			      for (var i = 0; i < this.todos.length; i++) {
+			        var element = this.todos[i];
+			        if(element.isTick == 0){
+			          newArr.push(element);
+			        }
+			      }
+			      return newArr;
+			    }
+			},
+			methods:{
+				datas:function(str){
+					this.curr=str
+				}
+			}
+		})
+	</script>
+</html>

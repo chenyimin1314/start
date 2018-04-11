@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="vue2.min.js"></script>
+    <style lang="">
+      .del-line{
+        text-decoration: line-through;
+      }
+    </style>
+</head>
+<body>
+
+<!--vue模板 绑定事件-->
+<div id="app">
+  <input type="text" placeholder="请输入你要完成的任务" v-model="newTodoText" v-on:keyup.enter="newTodo" >
+  <ul>
+    <li v-for="item in todos" v-if="curr=='all'">
+      <input type="checkbox" v-model="item.isTick" >
+      <span v-bind:class="{'del-line':item.isTick}">{{item.name}}</span>
+      <button v-on:click="del(item.id)">删除</button>
+    </li>
+    <li v-for="item in unfTodos" v-if="curr=='unf'">
+      <input type="checkbox" v-model="item.isTick" >
+      <span v-bind:class="{'del-line':item.isTick}">{{item.name}}</span>
+      <button v-on:click="del(item.id)">删除</button>
+    </li>
+    <li v-for="item in fTodos" v-if="curr=='f'">
+      <input type="checkbox" v-model="item.isTick" >
+      <span v-bind:class="{'del-line':item.isTick}">{{item.name}}</span>
+      <button v-on:click="del(item.id)">删除</button>
+    </li>
+  </ul>
+  <span>还剩下<b>{{unflen}}</b>个未完成的任务</span>
+  <!--datas是切换当前要显示的数据类型的函数-->
+  <a href="#all" v-on:click="datas('all')">所有任务</a>
+  <a href="#unf" v-on:click="datas('unf')">未完成的任务</a>
+  <a href="#f" v-on:click="datas('f')">已完成的任务</a>
+  <a href="javascript:;" v-on:click="delf">删除所有已完成的任务</a>
+</div>
+
+
+
+
+
+<script>
+//  模板渲染
+var vm = new Vue({
+  data: {
+    id:0,
+    newTodoText:'',
+    todos:[],
+    // 默认状态是所有任务
+    curr:'all'
+  },
+  computed:{
+    // 未完成任务数量
+    unflen:function(){
+      var len = 0;
+      for (var i = 0; i < this.todos.length; i++) {
+        var item = this.todos[i];
+        if(!item.isTick){
+          len++;
+        }
+      }
+      return len;
+    },
+    // 未完成任务数组
+    unfTodos:function(){
+      var newList = [];
+
+      for (var i = 0; i < this.todos.length; i++) {
+        var item = this.todos[i];
+        if(!item.isTick){
+          newList.push(item);
+        }
+      }
+
+      return newList;
+    },
+    // 已完成任务数组
+    fTodos:function(){
+      var newList = [];
+
+      for (var i = 0; i < this.todos.length; i++) {
+        var item = this.todos[i];
+        if(item.isTick){
+          newList.push(item);
+        }
+      }
+
+      return newList;
+    }
+  },
+  methods: {
+    delf:function(){
+      // 删除所有已完成的任务，相当于把未完成的数据覆盖所有数据
+      this.todos = this.unfTodos;
+    },
+    datas: function (str){
+      //切换当前需要显示的数据类型
+      this.curr = str;
+    },
+    newTodo:function(){
+      // 新增任务就是给任务数组添加一个元素
+      this.todos.push({
+        name:this.newTodoText,
+        id:this.id,
+        // 新增任务默认是没有完成的
+        isTick:false
+      })
+      // id自增，这样id就不会重复
+      this.id++;
+      // 新增任务后清空文本框的值
+      this.newTodoText = '';
+    },
+    del(id){
+      for (var i = 0; i < this.todos.length; i++) {
+        var item = this.todos[i];
+        // 通过id来找到要删除的元素
+        if(item.id == id){
+          this.todos.splice(i, 1);
+          break;
+        }
+      }
+    }
+  }
+}).$mount('#app');
+
+
+
+</script>
+</body>
+</html>

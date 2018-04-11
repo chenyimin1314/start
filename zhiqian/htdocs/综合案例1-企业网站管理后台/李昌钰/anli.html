@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/bootstrap.css" />
+		
+		<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="../js/bootstrap.js"></script>
+	</head>
+	<body>
+	<!--导航条-->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+				<a class="navbar-brand" href="#">Admin</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 后台首页<span class="sr-only">(current)</span></a>
+					</li>
+					<li>
+						<a href="用户管理.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户管理</a>
+					</li>
+					<li>
+						<a href="neirong-guanli.html"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 内容管理</a>
+					</li>
+					<li>
+						<a href="标签管理.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> 标签管理</a>
+					</li>
+				</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-screenshot"></span> 前台首页</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-user"></span> 个人主页</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-cog"></span> 个人设置</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-credit-card"></span> 账户中心</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-heart"></span> 我的收藏</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#"><span class="glyphicon glyphicon-off"></span> 退出</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</nav>	
+	
+    <!--后台页面-->
+    <div class="container">
+    	<div class="row">
+    	<div class="col-md-12">	
+    	<div class="alert alert-danger alert-dismissible" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <strong>网站程序有漏洞</strong>
+			  <p>当前版本程序(V1.22)存在严重安全问题，容易造成攻击，请即可修复！</p>
+			  <div class="btn btn-group">
+			   <button type="button" class="btn btn-danger dropdown-toggle"data-dismiss="alert" aria-label="Close">立即修复</button>
+			  </div>
+			  <div class="btn btn-group">
+			   <button type="button" class="btn btn-default dropdown-toggle"data-dismiss="alert" aria-label="Close">稍后处理</button>
+			  </div>
+			  </div>
+    </div>
+    </div>
+    <div class="row">
+    	<div class="col-md-6">
+    		 <div class="panel panel-default">
+    	<div class="panel-heading">网站数据统计</div>
+    	<table class="table">
+    		<thead>
+					<tr>
+						<th>统计项目</th>
+						<th>今日</th>
+						<th>昨日</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="font-weight:bold;">注册会员</td>
+						<td>200</td>
+						<td>400</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">登录会员</td>
+						<td>4200</td>
+						<td>5400</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">今日发帖</td>
+						<td>1200</td>
+						<td>1400</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">转载次数</td>
+						<td>800</td>
+						<td>1000</td>
+					</tr>
+				
+					</tbody>
+    	  </table>           
+    </div>
+    </div>
+  
+    <div class="col-md-6">
+    	<div class="panel panel-default">
+         <div class="panel-heading">网站热贴</div>
+         <div class="list-group">
+		    <a href="#" class="list-group-item"><span class="glyphicon glyphicon-list"></span> 冠军不易！曼联拄拐天团抢镜 道尽心酸 </a>
+		    <a href="#" class="list-group-item"><span class="glyphicon glyphicon-list"></span> 冠军不易！曼联拄拐天团抢镜 道尽心酸 </a>
+		    <a href="#" class="list-group-item"><span class="glyphicon glyphicon-list"></span> 冠军不易！曼联拄拐天团抢镜 道尽心酸 </a>
+		    <a href="#" class="list-group-item"><span class="glyphicon glyphicon-list"></span> 冠军不易！曼联拄拐天团抢镜 道尽心酸</a>
+		    <a href="#" class="list-group-item"><span class="glyphicon glyphicon-list"></span> 冠军不易！曼联拄拐天团抢镜 道尽心酸 </a>
+        </div>
+    </div>
+    </div>
+   </div>
+   <!--二行-->
+   <div class="row">
+   <div class="col-md-6">
+   	 <div class="panel panel-default">
+    	<div class="panel-heading">今日访客统计</div>
+   		<div class="panel-body">
+   			<canvas id="canvas" class="col-md-12"></canvas>
+   			<script src="../js/Chart.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/script.js" type="text/javascript" charset="utf-8"></script>
+   		</div>
+   	</div>
+   	</div>
+   	<div class="col-md-6">
+   		<div class="panel panel-default">
+   			<div class="panel-heading">服务器状态</div>
+   			<div class="panel-body">
+   				<p>内存使用率：40%</p>
+   				<div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+   			</div>
+   		</div>
+   		<p>数据库使用率：20%</p>
+   		<div class="progress">
+  <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+   			</div>
+   		</div>
+   		
+   		<p>磁盘使用率：60%</p>
+   		<div class="progress">
+  <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+   			</div>
+   			</div>
+   			<p>磁盘使用率：80%</p>
+   		<div class="progress">
+  <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+   			</div>
+   		</div>
+   		
+   		</div>
+   	</div>
+   	</div>
+   	</div>
+    
+    <!--三行-->
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="panel panel-default">
+    	<div class="panel-heading">团队留言版</div>
+    	  <div class="panel-body">
+    	  	<div class="well col-md-7">
+    	  		<div class="media">
+    	  		<div class="media-left">
+    	  			<img src="../images/a.png"/>
+    	  		</div>
+    	  		 <div class="media-body">
+                    <h4 class="media-heading">卓大哥</h4>
+                技术大哥，今晚请把网站程序升级一下哈，现在的系统有漏洞，安全起见！
+    	  		</div>
+                 </div> 
+    	  	</div>
+    	  	<div class="well col-md-7">
+    	  		<div class="media">
+    	  		<div class="media-left">
+    	  			<img src="../images/b.png"/>
+    	  		</div>
+    	  		 <div class="media-body">
+                    <h4 class="media-heading">程序猿大哥</h4>
+                                                           收到，今晚凌晨2点准时升级！
+    	  		</div>
+                </div>  
+    	  	</div>
+    	  	<div class="well col-md-7">
+    	  		<div class="media">
+    	  		<div class="media-left">
+    	  			<img src="../images/b.png"/>
+    	  		</div>
+    	  		 <div class="media-body">
+                    <h4 class="media-heading">程序猿大哥</h4>
+                                                                你在站点发一下通知！！！
+    	  		</div>
+                 </div> 
+    	  	</div>
+    	  	<div class="well col-md-7">
+    	  		<div class="media">
+    	  		<div class="media-left">
+    	  			<img src="../images/a.png"/>
+    	  		</div>
+    	  		 <div class="media-body">
+                    <h4 class="media-heading">卓大哥</h4>
+                                                                  好的！
+    	  		</div>
+                 </div> 
+    	  	</div>
+    	
+    	 <div class="well-lg-3 col-lg-offset-8">
+    	     <div class="form-group">
+    		<label for="exampleInputEmail1">留言版内容</label>
+    		<textarea class="form-control" id="exampleInputEmail1" cols="30" rows="10"></textarea>
+    	     </div> 
+    	    <button class="btn btn-default" type="submit">提交</button>
+         </div>
+        </br>	
+         <div class="well-lg-3 col-lg-offset-8">
+         	<div class="panel panel-default">
+    	<div class="panel-heading">团队成员手册</div>
+    	    <div class="panel-body">
+    	    	<table class="table table-bordered">
+                    <tbody>
+					<tr>
+						<td style="font-weight:bold;">站长(李孝利):<span class="glyphicon glyphicon-phone"></span> 13134848615</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">技术(大陆哥):<span class="glyphicon glyphicon-phone"></span> 13456128615</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">推广(张二哥):<span class="glyphicon glyphicon-phone"></span> 13985792348</td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">客服(王女士):<span class="glyphicon glyphicon-phone"></span> 12837493825 <span class="glyphicon glyphicon-phone-alt"></span> 62983764</td>
+					</tr>
+					</tbody>
+                 </table>
+    	    </div>
+    	  </div>
+    	</div>
+    		</div>
+    </div>
+    
+    </div>
+    </div>
+
+    </div><!--container的div-->
+	  <p style="text-align: center;">
+	   		Copyright&copy;2012-2015 www.baidu.com 粤ICP备13014270号-4
+	   	</p>	
+	</body>
+</html>
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// get请求与json格式字符串
+    var xhr = new XMLHttpRequest();
+    xhr.open('get','02-http.php?a=1&b=2');
+    xhr.send();
+    xhr.onreadystatechange = function (){
+      if(xhr.readyState == 4){
+        if(xhr.status == 200){
+          console.log(111);
+          // console.log(xhr.response);
+        }
+      }
+    }
+
+    // // post请求
+    var xhr = new XMLHttpRequest();
+    xhr.open('post','../api/cart/login.php');
+
+    // post请求传参需要设置x-www-form-urlencoded编码类型，不然后端拿不到前端传过去的数据
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    var data = JSON.stringify({account:'admin', password:'admin'});
+    xhr.send(data);
+    xhr.onreadystatechange = function (){
+      if(xhr.readyState == 4){
+        if(xhr.status == 200){
+          console.log(xhr.response);
+        }
+      }
+    }
+
+
+    // // put方法 一般用于修改信息
+    var xhr = new XMLHttpRequest();
+    xhr.open('put','../api/cart/product.php');
+    xhr.send( JSON.stringify({id:'60', name:'name-60'}) );
+    xhr.onreadystatechange = function (){
+      if(xhr.readyState == 4){
+        if(xhr.status == 200){
+          console.log(xhr.response);
+        }
+      }
+    }
+
+
+    // delete方法 一般用于删除信息
+    var xhr = new XMLHttpRequest();
+    xhr.open('delete','../api/cart/product.php');
+    xhr.send( JSON.stringify({id:'59'}) );
+    xhr.onreadystatechange = function (){
+      if(xhr.readyState == 4){
+        if(xhr.status == 200){
+          console.log(xhr.response);
+        }
+      }
+    }
+		</script>
+	</body>
+</html>

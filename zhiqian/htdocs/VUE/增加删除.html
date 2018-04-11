@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	<script  src="vue2.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+    <div>
+      <div class="conter">
+        <div v-for="item in t">{{item}}</div>
+      </div>
+    </div>
+    <input type="text" v-model="text">
+    <button @click="add">点击我</button>
+    <button @click="del">删除</button>
+  </div>
+
+  <script type="text/javascript">
+  new Vue({
+    el:'#app',
+    data:{
+      text:'',
+      t:[]
+    },
+    methods:{
+    	add(){
+    		this.t.push(this.text)
+    		this.text=''
+    	},
+    	del(){
+    		this.t.pop(this.text)
+    	}
+    }
+  })
+
+		 </script>
+	</body>
+</html>

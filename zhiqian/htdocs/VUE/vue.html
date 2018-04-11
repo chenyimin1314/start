@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="box">
+			{{mss}}
+		</div>
+		
+		<div class="a">
+			<div v-for="b in masss">
+				{{b.name}}
+			</div>
+			<div v-for="b in mass">
+				{{b.name}}
+			</div>
+		</div>
+		
+		<div class="b">
+			<input type="" name="" id="" value="" v-model="mss"/>
+			{{mss}}
+		</div>
+		
+		 <div class="c">
+			<button @click="cc">12313</button>
+		</div>
+		<div class="d">
+			<div v-if="ok">显示</div>
+			<div v-show="ok">显示</div>
+		</div>
+	</body>
+	 <script src="vue2.min.js"></script>
+	 <script>
+	 	var vm=new Vue({
+	 		el:'.box',
+	 		data:{
+	 			mss:'21323'
+	 		}
+	 	})
+//	 	.$mount('.box');
+	  var vm=new Vue({
+	 		el:'.a',
+	 		data:{
+	 			masss:[{name:1},{name:2}],
+	 			mass:[{name:1},{name:2}]
+	 		}
+	 	})
+	
+		var vm=new Vue({
+	 		el:'.b',
+	 		data:{
+	 			mss:"hall"
+	 		}
+	 	})
+		  
+		  var vm=new Vue({
+	 		el:'.c',
+	 		data:{
+	 			name:'vue'
+	 		},
+	 		methods:{
+	 			cc:function(){
+	 				alert(this.name)
+	 			}
+	 		}
+	 	})
+		  
+		  	var vm=new Vue({
+	 		el:'.d',
+	 		data:{
+	 			ok:false
+	 		}
+	 	})
+		  
+ </script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script type="text/javascript" src="./public/jquery.min.js"></script>
+</head>
+
+<body>
+
+<button>完成</button>
+<audio src="./public/complete.ogg" controls></audio>
+<video src="./public/complete.ogg" controls></video>
+  
+<form>
+
+  <input type="text" placeholder="请输入。。">
+  <input type="email">
+  <input type="date">
+  <input type="color">
+  <input type="number">
+  <input type="url">
+
+  <button type="submit">提交</button>
+
+</form>
+
+
+
+  <script type="text/javascript">
+    // HTML5新特性、新增语义化标签、视频、音频、新增属性、表单拓展
+    //  常用html5标签
+//  音频audio 获取音频视频元素.play()可以播放
+//  视频video
+//  头部header
+//  导航nav
+//  侧栏aside
+//  底部footer
+//  主体main
+//  文章article
+//  块section
+
+$('button').on('click', function(){
+  document.querySelector('audio').play();
+})
+
+
+  </script>
+</body>
+
+</html>

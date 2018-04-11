@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style lang="">
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .clearfix:after {
+      content: '';
+      clear: both;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: white;
+    }
+
+    header .left {
+      position: absolute;
+      left: 10px;
+      top: 13px;
+    }
+
+    header .left img {
+      width: 60px;
+    }
+
+    header .right {
+      position: absolute;
+      right: 10px;
+      top: 15px;
+    }
+
+    header .middle {
+      text-align: center;
+      padding-top: 5px;
+    }
+
+    header .middle img {
+      width: 50px;
+    }
+
+    header .right a img {
+      width: 30px;
+    }
+
+    main {
+      padding-top: 60px;
+      padding-bottom: 60px;
+      height: 2000px;
+      background-color: green;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #000000;
+    }
+
+    footer a {
+      width: 25%;
+      display: inline-block;
+      height: 50px;
+      float: left;
+      text-align: center;
+      padding-top:10px;
+      position: relative;
+    }
+
+    /*footer a .icon {
+      background: no-repeat;
+      width: 20px;
+      height: 20px;
+      background-size: cover;
+      opacity: 0.8;
+      display: inline-block;
+    }*/
+/*
+    footer a .icon-1 {
+      background-image: url('./public/images/icon_l1_h.png')
+    }
+
+    footer a .icon-2 {
+      background-image: url('./public/images/icon_l2_h.png')
+    }
+
+    footer a .icon-3 {
+      background-image: url('./public/images/icon_l3_h.png')
+    }
+
+    footer a .icon-4 {
+      background-image: url('./public/images/icon_l4_h.png')
+    }*/
+
+    footer a img{
+      width: 20px;
+      height: 20px;
+      opacity: 0.8;
+    }
+
+    footer a .text {
+      color: #BABABA;
+      font-size: 13px;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="left">
+      <img src="../public/images/tiel.png" alt="">
+    </div>
+    <div class="middle">
+      <img src="../public/images/logo.png" alt="">
+    </div>
+    <div class="right">
+      <a href="javascript:;" class="search">
+        <img src="../public/images/s-icon.png" alt="">
+      </a>
+    </div>
+  </header>
+  <main>2</main>
+  <footer class="clearfix">
+    <a href="javascript:;">
+      <img src="../public/images/icon_l1_h.png" alt="">
+      <span class="text">首页</span>
+    </a>
+    <a href="javascript:;">
+      <img src="../public/images/icon_l2_h.png" alt="">
+      <span class="text">列表</span>
+    </a>
+    <a href="javascript:;">
+      <img src="../public/images/icon_l3_h.png" alt="">
+      <span class="text">购物车</span>
+    </a>
+    <a href="javascript:;">
+      <img src="../public/images/icon_l4_h.png" alt="">
+      <span class="text">我的</span>
+    </a>
+  </footer>
+
+</body>
+
+</html>

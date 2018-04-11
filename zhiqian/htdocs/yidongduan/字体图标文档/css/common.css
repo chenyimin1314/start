@@ -1,0 +1,556 @@
+/*公用样式*/
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+  color: #aaa;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: ' ';
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+.tc {
+  text-align: center;
+}
+
+.col {
+  flex-direction: column;
+}
+
+
+/*组件*/
+
+.btn {
+  font-size: 16px;
+  text-align: center;
+  color: #007AFF;
+  border: 1px solid #007AFF;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+
+/*操作弹出层*/
+
+.action-sheet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  transition: .5s;
+  opacity: 0;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.action-sheet.on {
+  visibility: visible;
+  opacity: 1;
+}
+
+.on .mask {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.action-sheet .box {
+  position: absolute;
+  bottom: -50%;
+  width: 96%;
+  left: 2%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  transition: .5s;
+  border-radius: 5px;
+}
+
+.action-sheet.on .box {
+  bottom: 2%;
+}
+
+.action-sheet .action-list {
+  background-color: white;
+  flex: 1;
+  display: flex;
+  border-radius: 5px;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.action-sheet .action-list .action {
+  border-bottom: 1px solid #bbb;
+}
+
+.action-sheet .action-list .action:last-child {
+  border: none;
+}
+
+.action-sheet .action {
+  background-color: white;
+  flex: 0 0 40px;
+  color: #007AFF;
+  text-align: center;
+  line-height: 40px;
+}
+
+.action-sheet .cancel {
+  border-radius: 5px;
+  margin-top: 6px;
+}
+
+
+/* 苹果safari的action-sheet */
+
+.action-sheet .sub-list {
+  display: flex;
+  overflow: auto;
+  flex: 1;
+  padding: 10px 0;
+  border-bottom: 1px solid #bbb;
+}
+
+.action-sheet .sub-list:last-child {
+  border: none;
+}
+
+.action-sheet .sub-list .text-item {
+  text-align: center;
+  flex: 1;
+  color: #007AFF;
+}
+
+.action-sheet .sub-list .item {
+  flex: 0 0 23%;
+  text-align: center;
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  transition: .2s;
+}
+
+.action-sheet .sub-list .item.on {
+  color: #007AFF;
+}
+
+.action-sheet .sub-list .item .fa {
+  font-size: 40px;
+  display: block;
+  flex: 1;
+}
+
+.action-sheet .sub-list .item span {
+  flex: 1;
+  font-size: 12px;
+}
+
+
+/*对话框*/
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  transition: .5s;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog.on {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dialog .box {
+  background-color: white;
+  width: 80%;
+  padding: 20px 25px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  z-index: 10;
+}
+
+.dialog .box h1 {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.dialog .box .content {
+  margin-bottom: 10px;
+}
+
+.dialog .box .ctrl-box {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dialog .box .ctrl-box a {
+  color: #007AFF;
+  margin-right: 5px;
+}
+
+
+/*上拉百叶窗*/
+
+.window-shade {
+  position: fixed;
+  top: calc(100vh - 44px);
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 44px);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  transition: .5s;
+}
+
+.window-shade.on {
+  top: 44px;
+}
+
+.window-shade .t {
+  flex: 0 0 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #bbb;
+}
+
+.window-shade .t h2 {
+  padding: 3px 0 1px 0;
+  font-size: 16px;
+}
+
+.window-shade .t span {
+  font-size: 14px;
+  color: tomato
+}
+
+.window-shade .c {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.window-shade .c li {
+  flex: 0 0 40px;
+  line-height: 40px;
+  border-top: 1px dotted #ddd;
+  padding: 0 8px;
+}
+
+
+/*tab*/
+
+.tab {
+  flex: 0 0 30px;
+  border-bottom: 1px solid #bbb;
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.tab-nav {
+  flex: 0 0 33.33333%;
+  text-align: center;
+  line-height: 30px;
+  margin-bottom: -1px;
+}
+
+.tab-nav.on {
+  border: 1px solid #bbb;
+  background-color: white;
+}
+
+.tab-nav a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.tab-box {
+  display: none;
+  flex: 1;
+}
+
+.tab-box.on {
+  display: block;
+}
+
+
+/*布局*/
+
+#app {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  flex-direction: column;
+}
+
+header {
+  background-color: white;
+  flex: 0 0 44px;
+  display: flex;
+  border-bottom: 1px solid #bbb;
+}
+
+header.alpha {
+  background-color: rgba(0, 0, 0, .3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+header.gray {
+  background-color: #eee;
+}
+
+main {
+  flex: 1;
+  background-color: #EFEFF4;
+  display: flex;
+  height: calc(100vh - 88px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+main.pattern-1 {
+  height: calc(100vh - 44px);
+}
+
+main.pattern-2 {
+  height: 100vh;
+}
+
+main .main-box {
+  flex: 1;
+  padding: 5px;
+  display: flex;
+}
+
+footer {
+  background-color: white;
+  flex: 0 0 44px;
+  display: flex;
+  border-top: 1px solid #bbb;
+}
+
+footer.alpha {
+  background-color: rgba(0, 0, 0, .3);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+/*页眉*/
+
+header .btn-menu {
+  color: #007AFF;
+  font-size: 28px;
+  flex: 0 0 40px;
+  padding: 0 8px;
+  line-height: 42px;
+  /*height: 44px;*/
+}
+
+header h1 {
+  flex: 1;
+  line-height: 44px;
+  font-size: 18px;
+}
+
+header .other {
+  flex: 0 0 40px;
+}
+
+header .other2 {
+  flex: 0 0 80px;
+  height: 44px;
+  line-height: 42px;
+  display: flex;
+  justify-content: center;
+}
+
+header .other2 a {
+  color: #007AFF;
+  font-size: 18px;
+  flex: 0 0 30px;
+  text-align: center;
+}
+
+header .logo {
+  flex: 0 0 40px;
+  padding: 0 8px;
+  line-height: 42px;
+  height: 44px;
+  color: #007AFF;
+  font-size: 28px;
+}
+
+header .btn-back {
+  flex: 0 0 24px;
+  padding: 0 0 0 8px;
+  height: 44px;
+  line-height: 42px;
+  color: #007AFF;
+  font-size: 28px;
+}
+
+
+/*透明页眉*/
+
+header.alpha h1 {
+  color: white;
+}
+
+header.alpha .btn-back {
+  color: white;
+}
+
+
+/*页脚*/
+
+footer .bmenu {
+  display: flex;
+  flex: 1;
+}
+
+footer .bmenu a {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+footer .bmenu a.on {
+  color: #007AFF;
+}
+
+footer .bmenu a i.fa {
+  display: block;
+  font-size: 22px;
+}
+
+
+/*透明页脚*/
+
+footer.alpha .bmenu a {
+  color: white;
+}
+
+
+/*主体*/
+
+main .img-box {
+  flex: 1;
+}
+
+main .img-box img {
+  width: 100%;
+  float: left;
+}
+
+main .cbox {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+main .cbox .btn {
+  width: 96%;
+  flex: 0 0 30px;
+  margin: 5px 0;
+}
+
+
+/*05-control-panel*/
+
+main .p-list {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 100%;
+  overflow-x: hidden;
+}
+
+main .p-list li {
+  flex: 0 0 60px;
+  line-height: 60px;
+  border-bottom: 1px solid #bbb;
+  background-color: #fafafa;
+  width: 100%;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+main .p-list li div:first-child {
+  flex: 0 0 100%;
+  padding: 0 8px;
+  font-size: 18px;
+}
+
+main .p-list li div:last-child {
+  width: 100%;
+  height: 60px;
+  padding: 0 8px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #007AFF;
+  transition: .3s;
+  position: absolute;
+  left: 100%;
+  top: 0;
+}
+
+main .p-list li.on div:last-child {
+  left: 0%;
+}
+
+main .p-list li div:last-child a {
+  font-size: 30px;
+  flex: 0 0 40px;
+  margin-left: 4px;
+  color: white;
+}

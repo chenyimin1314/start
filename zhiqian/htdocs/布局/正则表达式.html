@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--<input type="text" id="but" />
+<input type="button" id="but1" value="号码检测"/><br />-->
+<input type="date" />
+<script>
+//    var x=confirm("是否关闭");
+//     if(x){
+//         window.close();
+//     }
+//    var y=prompt("一加一等于");
+//    if(y==4){
+//        window.open("https:www.baidu.com");
+//    }
+    var but=document.getElementById("but");
+    var but1=document.getElementById("but1");
+     var b=/^1\d{10}$/;
+     but1.onclick=function(){
+         var c=but.value;
+         var a= b.exec(c);
+         console.log(a)
+         var a= b.test(c);
+         console.log(a)
+         var a= c.match(b);
+         console.log(a)
+         if(!a){
+             alert("请输入正确的号码格式")
+         }
+         else{
+           var x=confirm("号码正确");
+            if(x==true){
+          prompt( "我帅吗？");
+             var x=prompt("你确定吗？");
+             if(x=="确定"){
+                 window.open("http://www.jingdong.com/")
+             }
+         }
+
+         }
+     }
+</script>
+</body>
+</html>

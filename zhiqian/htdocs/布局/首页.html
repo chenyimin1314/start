@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<link rel="stylesheet" type="text/css" href="../swiperku/swiper.css"/>
+		<title></title>
+		    <link rel="stylesheet" href="xu.css" />
+			<link rel="stylesheet" href="css/swiper.css">
+		<style>
+			.foot span{
+				font-size: 10px;
+			}
+			.foot img{
+				width: 20px;
+			}
+			.foot a{
+				text-decoration: none;
+				color: white;
+			}
+			.foot {
+				height: 55px;
+			}
+			.foot div{
+				margin: auto;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="head">
+				<div class="left"><img src="../public/images/tiel.png" alt="" /></div>
+				<div class=" middle"><img src="../public/images/logo.png" alt="" /></div>
+				<div class="right"><img src="../public/images/s-icon.png" alt="" /></div>
+			</div>
+			<div class="body">
+				<div class="content">
+					<div class="content1">最新上货</div>
+					<div class="content2"><span>大牌</span></div>
+					<div class="content3">玩转美世</div>
+				</div>
+				<div class="swiper-container in-banner">
+					        <div class="swiper-wrapper lb">
+					           
+					        </div>
+					        <!-- page -->
+					    	<div class="swiper-pagination"></div>
+				</div>
+			    <div class="fashion s1 .ad1 ">
+			   	 <div class="fashion1">时尚专区<span>></span></div>
+			   	 <table  class="table sss">
+			   	 
+			   	 </table>
+			   </div>
+			   <div class="fashion s2 .ad1 ">
+			   	 <div class="fashion1">奢侈专区<span>></span></div>
+			   	 <table  class="table ssss">
+			   	 
+			   	 </table>
+			   </div>
+			</div>
+			
+      <div class="out-login" style="display: none;">
+    	<div class="po-re">
+        	<a href="javascript:;" class="out-del"></a>
+            <div class="lo-topimg"></div>
+            <p class="lo-toptitle">为了您的财产安全请填写身份信息</p>
+            <div class="lo-inputbox">
+                <input type="text" placeholder="输入账号" id="account" class="lo-input ">
+                <input type="password" placeholder="输入密码" id="password" class="lo-input lo-input1">
+                <a href="javascript:;" class="lo-dell"></a>
+            </div>
+            <a href="javascript:;" class="lo-btn">确定</a>
+        </div>
+       
+    </div>
+			<div class="foot">
+				<div>
+					<a href="首页.html">
+					<img src="../public/images/icon_l1_h.png" alt="" />
+					<span>首页</span>
+					</a>
+				</div>
+				<div>
+					<a href="奢侈专qu.html">
+					<img src="../public/images/icon_l2_h.png" alt="" />
+					<span>品类</span>
+					</a>
+				</div>
+				<div>
+					<a href="购物车er.html">
+					<img src="../public/images/icon_l3_h.png" alt="" />
+					<span>购物车</span>
+					</a>
+				</div>
+				<div>
+					<a href="jie.html">
+					<img src="../public/images/icon_l4_h.png" alt="" />
+					<span>我的</span>
+					</a>
+				</div>
+			 </div>
+		</div>
+	</body>
+    <script src="../swiperku/swiper-3.3.1.min.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="com.js"></script>
+	<script>
+		var num=1;
+     fb();
+     function fb(){
+        $.get('../api/cart/product.php',{p:num,pnum:21},function(data){
+        	 console.log(data);
+        	 if(data.status==1){
+        	 	var list=data.list;
+        	 	 total=data.total;
+        	 	 var html="";
+        	 	 var htmls='';
+        	 	 var htmlss="";
+        	 	html='	<tr >\
+        	 	<td rowspan="2" class="left" >\
+                <img class="im" id="'+list[0].id+'" src="../api/cart'+list[0].img+'" alt="" />\
+        	 	<img class="ims" src="../api/cart'+list[1].img+'" alt="" />\
+        	 	</td><td><img src="../api/cart'+list[2].img+'" alt="" /></td>\
+        	 	<td><img src="../api/cart'+list[3].img+'" alt="" />\
+        	 	</td></tr>\
+			   	 <tr  class="right"><td><img src="../api/cart'+list[4].img+'" alt="" />\
+        	 	</td><td><img src="../api/cart'+list[5].img+'" alt="" /></td></tr>';
+
+        	    htmls='	<tr >\
+        	 	<td rowspan="2" class="left">\
+        	 	<img class="im" src="../api/cart'+list[6].img+'" alt="" />\
+        	 	<img class="ims" src="../api/cart'+list[7].img+'" alt="" />\
+        	 	</td><td><img src="../api/cart'+list[8].img+'" alt="" /></td>\
+        	 	<td><img src="../api/cart'+list[9].img+'" alt="" />\
+        	 	</td></tr>\
+			   	 <tr  class="right"><td><img src="../api/cart'+list[10].img+'" alt="" />\
+        	 	</td><td><img src="../api/cart'+list[11].img+'" alt="" /></td></tr>';
+        	 	
+        	 	htmlss=' <div class="swiper-slide"><img  onerror="this.src=\'../public/nopic.png\'"  src="../api/cart'+list[12].img+'" alt="" /></div>\
+					      <div class="swiper-slide"><img   onerror="this.src=\'../public/nopic.png\'" src="../api/cart'+list[13].img+'" alt="" /></div>\
+					       <div class="swiper-slide"><img   onerror="this.src=\'../public/nopic.png\'" src="../api/cart'+list[14].img+'" alt="" /></div>'
+        	 	$('.ssss').html(htmls);
+        	 	$('.sss').html(html);
+        	 	$('.lb').html(htmlss);
+        	 	
+        	 	 var mySwiper = new Swiper ('.swiper-container', {
+				    direction: 'horizontal',
+				    loop: true,
+				    pagination: '.swiper-pagination',
+					autoplayDisableOnInteraction : false,
+					autoplay : 3000,
+					speed:300,
+              }) ;
+        
+        	}
+
+        },'json')
+        }
+     $('.sss').on('click',' .im',function(){
+         	location.href="详情l.html";
+   	  localStorage.setItem('pus',$(this).prop('id'))
+      })
+     
+    login();
+	</script>
+</html>

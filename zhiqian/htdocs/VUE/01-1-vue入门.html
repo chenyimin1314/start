@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+  
+</head>
+<body>
+
+<!--vue模板 列表-->
+<div id="app">
+  <ul>
+  <!--通过v-if判断现在需要显示哪种类型的数据(所有任务、未完成任务、已完成任务)-->
+    <li v-for="todo in todos" v-if="curr == 'all'" >
+      {{ todo.name }}
+    </li>
+    <li v-for="todo in unf" v-if="curr == 'unf'">
+      {{ todo.name }}
+    </li>
+    <li v-for="todo in f" v-if="curr == 'f'">
+      {{ todo.name }}
+    </li>
+  </ul>
+  <span>还剩下<b></b>个未完成的任务</span>
+  <!--datas是切换当前要显示的数据类型的函数-->
+  <a href="#all" v-on:click="datas('all')">所有任务</a>
+  <a href="#unf" v-on:click="datas('unf')">未完成的任务</a>
+  <a href="#f" v-on:click="datas('f')">已完成的任务</a>
+  <a href="javascript:;">删除所有已完成的任务</a>
+</div>
+<script src="vue2.min.js"></script>
+<script>
+//  模板渲染
+var vm = new Vue({
+  data: {
+    // 所有任务的数组
+    todos: [
+      {name:"a",isTick:0},
+      {name:"c",isTick:0},
+      {name:"b",isTick:1}
+    ],
+    // 默认是所有任务的状态
+    curr:'all'
+  },
+  // 计算属性，可以根据data里面的todos动态新建一个未完成任务的数组unf，页面模板上可以直接使用unf这个变量
+  computed:{
+    // 未完成任务的数组
+    unf:function() {
+      var newArr = [];
+      for (var i = 0; i < this.todos.length; i++) {
+        var element = this.todos[i];
+        if(element.isTick == 0){
+          newArr.push(element);
+        }
+      }
+      return newArr;
+    },
+    // 已完成任务的数组
+    f:function() {
+      var newArr = [];
+      for (var i = 0; i < this.todos.length; i++) {
+        var element = this.todos[i];
+        if(element.isTick == 1){
+          newArr.push(element);
+        }
+      }
+      return newArr;
+    }
+  },
+  methods:{
+    datas: function (str){
+      //切换当前需要显示的数据类型
+      this.curr = str;
+    }
+  }
+}).$mount('#app');
+
+</script>
+</body>
+</html>

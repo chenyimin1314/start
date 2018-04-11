@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style lang="">
+    .active{color:red}
+    .loading{
+      color:red;
+      display:none;
+    }
+  </style>
+  <script type="text/javascript" src="./com.js"></script>
+</head>
+
+<body>
+
+<!--<input type="file" id="fileSelect">-->
+<button>上传</button>
+<div class="loading">
+  12121
+</div>
+  <script type="text/javascript">
+
+  $.ajaxStart = function(){
+    $('.loading').style.display = 'block';
+  }
+
+  $.ajaxComplete = function(){
+    $('.loading').style.display = 'none';
+  }
+  
+//$.ajax('get', '../api/cart/product.php', {p:2});
+
+     document.querySelector('button').onclick = function(){
+     	 $.ajaxStart();
+//     var file = document.querySelector('#fileSelect').files[0];
+//     ajax('post', '../api/cart/product.php', {file:file, name:'aaaa', price:12, detail:'111', lock:0}, false);
+     }
+
+  
+
+
+  </script>
+</body>
+
+</html>

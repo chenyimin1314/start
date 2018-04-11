@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../public/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!--这里要加载header.html-->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="javascript:;">Dashboard</a></li>
+          <li><a href="javascript:;">Settings</a></li>
+          <li><a href="javascript:;">Profile</a></li>
+          <li><a href="javascript:;">Help</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar shadow">
+          <li class="nav-plist"><a href="jquery后台.html">商品管理</a></li>
+          <li class="nav-olist active"><a href="11-订单管理静态页面.html">订单管理</a></li>
+          <li class="nav-chart "><a href="11-运营数据图表静态页面.html">运营数据</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="plist main-content">
+          <h2 class="sub-header">
+            订单管理
+            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+              <!--<button type="button" class="btn btn-default newp-btn">新增商品</button>
+              <button type="button" class="btn btn-default plup-btn">批量上架</button>
+              <button type="button" class="btn btn-default pldown-btn">批量下架</button>
+              <button type="button" class="btn btn-default pldel-btn">批量删除</button>-->
+            </div>
+          </h2>
+          <div class="table-responsive shuju">
+           
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+  <div class="popup" id="addp">
+    <div class="popup-content">
+      <h4 class="sub-header">
+        商品添加
+      </h4>
+      <form class="form-horizontal">
+        <div class="popup-main-content">
+          <div class="form-group">
+            <label for="inputPName" class="col-sm-2 control-label">商品名称</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputPName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品详情</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" id="inputDetail"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <labelclass="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+              <img src="" alt="" id="apimg" style="max-width:300px">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品图片</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control inputImg">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputUp" class="col-sm-2 control-label">是否上架</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label>
+              <input type="checkbox" value="" id="inputUp">
+            </label>
+              </div>
+              
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPrice" class="col-sm-2 control-label">价格</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="inputPrice">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-default save-btn" href="javascript:;">确认保存</a>
+            <a class="btn btn-default cancel-btn" href="javascript:;">取消</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="mask"></div>
+  </div>
+   <div class="loading">
+    <div class="mask"></div>
+    <img src="../public/loading.gif" alt="">
+  </div>
+
+  <script src="../public/jquery.min.js"></script>
+  <script type='text/javascript'>
+    $(document).ajaxStart(function(){
+      $('.loading').show();
+   })
+    $(document).ajaxComplete(function(){
+      $('.loading').hide();
+     
+   })
+		$(document).ajaxSuccess(function(event,data){
+			 if(data.responseJSON.status==1001){
+			 	  location.href="jq登入.html";
+			 }
+		})
+  	     	fc();
+	function fc(){
+	     $.get('../api/cart/order.php',function(data){
+	     	    if(data.status==1){
+	     	      var list=data.list;
+	     	      console.log(list);
+	     	        html='';
+	     	      for (var i=0;i<list.length;i++){
+	     	      	var item=list[i];
+	     	       	var cs='';
+	     	      	if(item.status==0){
+	     	      		cs='等待付款'
+	     	      	}else if(item.status==1){
+	     	      		cs='<button class="que">发货</button>'
+	     	      	}else if(item.status==2){
+	     	      		cs='等待签收';
+	     	      	}else if(item.status==3){
+	     	      		cs='交易完成';
+	     	      	}
+	     	      	
+	     	      	  console.log(item);
+	     	      	var data=new Date(item.createTime*1000);
+	     	      	 data=data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate();
+	     	         	html+= '<table class="table tab" id="'+item.id+'">\
+                  <thead><tr>\
+                  <th><input type="checkbox" id="check-all"></th>\
+                  <th>订单ID：'+item.id+'</th>\
+                  <th>订单日期：'+data+'</th>\
+                  <th>订单金额'+item.total+'</th>\
+                  <th>用户id：1'+item.uid+'</th>\
+                  <th>'+cs+'</th>\
+                </tr>\
+               </thead>';
+               
+	              for (var j=0;j<item.prods.length;j++){
+	              	 var prod=item.prods[j];
+	              	 html+='<tbody class="list" id="'+prod.id+'">\
+	              	 <tr >\
+                  <td>商品名称：'+prod.name+'</td>\
+                  <td>商品图片：<img style="width:50px"  onerror="this.src=\'../public/nopic.png\'" src="../api/cart'+prod.img+'" alt="" /></td>\
+                  <td>价格：'+prod.price+'</td>\
+                  <td>购买数量：'+prod.cnum+'</td>\
+                  <td>总金额：'+prod.price*prod.cnum+'</td>\
+                 </tr></tbody>';
+               }
+            html+='</table>';
+	     	      }
+	     	      $('.shuju').html(html);
+	     	    }
+	      },'json')
+	    }
+      	
+	$('.shuju').on('click','.que',function(){
+		 var id=$(this).parents('.tab').prop('id');
+		$.ajax({
+			type:"put",
+			url:"../api/cart/order.php",
+			data:JSON.stringify({id:id,status:2}),
+            dataType:'json',
+            success:function(data){
+            	if(data.status==1){
+            		fc();
+            	}
+            }
+		});
+	})
+	
+  
+    	   $('.shadow li ').on('click',function(){
+    	   	$(this).addClass('active');
+    	 })
+    
+  </script>
+</body>
+
+</html>

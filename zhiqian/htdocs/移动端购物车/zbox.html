@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no" />
+  <title>珠宝盒</title>
+  <link rel="stylesheet" href="css/swiper.css">
+  <link rel="stylesheet" href="css/style_ios.css">
+
+</head>
+
+<body>
+  <!--header-->
+  <header class="header clearfix">
+    <div class="left">
+    </div>
+    <div class="middle jewelryBox"><span>购物车</span><em>(<em>6</em>)</em>
+    </div>
+    <div class="right">
+      <!--<div class="editor"></div>-->
+    </div>
+  </header>
+
+  <section class="zboxmain">
+    <div class="zboxb borderTop">
+
+
+
+    </div>
+  </section>
+
+
+
+  <div class="botnBox clearfix">
+    <div class="left borderRight borderTop">
+      <dl>
+        <dd class="hover"></dd>
+        <dt>全选</dt>
+      </dl>
+      <div class="rc">合计 : <span class="god1">￥<span id="pay"></span></span>
+      </div>
+    </div>
+    <div class="middle borderTop"></div>
+    <div class="right bg-god buy-btn">购买</div>
+  </div>
+
+  <nav class="m_nav clearfix">
+    <a href="index.html">
+      <dl>
+        <dd class="ico1"></dd>
+        <dt>首页</dt>
+      </dl>
+    </a>
+    <a href="list.html">
+      <dl>
+        <dd class="ico2"></dd>
+        <dt>列表</dt>
+      </dl>
+    </a>
+    <a href="zbox.html">
+      <dl>
+        <dd class="ico3"></dd>
+        <dt>购物车</dt>
+      </dl>
+    </a>
+    <a href="order.html">
+      <dl>
+        <dd class="ico4"></dd>
+        <dt>我的</dt>
+      </dl>
+    </a>
+  </nav>
+
+  <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+  <script src="js/fontsize.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    var list = []
+    var nopic = '../../public/nopic.png'
+
+    function renderCart() {
+      $('.jewelryBox em em').html(list.length)
+      var html = ''
+      var isAll = 1;
+      var pay = 0;
+      list.forEach(function (item) {
+        var checkClass = ''
+        if (item.check == 1) {
+          checkClass = 'acti';
+          pay += item.price * item.cnum
+        } else {
+          isAll = 0
+        }
+        html += '<div class="zbox-list borderBottom" id="' + item.pid +
+          '"><div class="thrbox clearfix"><div class="left"><span class="' + checkClass +
+          '"></span></div><div class="middle"><dl class="clearfix"><dd><img src="../../api/cart' + item.img +
+          '" onerror="this.src = \'' + nopic + '\'"></dd><dt><p class="title"><a href="javascript:;">' + item.name +
+          '</a></p><p class="tow"><a href="###"></a></p><p class="god1 f24">￥' + item.price +
+          '</p></dt><div class="num"><a href="javascript:;" class="down-btn">-</a><input value="' + item.cnum +
+          '" /><a href="javascript:;" class="up-btn">+</a></div><div><button class="del-btn">删除</button></div></dl></div><div class="right"><span></span></div></div></div>'
+
+      });
+
+      if (list.length == 0) {
+        html += '<p class="null-ts">&nbsp;珠宝盒空空的！</p><a href="list.html" class="btnNull">选珠宝去</a>'
+        $('.botnBox ').hide()
+      } else {
+        if (isAll) {
+          $('.botnBox dl dd').addClass('hover')
+        } else {
+          $('.botnBox dl dd').removeClass('hover')
+        }
+
+        $('#pay').html(pay)
+      }
+
+      $('.zboxb').html(html)
+
+
+
+
+
+    }
+
+    $.ajax({
+      url: '../../api/cart/cart.php',
+      type: 'get',
+      success: function (data) {
+        data = JSON.parse(data)
+        if (data.status == 1) {
+          list = data.list;
+
+          renderCart()
+
+        }
+      }
+    })
+
+
+    $('.zboxb').on('click', '.zbox-list dl dd', function () {
+
+      localStorage.setItem('pid', $(this).parents('.zbox-list').prop('id'))
+      location.href = 'detail.html'
+
+    }).on('click', '.zbox-list .thrbox .left span', function (e) {
+      e.stopPropagation()
+
+      var check = $(this)
+      var pid = check.parents('.zbox-list').prop('id')
+      var checkVal = 1;
+      if (check.hasClass('acti')) {
+        checkVal = 0;
+      }
+
+      $.ajax({
+        url: '../../api/cart/cart.php',
+        type: 'put',
+        data: JSON.stringify({
+          pid: pid,
+          check: checkVal
+        }),
+        success: function (data) {
+          data = JSON.parse(data)
+          if (data.status == 1) {
+            list.forEach(function (item) {
+              if (item.pid == pid) {
+                item.check = checkVal
+              }
+            });
+            renderCart()
+          }
+        }
+      })
+
+    }).on('click', '.up-btn', function () {
+
+      var $item = $(this).parents('.zbox-list');
+      var pid = $item.prop('id')
+      var num = parseInt($item.find('.num input').val()) + 1
+
+      $.ajax({
+        url: '../../api/cart/cart.php',
+        type: 'put',
+        data: JSON.stringify({
+          pid: pid,
+          cnum: num
+        }),
+        success: function (data) {
+          data = JSON.parse(data)
+          if (data.status == 1) {
+            list.forEach(function (item) {
+              if (item.pid == pid) {
+                item.cnum = num
+              }
+            })
+            renderCart()
+          }
+        }
+      })
+
+    }).on('click', '.down-btn', function () {
+
+      var $item = $(this).parents('.zbox-list');
+      var pid = $item.prop('id')
+      var num = parseInt($item.find('.num input').val()) - 1
+
+      if (num <= 0) {
+        return false
+      }
+
+      $.ajax({
+        url: '../../api/cart/cart.php',
+        type: 'put',
+        data: JSON.stringify({
+          pid: pid,
+          cnum: num
+        }),
+        success: function (data) {
+          data = JSON.parse(data)
+          if (data.status == 1) {
+            list.forEach(function (item) {
+              if (item.pid == pid) {
+                item.cnum = num
+              }
+            })
+            renderCart()
+          }
+        }
+      })
+
+    }).on('click', '.del-btn', function () {
+
+      var $item = $(this).parents('.zbox-list');
+      var pid = $item.prop('id')
+
+      $.ajax({
+        url: '../../api/cart/cart.php?pid='+pid,
+        type: 'delete',
+        success: function (data) {
+          data = JSON.parse(data)
+          if (data.status == 1) {
+            list.forEach(function (item, index) {
+              if (item.pid == pid) {
+                list.splice(index, 1)
+              }
+            })
+            renderCart()
+          }
+        }
+      })
+
+    })
+
+
+    $('.botnBox').on('click', 'dl dd', function () {
+
+      var checkAll = $(this)
+      var checkVal = 1
+      if (checkAll.hasClass('hover')) {
+        checkVal = 0
+      }
+
+      var pid = [];
+      var checks = $('.zbox-list .thrbox .left span');
+
+      checks.each(function (index, check) {
+
+        check = $(check)
+        pid.push(check.parents('.zbox-list').prop('id'))
+
+      });
+
+      pid = pid.join(',')
+
+      $.ajax({
+        url: '../../api/cart/cart.php',
+        type: 'put',
+        data: JSON.stringify({
+          pid: pid,
+          check: checkVal
+        }),
+        success: function (data) {
+          data = JSON.parse(data)
+          if (data.status == 1) {
+
+            list.forEach(function (item) {
+              if (pid.indexOf(item.pid) > -1) {
+                item.check = checkVal
+              }
+            });
+            renderCart()
+          }
+        }
+      })
+
+    }).on('click', '.buy-btn', function () {
+
+      var pids = [],
+        nums = []
+      list.forEach(function (val) {
+        if (val.check == 1) {
+          pids.push(val.pid)
+          nums.push(val.cnum)
+        }
+      })
+
+      $.ajax({
+        url: '../../api/cart/order.php',
+        type: 'post',
+        data: JSON.stringify({
+          pids: pids.join(','),
+          nums: nums.join(',')
+        }),
+        success: function (data) {
+          data = JSON.parse(data)
+          if (data.status == 1) {
+            location.href = 'order.html'
+          }
+        }
+      })
+
+    })
+  </script>
+</body>
+
+</html>

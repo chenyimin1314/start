@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		 <style> 	
+		 	.active{
+		 		color: red;
+		 	}
+		 </style>
+	</head>
+	 <ul> </ul>
+	 <div class="box">
+	 	
+	 </div>
+	<body>
+		<script src="../jqku/jquery-1.11.3.min.js"></script>
+		<script>
+		fn(1);
+		function fn(num){
+			$.get('../php/02-page.php?p='+num,function(data){
+				 data=JSON.parse(data);
+//				console.log(data); 
+                  var list=data.list;
+			       var total=data.total;
+			       var html='';
+			       var page='';
+			       /显示商品/
+			       for(var i=0;i<list.length;i++){
+			       	  var s=list[i];
+			        html+='	<li><span>编号:'+s.id+'</span><span>姓名:'+s.name+'</span><span>作者:'+s.author+'</span></li>'
+			       }
+			       $("ul").html(html);
+			       
+			       /显示上一页/
+                  if(num>1){
+                	page+='<button class="prev">上一页</button>';
+                  }
+			       
+			      
+			     /显示页码/
+                    for(var i=1;i<=total;i++){
+                    	if(num==i){
+                    	page+='<a href="javascript:;"  class="teb "  style="color:red"  >'+i+'</a>';
+                    	}else{
+                    	page+='<a href="javascript:;" class="teb" >'+i+'</a>';	
+                    	}	
+                    }
+                    
+                    /显示下一页/
+                  if(num<total){
+                  	page+='<button class="next">下一页</button>';
+                  }
+                 
+			       $(".box").html(page);
+ 
+	})};
+	
+	  $(".box").on('click','a',function(){
+	  	var b=parseInt($(this).html());
+	  	   fn(b);
+	  }).on('click','.next',function(){
+            	   var a=parseInt($('.teb[style]').html())+1;
+            	   fn(a);
+                }).on('click','.prev',function(){
+                 var c=parseInt($('.teb[style]').html())-1;
+            	   fn(c);
+     })	
+//	fc(1);
+//	function fc(cum){
+//	$.ajax({
+//		type:'GET',
+//		url:'02-page.php?p='+cum,
+//		dataType:'json',
+//		cache:false,
+//	   success:function(data){ 
+////	   	alert("chengg")
+////         data=JSON.parse(data);
+//                var list=data.list;
+//			       var total=data.total;
+//
+//			       var html='';
+//			       var page='';
+////			       /显示商品/
+//			       for(var i=0;i<list.length;i++){
+//			       	  var s=list[i];
+//			        html+='	<li><span>编号:'+s.id+'</span><span>姓名:'+s.name+'</span><span>作者:'+s.author+'</span></li>'
+//			       }
+//			       $("ul").html(html);
+//			       
+////			          /显示上一页/
+//                if(cum>1){
+//                	page+='<button class="prev">上一页</button>';
+//                }
+////			     /显示页码/
+//                  for(var i=1;i<=total;i++){
+//                  	var  atv="";
+//                  	if(cum==i){
+//                  		atv="active";
+//                  	}
+//                  	page+='<a href="javascript:;" class="'+atv+'" >'+i+'</a>';
+//                  }
+//                  
+////                  /显示下一页/
+//                if(cum<total){
+//                	page+='<button class="next">下一页</button>';
+//                }
+// 
+//			       $(".box").html(page);
+//			       
+//			   
+//		}
+//	  })
+//	};	       
+//		
+//		$(".box").on('click','a',function(){
+//			   	 var b=parseInt($(this).html());
+//			  	   fc(b);
+//			     }).on('click','.next',function(){
+//          	   var a=parseInt($('.box .active').html())+1;
+//          	   fc(a);
+//              }).on('click','.prev',function(){
+//                var c=parseInt($(' .box .active').html())-1;
+//          	   fc(c);
+//          })	
+  $.ajax({
+      	     
+      	     	 
+      	     	
+      	     });
+		</script>
+	</body>
+</html>

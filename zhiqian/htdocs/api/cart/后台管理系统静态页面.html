@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="public/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!--这里要加载header.html-->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="javascript:;">Dashboard</a></li>
+          <li><a href="javascript:;">Settings</a></li>
+          <li><a href="javascript:;">Profile</a></li>
+          <li><a href="javascript:;">Help</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="nav-plist active"><a href="javascript:;">商品管理</a></li>
+          <li class="nav-olist"><a href="javascript:;">订单管理</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="plist main-content">
+          <h2 class="sub-header">
+            商品管理
+            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+              <button type="button" class="btn btn-default newp-btn">新增商品</button>
+              <button type="button" class="btn btn-default plup-btn">批量上架</button>
+              <button type="button" class="btn btn-default pldown-btn">批量下架</button>
+              <button type="button" class="btn btn-default pldel-btn">批量删除</button>
+            </div>
+          </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="check-all"></th>
+                  <th>商品ID</th>
+                  <th>商品名称</th>
+                  <th>上下架状态</th>
+                  <th>价格(元)</th>
+                  <th>创建日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="list">
+                <tr id="8ead327b-b675-412e-85b5-f3b17a6e0b88">
+                  <td><input type="checkbox" class="check"></td>
+                  <td>8ead327b-b675-412e-85b5-f3b17a6e0b88</td>
+                  <td>bb</td>
+                  <td>上架</td>
+                  <td>12</td>
+                  <td>2017-7-27</td>
+                  <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="..."> <button type="button" class="btn btn-default btn-edit">编辑</button><button type="button" class="btn btn-default btn-down">下架</button>
+                      <button type="button" class="btn btn-default btn-del">删除</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="2e00497c-93a8-4017-bf6b-15fdbd6484c4">
+                  <td><input type="checkbox" class="check"></td>
+                  <td>2e00497c-93a8-4017-bf6b-15fdbd6484c4</td>
+                  <td>222</td>
+                  <td>上架</td>
+                  <td>333</td>
+                  <td>2017-7-27</td>
+                  <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="..."> <button type="button" class="btn btn-default btn-edit">编辑</button><button type="button" class="btn btn-default btn-down">下架</button>
+                      <button type="button" class="btn btn-default btn-del">删除</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <nav>
+              <ul class="pagination pull-right">
+                <li>
+                  <a href="#" class="prev">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+                </li>
+
+                <li class="active"><a href="javascript:;" class="num">1</a></li>
+                <li ><a href="javascript:;" class="num">2</a></li>
+
+                <li>
+                <a href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+              </ul>
+            </nav>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+  <div class="popup" id="addp">
+    <div class="popup-content">
+      <h4 class="sub-header">
+        商品添加
+      </h4>
+      <form class="form-horizontal">
+        <div class="popup-main-content">
+          <div class="form-group">
+            <label for="inputPName" class="col-sm-2 control-label">商品名称</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputPName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品详情</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" id="inputDetail"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputUp" class="col-sm-2 control-label">是否上架</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label>
+              <input type="checkbox" value="" id="inputUp">
+            </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPrice" class="col-sm-2 control-label">价格</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="inputPrice">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-default save-btn" href="javascript:;">确认保存</a>
+            <a class="btn btn-default cancel-btn" href="javascript:;">取消</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="mask"></div>
+  </div>
+
+  <script src="../../public/jquery.min.js"></script>
+  <script type='text/javascript'>
+
+
+  </script>
+</body>
+
+</html>

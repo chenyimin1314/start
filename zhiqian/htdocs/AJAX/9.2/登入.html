@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body  >
+		<input type="text"  id="account"/>
+		<input type="password" id="password"/>
+		<button >登入</button>
+		<script>
+//			
+//function keyLogin(){
+// if (event.keyCode==13)  //回车键的键值为13
+// document.getElementByIdx_x("button").click(); //调用登录按钮的登录事件
+//}
+ 
+		   document.querySelector("button").onclick=function(){
+		   	 var account=document.querySelector('#account').value;
+		   	  var password=document.querySelector('#password').value;
+		   	  var a=new XMLHttpRequest();
+		   	   a.open('post','../../api/cart/login.php');
+		   	   a.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+		   	   var data = JSON.stringify({account:account, password:password})
+		   	    a.send(data);
+		   	    a.onreadystatechange=function(){
+		   	      if(a.readyState==4){
+		   	      	if(a.status==200){
+		   	  	    var b=JSON.parse(a.response);
+		   	  	    console.log(b);
+		   	  	   if(b.status==1){
+		   	  	 	   alert("成功");
+		      location.href="后台管理系统静态页面.html"
+			   	  	 }
+		   	  	   }
+		   	     }
+		   	   }
+		   }
+   
+		   localStorage.clear();
+		   localStorage.setItem("name",'小明');
+		    localStorage.getItem('name')
+		</script>
+	</body>
+</html>

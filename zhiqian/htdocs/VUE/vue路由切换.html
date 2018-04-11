@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no" />
+  <title>品类</title>
+  <link rel="stylesheet" href="public/css/style_ios.css">
+  <script src="public/js/fontsize.js" type="text/javascript"></script>
+  <script type="text/javascript" src="public/vue2.min.js"></script>
+  <!--vue的路由插件-->
+  <script type="text/javascript" src="public/vue-router.min.js"></script>
+  <script type="text/javascript" src="public/vue-resource.js"></script>
+<style lang="">
+  .login-box{
+    display: none;
+  }
+  .login-box.on{
+    display: block;
+  }
+</style>
+</head>
+
+<body class="bf8">
+  <div id="app">
+  
+    
+    <router-view></router-view>
+    
+    <div class="login-box" :class="{on:user.id == -1}">
+      <div class="out-login">
+        <div class="po-re">
+          <a href="###" class="out-del"></a>
+          <div class="lo-topimg"></div>
+          <p class="lo-toptitle">登录</p>
+          <div class="lo-inputbox">
+            <input type="text" placeholder="输入账号" class="lo-input" v-model="user.account">
+            <input type="password" placeholder="输入密码" class="lo-input lo-input1" v-model="user.password">
+            <a href="###" class="lo-dell"></a>
+          </div>
+          <a href="javascript:;" class="lo-btn" @click="dian">确定</a>
+        </div>
+      </div>
+      <div class="bg1"></div>
+    </div>
+    
+    
+    <nav class="m_nav clearfix">
+      <router-link to="/index">
+        <dl>
+          <dd class="ico1"></dd>
+          <dt>首页</dt>
+        </dl>
+      </router-link>
+      <router-link to="/xiang">
+        <dl>
+          <dd class="ico2"></dd>
+          <dt>列表</dt>
+        </dl>
+      </router-link>
+      <router-link to="/product">
+        <dl>
+          <dd class="ico3"></dd>
+          <dt>购物车</dt>
+        </dl>
+      </router-link>
+      <router-link to="/order">
+        <dl>
+          <dd class="ico4"></dd>
+          <dt>我的</dt>
+        </dl>
+      </router-link>
+    </nav>
+ 
+
+    
+  </div>
+
+  <script>
+ 
+//	
+	Vue.http.interceptors.push(function(req, next){
+    this.loading = true;
+    next(function(data){
+      var obj = JSON.parse(data.body);
+      if(obj.status == 1001){
+        // 如果没登录，id就改成-1，这样登录框才可以弹出
+       sdata.user.id = -1;
+      }
+      this.loading = false;
+    })
+})
+  	
+  	  var sdata=new Vue({
+  	  	data:{
+  	  	 user: {
+          id: 0,
+          account: '',
+          password: ''
+        }
+  	  	}
+  	  })
+  	
+    var xiang ={
+    	 template:`<div>
+        <header class="header clearfix">
+        <div class="middle"><span class="god bold">商品列表</span></div>
+    </header>
+    <div class="h1r"></div>
+	<section class="list" @scroll="scroll" ref="listDom">
+    	<ul class=" clearfix">
+        	<li v-for="item in list">
+            	<a href="javascript:;">
+                	<dl>
+                    	<dd><img :src="item.img" onerror="this.src = '../public/nopic.png'"></dd>
+                        <dt>
+                        	<p>{{item.price}}</p>
+                            <p>{{item.name}}</p>
+                        </dt>
+                    </dl>
+                </a>            
+          </li>
+        </ul>
+        <section class="list-bottomla clearfix">
+            <div class="itemEnd" v-if="curr <= total">拖动,显示更多珠宝</div>
+            <div class="itemEnd nol" v-else>到底了</div>
+        </section>
+    </section>    
+      </div>`,
+      data:function(){
+	   	   	return {
+		   	   	total:1,
+		   	   	curr:1,
+		   	   	list:[],
+		   	   	isall:false, 
+		   	   	 loading: false
+           }
+   	   },
+   	   created:function(){
+   	   	   this.fn()
+   	   },
+   	   methods:{
+	   	   	scroll:function(){
+	   	   		if(this.isall){
+	   	   			return;
+	   	   		}
+	   	   		 if(this.$refs.bang.scrollHeight-this.$refs.bang.clientHeight-this.$refs.bang.scrollTop<150){
+	   	   		 	this.fn();
+	   	   		 }
+	   	   	},
+	   	   	fn:function(){
+	   	   		if(this.curr>this.total){
+	   	   			return;
+	   	   		}
+	   	   		this.$http.get('../api/cart/product.php?pnum=9&p='+this.curr).then(function(re){
+	   	   			var data=JSON.parse(re.data);
+	   	   			if(data.status==1){
+	   	   				data.list.forEach(function(item){
+	   	   					item.img='../api/cart'+item.img;
+	   	   				})
+	   	   				this.list=this.list.concat(data.list)
+	   	   				this.total=data.total;
+	   	   				this.curr++;
+	   	   			}
+	   	   		})
+	   	   	}
+          }
+   	   }
+   var index ={
+    	template:'<div>首页</div>',
+    }
+  var product ={
+    	template:'<div>订单页</div>',
+    } 
+    var order ={
+    	template:'<div>购物车</div>',
+    }
+
+    var   cons=[{
+		   path:'/index',
+		   component:index
+	      },
+	      {
+		   path:'/xiang',
+		   component:xiang
+	      },
+	      {
+		   path:'/product',
+		   component:product
+	      },
+	      {
+		   path:'/order',
+		   component:order
+	      }
+     ]
+    
+	     var routerobj=new VueRouter({
+	   	    routes:cons
+	    })
+	     
+		  var vm=new Vue({
+		  	el:'#app',
+		  	   router:routerobj,
+		  	   data:{
+			
+		  	   },
+		  	   computed:{
+		  	   	user:function(){
+		  	   		return sdata.user
+		  	   	}
+		  	   },
+		  	   methods:{
+		  	   		dian:function(){
+	   	   		this.$http.post('../api/cart/login.php',{account:this.user.account,password:this.user.password}).then(function(re){
+	   	   			var data=JSON.parse(re.data);
+	   	   			  console.log(data);
+	   	   			  if(data.status==1){
+	   	   			  	  Object.assign(sdata.user, data.user)
+                         alert('登录成功！')
+	   	   			  }
+	   	   		})
+	   	   	},
+		  	   }
+		  })
+  </script>
+
+</body>
+
+</html>

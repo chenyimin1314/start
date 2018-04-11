@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="../../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../../public/main.css" rel="stylesheet">
+<style>
+
+ 
+ </style>
+</head>
+
+<body>
+  <!--这里要加载header.html-->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <div style="color:white">欢迎，<span id="username"></span> <button style="color:black" id="logout">登出</button> </div>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="nav-plist active"><a href="javascript:;">商品管理</a></li>
+          <li class="nav-olist"><a href="javascript:;">订单管理</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="plist main-content">
+          <h2 class="sub-header">
+            商品管理
+            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+              <button type="button" class="btn btn-default newp-btn">新增商品</button>
+              <button type="button" class="btn btn-default plup-btn">批量上架</button>
+              <button type="button" class="btn btn-default pldown-btn">批量下架</button>
+              <button type="button" class="btn btn-default pldel-btn">批量删除</button>
+            </div>
+          </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="check-all"></th>
+                  <th>商品ID</th>
+                  <th>图片</th>
+                  <th>商品名称</th>
+                  <th>商品详情</th>
+                  <th>上下架状态</th>
+                  <th>价格(元)</th>
+                  <th>创建日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="list">
+              	
+              </tbody>
+            </table>
+
+            <nav>
+              <ul class="pagination pull-right">
+                
+              </ul>
+            </nav>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+  <div class="popup" id="addp">
+    <div class="popup-content">
+      <h4 class="sub-header">
+        商品添加
+      </h4>
+      <form class="form-horizontal">
+        <div class="popup-main-content">
+          <div class="form-group">
+            <label for="inputPName" class="col-sm-2 control-label">商品名称</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputPName" name="pname">
+            </div>
+          </div>
+          <div class="form-group">
+            <labelclass="col-sm-2 control-label">
+              </label>
+              <div class="col-sm-10">
+                <img src="" alt="" id="apimg" style="max-width:300px">
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品图片</label>
+            <div class="col-sm-10">
+              <input type="file"  id="inputIMG" >
+            </div>
+          </div>
+            <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品详情</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" id="inputDetail" name="detail"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputUp" class="col-sm-2 control-label">是否上架</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label>
+              <input type="checkbox" value="" id="inputUp" name="lock">
+            </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPrice" class="col-sm-2 control-label">价格</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="inputPrice" name="price">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset- col-sm-10">
+            <a class="btn btn-default save-btn" href="javascript:;">确认保存</a>
+            <a class="btn btn-default saves-btn col-sm-3 " style='display: none'; href="javascript:;">确认修改</a>
+            <a class="btn btn-default cancel-btn" href="javascript:;">取消</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="mask"></div>
+  </div>
+  <script src="../../Jqku/jquery-1.11.3.min.js"></script>
+  <script type='text/javascript'>
+  	
+  	     var user=JSON.parse(localStorage.getItem('user'));
+  	     if(user&&user.acctound){
+  	     	document.querySelector('#username').innerHTML = user.account;
+  	     }
+  	     
+  	     document.querySelector('#logout').onclick=function(){
+            var a=new XMLHttpRequest();
+            a.open('get','../../api/cart/logout.php');
+              a.send();
+             a.onreadystatechange=function(){
+            	 if(a.readystate==4){
+            		var data=JSON.parse(a.response);
+            	 	if(data.status==1){
+            	 		alert('登出成功');
+			            localStorage.removeItem('user');
+			           location.href = '登入.html';
+            	 }}
+            }
+  	     }
+  	    
+  	      fn(1)
+		       function fn(num){
+						var a=new XMLHttpRequest();
+           a.open('get','../../api/cart/admin/product.php?pnum=3&p='+num);
+           a.send();
+           a.onreadystatechange=function(){
+	      	 if(a.readyState==4){
+			  		 if(a.status==200){
+	     	   var data=JSON.parse(a.response);
+			   	    if(data.status==1){
+			   	    
+			   	    		 var list=data.list;
+			   	    		 var total=data.total;
+			   	    		  var html='';
+			   	    		  var page='';   		 
+			   	    		  var d=new Date();
+	               var y=d.getMonth()+1;
+	               var y=y<10?'0'+y:y; 
+	                var time=d.getFullYear()+"-"+y+"-"+d.getDate(); 
+			   	      		  for(var i=0;i<list.length;i++){
+			   	    		  	  var item=list[i];
+			   	    		  	  var locks="上架";
+			       	       var locksup='<button type="button" class="btn btn-default btn-down">下架</button>';   
+				             if(item.lock==1){
+				       	  	 locks="下架";
+				       	  	  locksup='<button type="button" class="btn btn-default btn-up">上架</button>';
+				       	   }
+			   	    		    html+='<tr id="'+item.id+'"><td><input type="checkbox" class="check"></td>\
+		                  <td>'+item.id+'</td>\
+		                 <td ><img style=\"\width:70px;"  class="img"  onerror="this.src=\'../../public/nopic.png\'" src="../../api/cart/'+item.img+'"/></td>\
+		                  <td class="name">'+item.name+'</td>\
+		                  <td class="detail">'+item.detail+'</td>\
+		                  <td class="lock">'+locks+'</td>\
+		                  <td class="price">'+item.price+'</td>\
+		                  <td>'+time+'</td>\
+		                  <td><div class="btn-group btn-group-sm" role="group" aria-label="...">\
+		                  <button type="button" class="btn btn-default btn-edit">编辑</button>'+locksup+'\
+		                  <button type="button" class="btn btn-default btn-del">删除</button>\
+		                  </div>\
+		                  </td>\
+		                  </tr>';			    
+			   	    		  }
+			   	    		  
+		   		 	 	    document.querySelector('#list').innerHTML=html;
+		   		 	 	    if(num>1){
+		   		 	 	    	page+='<li><a href="javascript:;" class="prev"> <span aria-hidden="true">&laquo;</span></a></li>';
+                  }
+		   		 	 	    for(var i=1;i<=total;i++){
+		   		 	 	    	if(num==i){
+		   		 	 	    		  page+='<li><a href="javascript:;"  style="background:blue" class="num">'+i+'</a></li>';
+		   		 	 	    	}else{
+		   		 	 	         page+='<li ><a href="javascript:;" class="num">'+i+'</a></li>';
+		   		 	 	     }
+		   		 	 	  }
+		   		 	 	  if(num<total){
+		   		 	 	  	page+='<li><a href="javascript:;"  class="next"><span aria-hidden="true">&raquo;</span></a></li>';
+		   		 	 	  }
+		   		 	 	  
+             document.querySelector('.pagination').innerHTML=page;   
+             
+		   		 	      var sou=document.querySelectorAll('.num');
+		   		 	      for(var i=0;i<sou.length;i++){
+		   		 	      	   var el=sou[i];
+		   		 	      	     el.index=i+1;
+		   		 	           el.onclick=function(){
+		   		 	      	    fn(this.index);
+		   		 	         }
+		   		 	      }
+		   		 	    if(num<total){
+		   		 	    	document.querySelector('.next').onclick=function(){		   		 	    		
+		            	  	var g=parseInt(document.querySelector('.num[style]').innerHTML)+1;
+		            	     fn(g);
+		   		 	    	}
+		   		 	    }
+		   		 	 
+		   		 	   if(num>1){
+		   		 	    	document.querySelector('.prev').onclick=function(){
+		   		 	    		var a=parseInt(document.querySelector('.num[style]').innerHTML-1);
+		   		 	    		  fn(a);
+		   		 	    	}
+		   		 	    }
+   		     } else if(data.status==1001){
+			   	    		location.href="登入.html";
+			   	    	}
+			   	   }
+			   	    		
+			   	 }
+         }
+		}
+		   		 	    document.querySelector('#list').onclick=function(e){
+		   		 	 	      var tg=e.target;
+		   		 	 	 if (tg.classList.contains('btn-up')||tg.classList.contains('btn-down')){
+		   		 	 	       var tr=tg.parentNode.parentNode.parentNode;
+		   		 	 	       var id=tr.getAttribute('id');
+		   		 	 	        var lock=0;
+		   		 	 	         if(tg.classList.contains('btn-down')){
+		   		 	 	       	    lock=1;
+		   		 	 	         }
+		   		 	 	   var xhr = new XMLHttpRequest();
+					        xhr.open('put', '../../api/cart/product/update.php');
+					        xhr.send(JSON.stringify({id: id,lock: lock}));
+					        xhr.onreadystatechange = function () {
+					          if (xhr.readyState == 4) {
+					            if (xhr.status == 200) {
+					              var obj = JSON.parse(xhr.response);
+					              if (obj.status == 1) {
+					                var a=parseInt(document.querySelector('.num[style]').innerHTML);
+		   		 	    		        fn(a);
+					              }
+					            }
+					          }
+					        }
+
+		   		 	 	 } else if(tg.classList.contains('btn-del')){
+		   		 	 	 	        var tr=tg.parentNode.parentNode.parentNode;
+		   		 	 	       var id=tr.getAttribute('id');
+		   		 	 	        var xhr = new XMLHttpRequest();
+					          xhr.open('DELETE', '../../api/cart/product.php');
+					          xhr.send(JSON.stringify({id: id}));
+					            xhr.onreadystatechange = function () {
+					          if (xhr.readyState == 4) {
+					            if (xhr.status == 200) {
+					              var obj = JSON.parse(xhr.response);
+					              if (obj.status == 1) {
+					                var a=parseInt(document.querySelector('.num[style]').innerHTML);
+		   		 	    		       fn(a);
+					              }
+					            }
+					          }
+					        }
+		   		 	 	 }else if(tg.classList.contains('btn-edit')){ 
+		   		 	 	 	  document.querySelector('#addp').style.display="block";
+		   		 	 	 	   document.querySelector('.saves-btn').style.display="block";
+		   		 	 	 	    document.querySelector('.save-btn').style.display="none";
+		   		 	 	 	  var tr=tg.parentNode.parentNode.parentNode;
+		   		 	 	  document.querySelector('#addp').pid = tr.getAttribute('id');
+		   		 	 	  document.querySelector('#inputPName').value = tr.querySelector('.name').innerHTML;
+               document.querySelector('#inputDetail').value = tr.querySelector('.detail').innerHTML;
+              document.querySelector('#inputUp').checked = tr.querySelector('.lock').innerHTML= '上架' ? true : false;
+              document.querySelector('#inputPrice').value = tr.querySelector('.price').innerHTML;
+				      document.querySelector('#apimg').src = tr.querySelector('.img').src;
+        	 	 	  
+		   		 	 	 }else if(tg.classList.contains('check')){
+		   		 	 	 	    if(!tg.checked){
+		   		 	 	 	     document.querySelector("#check-all").checked=false;
+		   		 	 	 	   } 
+		   		 	 	 	   else if(tg.checked){
+		   		 	 	 	   	 document.querySelector("#check-all").checked=true;
+		   		 	 	 	   }
+		   		 	 	 }
+		   		 	 	 
+		   		 	 }
+		   		 	     
+		   		 	 document.querySelector('.cancel-btn').onclick = function () {
+                 document.querySelector('#addp').style.display = 'none';
+             	 clear();
+             };    
+		   		 	
+		   		 	document.querySelector('.newp-btn').onclick=function(){
+		   		 		document.querySelector('#addp').style.display = 'block';
+		   		 	
+		   		 	
+		   		 	}
+		      document.querySelector(".save-btn").onclick=function(){	
+		      	 document.querySelector('#addp').style.display = 'none';
+		      	  document.querySelector('#check-all').checked=false;
+		   	          var a=new XMLHttpRequest();
+		   	          var pro=getshu();
+                      a.open('post','../../api/cart/product.php');
+                      a.send(pro);
+                      a.onreadystatechange=function(){ 
+                    	if(a.readyState==4){
+                    		if(a.status==200){
+                    		var data=JSON.parse(a.response);
+                    		if(data.status==1){
+		   		 	    		       fn(1);
+                    		}
+                      clear();
+                    	}
+                    }
+	          }     
+		   } 
+		       document.querySelector(".saves-btn").onclick=function(){	
+		      	 document.querySelector('#addp').style.display = 'none';
+		      	 document.querySelector('#check-all').checked=false;
+		   	          var a=new XMLHttpRequest();
+		   	          var pro=getshu();
+		   	           pro.append("id",document.querySelector('#addp').pid)
+                      a.open('post','../../api/cart/product/update.php');
+                      a.send(pro);
+                      a.onreadystatechange=function(){ 
+                    	if(a.readyState==4){
+                    		if(a.status==200){
+                    		var data=JSON.parse(a.response);
+                    		if(data.status==1){		
+//		   		 	    		       var a=parseInt(document.querySelector('.num[style]').innerHTML);
+		   		 	    		       fn(1);
+                    		}
+                      clear();
+                    	}
+                    }
+	          }     
+		   }
+	 	 document.querySelector('#check-all').onclick=function(){
+	 	 	  var check=this.checked;
+	 	 	  var checks=document.querySelectorAll('.check');
+	 	 	  for (var i=0;i<checks.length;i++) {
+	 	 	  	   var bb=checks[i];
+	 	 	  	   bb.checked=check;
+	 	 	  }
+	 	 }
+	 	 
+	 	 document.querySelector('.pull-right').onclick=function(e){
+	 	 			   cheout();
+	 	 	   var tg=e.target;
+	 	 	if(tg.classList.contains('plup-btn')||tg.classList.contains('pldown-btn')){
+	 	 		  var checks = document.querySelectorAll('.check:checked');
+          var arr = [];
+          for (var i = 0; i < checks.length; i++) {
+           var check = checks[i];
+          var id = check.parentNode.parentNode.id;
+            arr.push(id);
+       }
+     var lock=0;
+       if(tg.classList.contains('pldown-btn')){
+
+       	   lock=1;
+       }
+      var ids = arr.join(',');
+      var xhr = new XMLHttpRequest();
+      xhr.open('put', '../../api/cart/product/update.php');
+      xhr.send(JSON.stringify({id: ids,lock:lock}));
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+            if (obj.status == 1) {
+             var a=parseInt(document.querySelector('.num[style]').innerHTML);
+              fn(a);
+            }
+          }
+        }
+      }
+	 	 	} 
+	 	 	else if(tg.classList.contains('pldel-btn')){
+	 	 		  var checks = document.querySelectorAll('.check:checked');
+          var arr = [];
+          for (var i = 0; i < checks.length; i++) {
+           var check = checks[i];
+          var id = check.parentNode.parentNode.id;
+            arr.push(id);
+       }
+      var ids = arr.join(',');
+      var xhr = new XMLHttpRequest();
+      xhr.open('delete', '../../api/cart/product.php');
+      xhr.send(JSON.stringify({id: ids}));
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+            if (obj.status == 1) {
+                var a=parseInt(document.querySelector('.num[style]').innerHTML);
+		   		 	   fn(a);
+            }
+          }
+        }
+      }
+	 	 	}
+	 	 	
+	 	 }
+		  function getshu(){
+		   		    var name = document.querySelector('#inputPName').value;
+				      var detail = document.querySelector('#inputDetail').value;
+				      var lock = document.querySelector('#inputUp').checked ? 0 : 1;
+				      var price = document.querySelector('#inputPrice').value;
+				      var files = document.querySelector('#inputIMG').files;
+				      
+				       var pro=new FormData();
+	             pro.append('name',name);
+	             pro.append('detail',detail);
+	             pro.append('lock',lock);
+	             pro.append('price',price);
+             if(files.length>0){
+             	 pro.append('file',files[0]);
+             }
+             return pro
+		   		 }
+		  function clear(){
+		      document.querySelector('#inputPName').value='';
+				    document.querySelector('#inputDetail').value='';
+				      document.querySelector('#inputUp').checked =false;
+				     document.querySelector('#inputPrice').value='';
+				    document.querySelector('#inputIMG').value="";
+		  }
+		  function cheout(){
+		  	document.querySelector('#check-all').checked=false;
+		  	var check=	document.querySelectorAll('.check');
+		  	for(var i  in check ){
+		       	check[i].checked=false;
+		  	}
+		  }
+  </script>
+</body>
+
+</html>

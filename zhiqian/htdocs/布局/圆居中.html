@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			div{
+				height: 200px;
+				width: 200px;
+				border-radius: 100px;
+				background: red;
+				display: flex;
+				justify-content:center;
+   	            background:#0099cc;
+   	            align-items: center;
+   	          /* align-content:center*/
+			}
+				p{
+				height: 100px;
+				width: 100px;
+				border-radius:0 0 0 100px;
+				background: brown;
+			}
+		</style>
+	</head>
+	<body>
+		<div title="这是div" alt="这是div1">
+			<p></p>
+		</div>
+		<script>
+			var a=new XMLHttpRequest()
+			a.open('get','sada')
+			a.send()
+			a.onreadystatechange=function(){
+				var data=JSON.parse(a.response)
+			}
+		</script>
+	</body>
+</html>

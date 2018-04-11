@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="box">
+			<input type="text" v-on:keyup.enter="test"  v-model="shuju" />
+			<br />
+			<div v-for="item in page">
+				<input type="checkbox"/>
+				<span>{{item.name}}</span>
+				<button v-on:click="dele(item.id)" >删除</button>
+			 </div>
+		 </div>
+	</body>
+	<script src="vue2.min.js"></script>
+	<script>
+		vm=new Vue({
+			el:'.box',
+			data:{
+				id:0,
+		        shuju:'',
+		        page:[]
+			 },
+			methods:{
+              test:function(){
+              	this.page.push({
+              		name:this.shuju,
+              		id:this.id
+              	  })
+              	 this.id++,
+              	 this.shuju=''
+              },
+              dele:function(id){
+              	for(var i=0;i<this.page.length;i++){
+              		var item=this.page[i];
+              		if(item.id==id){
+              			this.page.splice(i,1)
+              			break;
+              		}
+              	}
+              }
+			}
+		})
+	</script>
+</html>

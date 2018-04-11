@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="file"  id="file" value=""/>
+		<button >点击</button>
+		<script src="com.js"></script>
+		 <script>
+		 	function ajaxstar(){
+		 		document.querySelector('.che').style.display = 'block';
+		 	}
+		 	function ajaxend(){
+		 		     document.querySelector('.che').style.display = 'none';
+		 	}
+		 	 function ajax(type,url,data,tf){
+		 	 	var formdata;
+		 	 	var a=new XMLHttpRequest();
+		 	 	if(tf==undefined){
+		 	 		tr=true;
+		 	 	  }
+		    	if(type=='get'){
+		    		url+='?';
+		    		var arr=[];
+		    		for(var i in data){
+		    		arr.push(i+'='+data[i]);
+		    		}
+		    		url+=arr.join('&');
+		    	};
+    	       a.open(type,url);
+             if(type=='post'&&tf){
+	         	 a.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	         }else if(type=='post'){
+	         	formdata=new FormData();
+	         	for( var k in data){
+	         	formdata.append(k,data[k])
+	         	}
+	         	console.log(formdata.get("file"));
+	         }
+	        if(type=='get'){
+	             a.send();
+	        }else if(type=='post'&&!tf){
+	        	a.send(formdata)
+	        }
+	        else{
+	            a.send(JSON.stringify(data));
+	         }
+	        a.onreadystatechange = function (){
+	        if(a.readyState == 4){
+	             if(a.status == 200){
+	             
+		        }
+		      }
+	      }
+	 };
+	 document.querySelector('button').onclick=function(){
+//	 	var file=document.querySelector('#file').files[0];
+         ajax('put','../api/cart/product/update.php',{id:192,name:'abcd',detail:'sadasd',lock:0},false);
+	 };
+		 </script>
+	</body>
+</html>

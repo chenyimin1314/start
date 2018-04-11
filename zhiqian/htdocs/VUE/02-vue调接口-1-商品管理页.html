@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../public/main.css" rel="stylesheet">
+  <script type="text/javascript" src="vue2.min.js"></script>
+  <!--调接口的插件-->
+  <script type="text/javascript" src="vue-resource.js"></script>
+  <style lang="">
+    #addp {
+      display: block
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <!--这里要加载header.html-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+            aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:;">Dashboard</a></li>
+            <li><a href="javascript:;">Settings</a></li>
+            <li><a href="javascript:;">Profile</a></li>
+            <li><a href="javascript:;">Help</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="nav-plist active"><a href="javascript:;">商品管理</a></li>
+            <li class="nav-olist"><a href="javascript:;">订单管理</a></li>
+          </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="plist main-content">
+            <h2 class="sub-header">
+              商品管理
+              <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+                <button type="button" class="btn btn-default newp-btn" @click="newProdShow">新增商品</button>
+                <button type="button" class="btn btn-default plup-btn" @click="pllock(true)">批量上架</button>
+                <button type="button" class="btn btn-default pldown-btn" @click="pllock(false)">批量下架</button>
+                <button type="button" class="btn btn-default pldel-btn" @click="pldel">批量删除</button>
+              </div>
+            </h2>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" v-model="checkAll" @click="ca"></th>
+                    <th>商品ID</th>
+                    <th>商品图片</th>
+                    <th>商品名称</th>
+                    <th>商品详情</th>
+                    <th>上下架状态</th>
+                    <th>价格(元)</th>
+                    <th>创建日期</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="list">
+                  <tr v-for="(item, index) in list">
+                    <td><input type="checkbox" v-model="item.check" @click="c(index)"></td>
+                    <td>{{item.id}}</td>
+                    <td><img style="width:60px;height:60px" v-bind:src="item.img" @error="imgErr(index)"></td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.detail}}</td>
+                    <td>{{item.lock?'下架':'上架'}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{toDate(item.createTime*1000)}}</td>
+                    <td>
+                      <div class="btn-group btn-group-sm" role="group" aria-label="..."> 
+                      	<button type="button" class="btn btn-default" v-on:click="edit(index)">编辑</button>
+                        <button type="button" class="btn btn-default" v-on:click="updateLock(item.id, index)">{{item.lock?'上架':'下架'}}</button>
+                        <button type="button" class="btn btn-default btn-del" v-on:click="del(item.id)">删除</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+
+          </div>
+
+
+          <nav>
+            <ul class="pagination pull-right">
+              <li v-if="curr > 1" @click="page(curr-1)">
+                <a href="#">
+                  <span>&laquo;</span>
+                </a>
+              </li>
+
+              <li v-for="num in nums" v-bind:class="{'active':num==curr}" @click="page(num)"><a href="javascript:;" class="num">{{num}}</a></li>
+
+              <li v-if="curr < total" @click="page(curr+1)">
+                <a href="#">
+                  <span>&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+    <div class="popup" id="addp" v-show="show">
+      <div class="popup-content">
+        <h4 class="sub-header">
+          {{addpText}}
+        </h4>
+        <form class="form-horizontal">
+          <div class="popup-main-content">
+            <div class="form-group">
+              <label for="inputPName" class="col-sm-2 control-label">商品名称</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputPName" v-model="prod.name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPName" class="col-sm-2 control-label">商品图片选择</label>
+              <div class="col-sm-10">
+                <input type="file" class="form-control" ref="fileSelect">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPName" class="col-sm-2 control-label"> </label>
+              <div class="col-sm-10">
+                <img :src="prod.img" style="width:120px;height:120px;" v-if="prod.img">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputDetail" class="col-sm-2 control-label">商品详情</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" rows="3" id="inputDetail" v-model="prod.detail"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputUp" class="col-sm-2 control-label">是否上架</label>
+              <div class="col-sm-10">
+                <div class="checkbox">
+                  <label>
+              <input type="checkbox"  v-model="prod.lock">
+            </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPrice" class="col-sm-2 control-label">价格</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="inputPrice" v-model="prod.price">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <a class="btn btn-default save-btn" href="javascript:;" @click="prodSave">确认保存</a>
+              <a class="btn btn-default cancel-btn" href="javascript:;" @click="hide">取消</a>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="mask"></div>
+    </div>
+
+
+
+  </div>
+
+  <script type='text/javascript'>
+    var vm = new Vue({
+      data: {
+        show: false,
+        checkAll: false,
+        // 商品列表
+        list: [],
+        prod: {
+          id: '',
+          name: '',
+          detail: '',
+          price: '',
+          lock: true,
+          // 复选框默认不打钩
+          check: false
+        },
+        addpText: '商品添加',
+        isEdit: false,
+        // 新增商品的id，每新增一个商品，就会自增
+        id: 100,
+        // 当前页码
+        curr: 1,
+        // 总页码
+        total: 1
+      },
+      // vue实例对象创建好了，就会触发这个created回调函数
+      created: function () {
+        this.selectProducts()
+      },
+      computed: {
+        nums: function () {
+          var arr = [];
+
+          for (var i = 1; i <= this.total; i++) {
+            arr.push(i)
+          }
+
+          return arr;
+        }
+      },
+      methods: {
+        toDate: function (timeStamp) {
+          var date = new Date(timeStamp)
+          return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+        },
+        imgErr: function (index) {
+          this.list[index].img = '../public/nopic.png'
+        },
+        selectProducts: function () {
+          this.$http.get('../api/cart/admin/product.php?p=' + this.curr).then(function (res) {
+            var data = JSON.parse(res.data)
+            if (data.status == 1) {
+              // 调接口后动态的给图片路径加上'../api/cart'
+              data.list.forEach(function (item) {
+                item.img = '../api/cart' + item.img
+              })
+              this.list = data.list
+              this.total = data.total
+
+            }
+
+          })
+        },
+        page: function (num) {
+          this.curr = num
+          this.selectProducts()
+        },
+        pllock: function (lock) {
+          this.list.forEach(function (item) {
+            // 如果是打钩的商品，那么就改变他的上下架值
+            if (item.check) {
+              item.lock = lock
+
+              // 判断完把复选框恢复成不打钩
+              item.check = false
+            }
+
+          })
+          // 全选去掉打钩
+          this.checkAll = false
+        },
+        pldel: function () {
+          // 找到没打钩的商品，覆盖整个商品列表，这就相当于删除那些打钩的商品
+          this.list = this.list.filter(function (item) {
+            return !item.check
+          })
+          // 全选去掉打钩
+          this.checkAll = false
+        },
+        ca: function () {
+          var that = this;
+          this.list.forEach(function (item) {
+            item.check = that.checkAll
+          })
+
+        },
+        c: function (index) {
+          // 当我点击商品的复选框，如果是打钩
+          if (this.list[index].check) {
+            var newList = this.list.filter(function (item) {
+              return item.check
+            })
+            if (newList.length == this.list.length) {
+              this.checkAll = true
+            } else {
+              this.checkAll = false
+            }
+
+            // 当我点击商品的复选框，如果不打钩
+          } else {
+            this.checkAll = false
+          }
+        },
+        updateLock: function (id, index) {
+          // 上下架
+          this.$http.put('../api/cart/product/update.php', {
+            id: id,
+            lock: !this.list[index].lock
+          }).then(function (res) {
+            var data = JSON.parse(res.data);
+            if (data.status == 1) {
+              // this.selectProducts()
+              // 不调接口刷新页面，性能更好
+              this.list[index].lock = !this.list[index].lock
+            }
+          })
+        },
+        del: function (id) {
+          this.$http.delete('../api/cart/product.php', {
+            body: {
+              id: id
+            }
+          }).then(function (res) {
+            var data = JSON.parse(res.data);
+            if (data.status == 1) {
+              this.selectProducts()
+            }
+          })
+        },
+        // 编辑按钮弹窗
+        edit: function (index) {
+          // 通过下标拿到数组里面对应的商品
+          var item = this.list[index];
+          // 弹窗
+          this.show = true;
+          // 修改文字
+          this.addpText = '商品编辑'
+
+          // 对象拷贝等价的三种方法
+          // for(var k in item){
+          //   this.prod[k] = item[k];
+          // };
+          // Object.assign(this.prod, item)
+          	this.$refs.fileSelect.value='';
+          this.prod.id = item.id;
+          this.prod.name = item.name;
+          this.prod.detail = item.detail;
+          this.prod.lock = item.lock;
+          this.prod.price = item.price;
+          this.prod.img = item.img;
+
+          // 切换成编辑状态
+          this.isEdit = true;
+        },
+        newProdShow: function () {
+        	this.$refs.fileSelect.value='';
+          this.show = true;
+          this.prod.id = '';
+          this.prod.name = '';
+          this.prod.detail = '';
+          this.prod.lock = '';
+          this.prod.price = '';
+          this.prod.img = '';
+          // 切换成新增状态
+          this.isEdit = false;
+        },
+        hide: function () {
+          this.show = false;
+        },
+        // 新增商品或者编辑商品的保存
+        prodSave: function () {
+
+          var formData = new FormData();
+
+          // this.$refs可以选择到模板上指定的ref属性的元素
+          var files = this.$refs.fileSelect.files;
+
+          if (files.length > 0) {
+            formData.append('file', files[0])
+          }
+
+          for (var k in this.prod) {
+            // 调新增接口不能传id和复选框那个check值
+            if (k != 'id' && k != 'check') {
+              // 如果是上下架，那么接口要求上架的话应该传false或者0，下架则是true或者1，那么跟我们定义的相反，所以要取反
+              if (k == 'lock') {
+                formData.append(k, !this.prod[k])
+              } else {
+                formData.append(k, this.prod[k])
+              }
+            }
+
+          };
+
+          // 如果为true，就是编辑状态
+          if (this.isEdit) {
+            formData.append('id', this.prod.id)
+            this.$http.post('../api/cart/product/update.php', formData).then(function (res) {
+              var data = JSON.parse(res.data);
+              if (data.status == 1) {
+                this.selectProducts()
+              }
+            })
+            // for (var i = 0; i < this.list.length; i++) {
+            //   var item = this.list[i];
+            //   // 找到商品列表的那个商品就可以修改
+            //   if (this.prod.id == item.id) {
+
+            //     // 第二个对象把值拷贝给第一个对象
+            //     Object.assign(item, this.prod);
+
+
+            //     break;
+            //   }
+            // }
+
+          } else {
+     
+
+            this.$http.post('../api/cart/product.php', formData).then(function (res) {
+              var data = JSON.parse(res.data);
+              if (data.status == 1) {
+                this.selectProducts()
+              }
+            })
+
+            // console.log(formData.get('name'));
+
+
+            // console.log(this.$refs.fileSelect);
+
+            // Object.assign(obj, this.prod);
+            // obj.id = this.id;
+
+            // 在数组的前面新增对象
+            // this.list.unshift(obj);
+
+          }
+
+          // 隐藏弹窗
+          this.show = false;
+
+        }
+      }
+    }).$mount('#app')
+  </script>
+</body>
+
+</html>

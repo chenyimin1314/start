@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.lei{
+				text-decoration: line-through;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+				<input type="text" v-on:keyup.enter="test" id="d" v-model="mess" />
+             <div v-for="item in todos" v-if="curr=='all'">
+				<input type="checkbox" v-model="item.isTick"/>
+				<span v-bind:class="{lei:item.isTick}">{{item.name}}</span>
+				<button v-on:click="dele(item.id)" >删除</button>
+			 </div>
+			 <div v-for="item in xings" v-if="curr=='xings'">
+				<input type="checkbox" v-model="item.isTick"/>
+				<span v-bind:class="{lei:item.isTick}">{{item.name}}</span>
+				<button v-on:click="dele(item.id)" >删除</button>
+			 </div>
+			 <div v-for="item in bus" v-if="curr=='bus'">
+				<input type="checkbox" v-model="item.isTick"/>
+				<span v-bind:class="{lei:item.isTick}">{{item.name}}</span>
+				<button v-on:click="dele(item.id)" >删除</button>
+			 </div>
+			<br />
+			   <span>还剩下<b>{{lens}}</b>个未完成的任务</span>
+			     <a href="#aa" v-on:click="datas('all')">所有任务</a>
+				 <a href="#xing" v-on:click="datas('xings')">已完成任务</a>
+				 <a href="#bu"v-on:click="datas('bus')">未完成任务</a>
+				 <a href="#del" v-on:click="shan">删除所有完成的任务</a>
+		</div>
+	</body>
+	<script src="vue2.min.js"></script>
+	<script>
+		var vm=new Vue({
+			el:'.box',
+			data:{
+			  mess:'',
+			  todos:[],
+			  id:0,
+			  curr:'all'
+			},
+			methods:{
+				test:function(){
+			      if(document.querySelector('#d').value!==""){
+						 this.todos.push({
+						name:this.mess,
+						id:this.id,
+						isTick:false
+					})
+					this.id++,
+              	    this.mess=''
+					}else{
+						alert("内容不能为空")
+					}
+				},
+				datas:function(str){
+					this.curr=str
+				},
+			    dele:function(id){
+               	for(var i=0;i<this.todos.length;i++){
+              		var item=this.todos[i];
+              		if(item.id==id){
+              			this.todos.splice(i,1)
+              			break;
+              		}
+              	}
+             },
+             shan:function(){
+              this.todos=this.bus;
+//            /全删/
+//               this.todos=[];
+             }
+	      },
+		computed:{
+					bus:function() {
+			      var newArr = [];
+			      for (var i = 0; i < this.todos.length; i++) {
+			        var item = this.todos[i];
+			        if(!item .isTick){
+			          newArr.push(item );
+			        }
+			      }
+			    },
+			    xings:function(){
+			      var newArr = [];
+			      for (var i = 0; i < this.todos.length; i++) {
+			        var item  = this.todos[i];
+			        if(item .isTick){
+			          newArr.push(item );
+			        }
+			      }
+			      return newArr;
+			    },
+			    lens:function(){
+			    	var len=0;
+			    	for (var i=0;i<this.todos.length;i++){
+			    		var item=this.todos[i];
+			    		if(!item.isTick){
+			    			len++;
+			    		}
+			    	}
+			    	return len;
+			    }
+			}
+			
+		})
+	</script>
+</html>

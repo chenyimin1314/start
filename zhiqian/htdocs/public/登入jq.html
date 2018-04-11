@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form  class="box">
+			<input type="text"  id="account" name="account"  required/>
+			<input type="password" id="password" name="password"  required/>
+			<button type="submit"  class="submit" >登入</button>
+		</form>
+		<script src="../jqku/jquery-1.11.3.min.js"></script>
+		<script src="../Jqku/jquery.validate.js"></script>
+		<script>
+//		
+//		$('button').on('click',function(){	  
+//			   var account=$('#account').val();
+//		   	  var password=$('#password').val();
+//			 $.ajax({
+//			 	type:"post",
+//			 	url:"../../api/cart/login.php",
+//			 	dataType:"json",
+//			 	 data:JSON.stringify({account:account, password:password}),
+//			 	 success:function(data){	
+//		   	  	   if(data.status==1){
+//		   	  	 	   alert("成功");
+////		   	  	 	 localStorage.setItem('user', JSON.stringify(data.user) );
+//		         location.href='jquery后台.html';
+//			   	  	 }
+//		   	  	  }
+//			 })
+//				})      
+
+		      $(".box").validate({
+		      // 表单提交回调函数
+		      submitHandler: function (){
+		      	console.log(111);
+		         var account=$('#account').val();
+		   	var password=$('#password').val();
+					 $.ajax({
+						type:"post",
+					 	url:"../api/cart/login.php",
+					 	dataType:"json",
+					 	 data:JSON.stringify({account:account, password:password}),
+					 	 success:function(data){	
+				   	  	   if(data.status==1){
+				   	  	 	   var r=confirm("成功");
+				   	  	 	   if(r){
+				   	  	 	    localStorage.setItem('user', JSON.stringify(data.user) );
+                                 location.href='jquery后台.html';
+				   	  	 	}else{
+				   	  	 	   
+				   	  	 	   }
+				   	 
+					   	  	 }
+				   	  	  }
+					 })
+				    }
+		    });
+		</script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="account">
+  <input type="password" id="password">
+  <button>登录</button>
+  <script type="text/javascript" src="../public/jquery.min.js"></script>
+  <script type="text/javascript">
+  
+  $('button').on('click', function(){
+    var account = $('#account').val();
+    var password = $('#password').val();
+
+    $.post('../api/cart/login.php', JSON.stringify({account:account, password:password}), function(data){
+      if(data.status == 1){
+        location.href = './04-product-jquery-2.html';
+      }
+    }, 'json')
+
+  })
+
+  </script>
+</body>
+</html>

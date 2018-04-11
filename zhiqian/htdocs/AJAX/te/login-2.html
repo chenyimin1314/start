@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="../../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../../public/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <input type="text" id="account">
+  <input type="password" id="password">
+  <button>登录</button>
+
+  <script src="../../public/jquery.min.js"></script>
+  <script type='text/javascript'>
+  
+  // 1.静态页面
+  // 2.登录按钮点击事件
+  // 3.获取账号和密码
+  // 4.调登录接口
+  // 5.如果调成功，跳转到管理页面
+  // 6.如果失败，弹出提示
+
+  document.querySelector('button').onclick = function (){
+
+    // 获取账号信息
+    var account = document.querySelector('#account').value;
+    var password = document.querySelector('#password').value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('post', '../../api/cart/login.php');
+
+    // 设置请求头的传输内容类型
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var data = JSON.stringify({account:account, password:password})
+    xhr.send(data);
+    xhr.onreadystatechange = function (){
+      if(xhr.readyState == 4){
+
+        // 浏览器调接口成功
+        if(xhr.status == 200){
+          console.log(xhr.response);
+          console.log(xhr.responseText);
+          var obj = JSON.parse(xhr.response);
+          console.log(obj);
+          // 后端接口业务逻辑正确,返回1
+          if(obj.status == 1){
+            var user = obj.user;
+            alert('登录成功！');
+            // 把用户信息存到本地存储，那么商品管理页面就能获取
+            localStorage.setItem('user', JSON.stringify(user) )
+            // 跳转商品管理首页
+            location.href = 'product-2-封装了ajax.html';
+          }
+        }
+      }
+    }
+
+  }
+
+// html5的一个本地存储功能
+  // 清空localStorage里面所有数据
+  localStorage.clear()
+
+  // 存值 键值对
+  localStorage.setItem('name', '小明')
+
+  // 获取值
+  localStorage.getItem('name')
+
+  </script>
+</body>
+
+</html>

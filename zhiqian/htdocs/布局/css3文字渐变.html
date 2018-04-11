@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				padding: 20px;
+				/*background: -webkit-Radial-gradient(green,red,blue);
+				background: -webkit-linear-gradient(bottom,red,blue);
+				box-shadow: 110px 10px 110px red;*/
+				font-size: 30px;
+				text-align: center;
+				 background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(0, 128, 0, 1)), to(rgba(51, 51, 51, 1)));
+                 -webkit-background-clip: text;
+               -webkit-text-fill-color: transparent;
+			}
+		</style>
+	</head>
+	<body>
+	<div>
+		sadasdsaddsa
+	</div>
+	<script>
+		var arr1=[{"id":1},{"id":2},{"id":3}];
+        var arr2=[{"id":1,"value":"a"},{"id":2,"value":"b"}];
+				for(i=0;i<arr1.length;i++){
+		    var temID=arr1[i].id;
+		    for(var j=0;j<arr2.length;j++){
+		        if(temID==arr2[j].id){
+		            arr1[i]["newValue"]=arr2[j]["value"];
+		            break;
+		        }
+		    }
+		}
+
+		//for(var i = 0, j = 0, l = arr1.length; i < l; i++) {
+		//var temID = arr1[j]['id'];
+		//if (temID == arr2[i]['id'] && j < l) {
+		//  arr1[j]['newValue'] = arr2[i]['value'];
+		//  j++;
+		//  i = 0;
+		//  break;
+		//}
+		//}
+	console.log(arr1)
+	  for(var i=0;i<5;i++){
+	  	
+	  	  console.log(i);
+	  }
+	</script>
+	</body>
+</html>

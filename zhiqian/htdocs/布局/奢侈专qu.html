@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="format-detection" content="telephone=no" />
+<title>品类</title>
+<link rel="stylesheet" href="css/style_ios.css">
+<style>
+	html,body{
+		font-size: 10px;
+	}
+	    .foot div{
+				height: 100%;
+				width: 25%;
+				background: black;
+				color: white;
+				text-align: center;
+				font-size: 0.4rem;
+			}
+			.foot{
+				display: flex;
+				justify-content: center;
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				height:  40px;
+				width: 100%;
+				background: black;
+				z-index: 1000;
+			}
+			.foot img{
+				width: 30px;
+			}
+			.foot div img{
+				position: relative;
+				top: 9px;
+			}
+			.foot div span{
+				text-align: center;
+				position: relative;
+				top: 25px;
+				display: block;
+			}
+			.foot a{
+				display: block;
+			}
+	 
+</style>
+</head>
+
+<body class="bf8">
+	<!--header-->
+	<header class="header clearfix">
+    	<div class="left">
+        	<!--<p>珠宝白用 </br>戴出收益</p>-->
+            <a href="javascript:;"><div class="back"></div></a>
+        </div>
+        <div class="middle"><span class="god bold">奢侈专区</span></div>
+        <div class="right"><div class="serch"></div></div>
+    </header>
+    <div class="h1r"></div>
+ 	<section class="page-title class-page-title clearfix">
+    	<div class="two-box class-first">
+        	<a href="javascript:void(0);">排序</a>
+    	</div>
+        <div class="two-box">
+        	<a href="javascript:void(0);">筛选</a>
+        </div>
+    </section>
+	<section class="list">
+    	<ul class="clearfix  uls">
+         
+        </ul>
+        <section class="list-bottomla clearfix">
+            <div class="itemEnd hover">拖动,显示更多珠宝</div>
+            <div class="itemEnd nol" style="display: none">到底了</div>
+        </section>
+    </section>    
+	<div class="out-login" style="display: none;">
+    	<div class="po-re">
+        	<a href="javascript:;" class="out-del"></a>
+            <div class="lo-topimg"></div>
+            <p class="lo-toptitle">为了您的财产安全请填写身份信息</p>
+            <div class="lo-inputbox">
+                <input type="text" placeholder="输入账号" id="account" class="lo-input ">
+                <input type="password" placeholder="输入密码" id="password" class="lo-input lo-input1">
+                <a href="javascript:;" class="lo-dell"></a>
+            </div>
+            <a href="javascript:;" class="lo-btn">确定</a>
+        </div>
+       
+    </div>
+     <nav class="m_nav clearfix">
+    	<a href="首页.html">
+        	<dl>
+            	<dd class="ico1"></dd>
+                <dt>首页</dt>
+            </dl>
+        </a>
+        <a href="奢侈专qu.html">
+        	<dl>
+            	<dd class="ico2"></dd>
+                <dt>品类</dt>
+            </dl>
+        </a>
+        <a href="购物车er.html">
+        	<dl>
+            	<dd class="ico3"></dd>
+                <dt>购物车</dt>
+            </dl>
+        </a>
+        <a href="jie.html">
+        	<dl>
+            	<dd class="ico4"></dd>
+                <dt>我的</dt>
+            </dl>
+        </a>
+    </nav>
+<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="js/fontsize.js" type="text/javascript"></script>
+<script src="com.js"></script>
+<script>        
+		function fn(){
+			$.get('../api/cart/product.php',{p:cum,pnum:6},function(data){
+				console.log(data);
+				if(data.status==1){
+				var list = data.list;
+                 total = data.total;
+                  var html = '';
+                  for(var i=0;i<list.length;i++){
+                  	 var item=list[i];
+                   	html+='<li id="'+item.id+'">\
+		              	   <a href="详情l.html#'+item.id+'">\
+		                	<dl>\
+		                    	<dd><img  onerror="this.src=\'../public/nopic.png\'"  src="../api/cart'+item.img+'"></dd>\
+		                        <dt>\
+		                        	<p>'+item.price+'</p>\
+		                            <p>'+item.detail+'</p>\
+		                        </dt>\
+		                    </dl>\
+		                </a></li>';
+                  }
+                  $('.list ul').append(html)
+				}
+			},'json')}    
+
+		$('.list').on('scroll',function(){
+			if(fa){
+				return;
+			}
+			var $a=this;
+			if($a.scrollHeight-$a.scrollTop-$a.clientHeight<150){
+				cum++;
+				if(cum<=total){
+					fn();
+				}else{
+					$('.hover').hide();
+					$(".nol").show();
+				}
+			}
+		})
+//		.on('click',' li ',function(){
+//			location.href='详情l.html'
+//           localStorage.setItem("pus",$(this).prop('id'));
+////           console.log($(this).prop('id'))
+//		})
+       $('.left a').on('click',function(){
+  		history.go(-1);
+    	})
+       fn();
+       login();
+  </script>
+</body>
+</html>

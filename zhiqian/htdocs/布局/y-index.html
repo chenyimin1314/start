@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="format-detection" content="telephone=no" />
+<title>首页</title>
+<link rel="stylesheet" href="css/swiper.css">
+<link rel="stylesheet" href="css/style_ios.css">
+<!--<link rel="stylesheet" href="css/dpr2.css">-->
+<style>
+	.swiper-container .swiper-pagination-bullet{background: #ccc;}
+	.swiper-container .swiper-pagination-bullet-active{background: #666;}
+</style>
+</head>
+
+<body class="bf8">
+	<!--header-->
+	<header class="header clearfix">
+    	<div class="left">
+        	<!--<p>珠宝白用 </br>戴出收益</p>-->
+            <div class="top-img"></div>
+        </div>
+        <div class="middle"><div class="logo"></div></div>
+        <div class="right"><div class="serch"></div></div>
+    </header>
+    
+    <!--nav-->
+    <nav class="nav clearfix">
+    	<a href="###">最新上货</a>
+        <a href="###">大牌</a>
+        <a href="###" class="last"><div class="s-box clearfix"><span>玩转美世</span></div></a>
+    </nav>
+    
+    <!--banner-->
+    <div class="swiper-container in-banner">
+        <div class="swiper-wrapper oncl">
+            
+        </div>
+        <!-- page -->
+    	<div class="swiper-pagination"></div>
+    </div>
+    
+    <!--1F-->
+    <section class="page-title">
+		<span>时尚专区</span><a href="y-list.html"><em></em></a>
+    </section>
+    
+    <section class="f-box borderBottom clearfix oncl">
+    	
+    </section>
+    
+    
+    <!--2F-->
+    <section class="page-title">
+		<span>奢侈专区</span><a href="y-list.html"><em></em></a>
+    </section>
+    
+    <section class="f-box borderBottom clearfix oncl">
+    	
+    </section>
+    	
+    
+    <nav class="m_nav clearfix">
+    	<a href="y-index.html">
+        	<dl>
+            	<dd class="ico1"></dd>
+                <dt>首页</dt>
+            </dl>
+        </a>
+        <a href="y-list.html">
+        	<dl>
+            	<dd class="ico2"></dd>
+                <dt>列表</dt>
+            </dl>
+        </a>
+        <a href="zbox.html">
+        	<dl>
+            	<dd class="ico3"></dd>
+                <dt>购物车</dt>
+            </dl>
+        </a>
+        <a href="order.html">
+        	<dl>
+            	<dd class="ico4"></dd>
+                <dt>我的</dt>
+            </dl>
+        </a>
+    </nav>
+    
+    <div class="login-box" style="display:none">
+	<div class="out-login">
+    	<div class="po-re">
+        	<a href="###" class="out-del"></a>
+            <div class="lo-topimg"></div>
+            <p class="lo-toptitle">登录</p>
+            <div class="lo-inputbox">
+                <input type="text" placeholder="输入账号" id="account" class="lo-input">
+                <input type="password" placeholder="输入密码" id="password" class="lo-input lo-input1">
+                <a href="###" class="lo-dell"></a>
+            </div>
+            <a href="###" class="lo-btn">确定</a>
+        </div>
+    </div>
+	<div class="bg1"></div>
+  </div>
+
+<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="js/fontsize.js" type="text/javascript"></script>
+<script src="js/swiper.min.js" type="text/javascript"></script>
+<script>        
+  $('.oncl').on('click','.onc',function(e){
+  	localStorage.setItem( 'pid',$(this).prop('id') );
+//  	console.log($(this).prop('id') )
+    	location.href='y-detail.html';
+  })
+  
+  
+  $(document).ajaxComplete(function(event,xhr){
+//  	loading=false;
+    	var data=JSON.parse(xhr.responseText);
+    	console.log(data)
+    	if(data.status == 1001){
+    		$('.login-box').show();
+    	}
+    	
+    })
+  
+  $('.lo-btn').on('click',function(){
+    	var account=$('#account').val();
+    	var password=$('#password').val();
+    	
+    	$.post('../../api/cart/login.php',JSON.stringify({ account:account,password:password } ),
+    	function(data){
+    		if(data.status == 1){
+    			$('.login-box').hide();
+    			getL();
+    		}
+    	},'json')
+    })
+  getL();
+  function getL(){
+  	
+  	
+  	$.get('../../api/cart/product.php',{p:1,pnum:5},function(data){
+  	if(data.status==1){
+  		var list=data.list;
+  	    var html="";
+  	    
+//	    	var item=list[i];
+  	    	html='<div class="left-box left_box_2F left">\
+        	<div class="box">\
+                <div class="dl-box onc" id="'+list[0].id+'" >\
+                    <span><img src="../../api/cart'+list[0].img+'"  ></span>\
+                    <div class="title">\
+                        <p>CARTIER</p>\
+                        <p>'+list[0].detail+'</p>\
+                    </div>\
+                </div>\
+            </div>\
+          </div>\
+          <div class="right-box right_box_2F right clearfix">\
+        	<div id="'+list[1].id+'" class="onc pro-box"><span><img src="../../api/cart'+list[1].img+'"  ></span></div>\
+            <div id="'+list[2].id+'" class="onc pro-box"><span><img src="../../api/cart'+list[2].img+'"  ></span></div>\
+            <div id="'+list[3].id+'" class="onc pro-box"><span><img src="../../api/cart'+list[3].img+'"  ></span></div>\
+            <div id="'+list[4].id+'" class="onc pro-box"><span><img src="../../api/cart'+list[4].img+'"  ></span></div>\
+          </div>';
+  	    
+  	    
+        
+        $('.f-box').eq(0).html(html);
+  	}
+  	
+        
+  },'json')
+  
+  
+  $.get('../../api/cart/product.php',{p:2,pnum:5},function(data){
+  	if(data.status==1){
+  		var list=data.list;
+  	    var html="";
+  	    
+//	    	var item=list[i];
+  	    	html='<div class="left-box left_box_2F left">\
+        	<div class="box">\
+                <div class="dl-box onc" id="'+list[0].id+'" >\
+                    <span><img src="../../api/cart'+list[0].img+'"  ></span>\
+                    <div class="title">\
+                        <p>CARTIER</p>\
+                        <p>'+list[0].detail+'</p>\
+                    </div>\
+                </div>\
+            </div>\
+          </div>\
+          <div class="right-box right_box_2F right clearfix">\
+        	<div id="'+list[1].id+'" class="onc pro-box"><span><img src="../../api/cart'+list[1].img+'"  ></span></div>\
+            <div id="'+list[2].id+'" class="onc pro-box"><span><img src="../../api/cart'+list[2].img+'"  ></span></div>\
+            <div id="'+list[3].id+'" class="onc pro-box"><span><img src="../../api/cart'+list[3].img+'"  ></span></div>\
+            <div id="'+list[4].id+'" class="onc pro-box"><span><img src="../../api/cart'+list[4].img+'"  ></span></div>\
+          </div>';
+  	    
+  	    
+        
+        $('.f-box').eq(1).html(html);
+  	}
+  	
+        
+  },'json')
+  
+  $.ajax({
+  	url:'../../api/cart/product.php',
+  	type:'get',
+  	dataType:'json',
+  	data:{p:3,pnum:5},
+  	success:function(data){
+  		if(data.status==1){
+  		var list=data.list;
+  	    var html="";
+  	    
+//	    	var item=list[i];
+  	    	html='<div id="'+list[0].id+'" class="onc swiper-slide"><img src="../../api/cart'+list[0].img+'"></div>\
+                  <div id="'+list[1].id+'" class="onc swiper-slide"><img src="../../api/cart'+list[1].img+'"></div>\
+                  <div id="'+list[2].id+'" class="onc swiper-slide"><img src="../../api/cart'+list[2].img+'"></div>';
+  
+        $('.swiper-wrapper').eq(0).html(html);
+        
+         var mySwiper = new Swiper ('.swiper-container', {
+             direction: 'horizontal',
+             loop: true,
+               // 如果需要分页器
+             pagination: '.swiper-pagination',
+	         autoplayDisableOnInteraction : false,
+	         autoplay : 3000,
+	         speed:300,
+             }) 
+  	}
+  	
+        
+  	}
+  })
+  
+  
+  }
+
+  
+  </script>
+</body>
+</html>

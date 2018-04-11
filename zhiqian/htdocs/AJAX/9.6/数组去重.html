@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+<script>
+ var arr=[1,2,3,4,4,5,5,6,612,1,2,3];
+
+// function b(a){
+// 	var s=[];
+//    for(var i=0;i<a.length;i++){
+//     if(s.indexOf(a[i])==-1){
+//   	s.push(a[i]);
+//     }
+//     }
+//    return s
+//   }
+//console.log(b(arr));
+
+//function bubbleSort(arr) {
+//  var len = arr.length;
+//  for (var i = 0; i < len; i++) {
+//      for (var j = 0; j < len - 1; j++) {
+//          if (arr[j] > arr[j+1]) {
+//          	var a=arr[j+1]
+//              arr[j+1] = arr[j];
+//              arr[j] = a;
+//          }
+//      }
+//  }
+//  return arr;
+//}
+// function fn(arr){
+// 	for(var i=0;i<arr.length;i++){
+// 		for(var j=0;j<arr.length-1;j++){
+// 			if(arr[j]>arr[j+1]){
+// 				var a=arr[j+1];
+// 				arr[j+1]=arr[j];
+// 				arr[j]=a;
+// 			}
+// 		}
+// 	}
+// 	return arr
+// }
+//console.log(fn(arr))
+
+function fv(arr){
+	var ar=[];
+	for(var i=0;i<arr.length;i++){
+		if(ar.indexOf(arr[i])==-1){
+			ar.push(arr[i])
+		}
+	}
+	return ar
+}
+console.log(fv(arr))
+function fb(arr){
+	for(var i=0;i<arr.length;i++){
+		for(var j=0;j<arr.length-1;j++){
+			 if(arr[j]>arr[j+1]){
+			 	var a=arr[j+1];
+			 	 arr[j+1]=arr[j];
+			 	 arr[j]=a;
+			 }
+		}
+	}
+	return arr
+}
+console.log(fb(arr))
+
+</script>
+	</body>
+</html>

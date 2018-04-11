@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				height: 100px;
+				width: 100px;
+				background: red;
+			    animation: a 3s infinite linear;
+			}
+			@-webkit-keyframes a{
+				0%{
+					margin-left: 0px;
+						margin-top: 0px;
+					background: silver;
+				}
+				25%{
+					margin-left: 1000px;
+					margin-top: 0px;
+					background: blue;
+				}
+				50%{
+					margin-left: 1000px;
+						margin-top: 550px;
+					background: yellow;
+				}
+				75%{
+					margin-left: 0px;
+					margin-top: 550px;
+					background: hotpink;
+				}
+				100%{
+					margin-left: 0px;
+					margin-top: 0px;
+					background: red;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+	</body>
+</html>

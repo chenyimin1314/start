@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />	
+		<title></title>
+		<link rel="stylesheet" href="../css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.new.css"/>
+		<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="../js/bootstrap.js"></script>
+	</head>
+	
+	<body>
+		<div class="modal fade" id='mod'>
+	   			<div class="modal-dialog">
+	   				<div class="modal-content">
+	   					<div class="modal-header">
+	   						<button type="button" class="close" data-dismiss="modal">&times;</button>
+	   					  <h3>添加用户</h3>
+	   					</div>
+	   					<div class="modal-body">
+							<p>用户名</p>
+							<input type="text" class="form-control" placeholder="请输入用户名"/>
+							<p>用户名密码</p>
+							<input type="text" class="form-control" placeholder="请输入用户名"/>
+							<p>确认用户名密码</p>
+							<input type="text" class="form-control" placeholder="请输入用户名"/>
+							<p>用户名邮箱</p>
+							<input type="text" class="form-control" placeholder="请输入用户名"/>
+							<p>用户所属用户组</p>
+							<input type="text" class="form-control" placeholder="请输入用户名"/>
+						</div>
+                      <div class="modal-footer">
+							<button type="button" class="btn btn-default">添加</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						</div>
+
+	   				</div>
+	   			</div>
+	   		</div>
+			<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+				<a class="navbar-brand" href="#">Admin</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li >
+						<a href="anli.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 后台首页<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="active">
+						<a href=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户管理</a>
+					</li>
+					<li>
+						<a href="neirong-guanli.html"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 内容管理</a>
+					</li>
+					<li>
+						<a href="标签管理.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> 标签管理</a>
+					</li>
+				</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-screenshot"></span> 前台首页</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-user"></span> 个人主页</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-cog"></span> 个人设置</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-credit-card"></span> 账户中心</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-heart"></span> 我的收藏</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#"><span class="glyphicon glyphicon-off"></span> 退出</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	   
+	   <div class="container">
+	   	<div class="row">
+	   		<div class="col-lg-2">
+	   			<a class="list-group-item active" href="#" role="button">用户管理</a>
+	   			<a class="list-group-item" href="yonghu-ss.html" role="button">用户搜索</a>
+	   			<a class="list-group-item" href="#" role="button" data-target="#mod" data-toggle="modal">用户添加</a>
+	   		</div>
+	   		<div class="col-lg-10">
+	   			<ul class="nav nav-tabs">
+                 <li><a href="#">用户管理</a></li>
+                 </ul>
+                <!--用户管理--> 
+                <br />
+               <ul class="nav nav-tabs">
+               	<li class="active"><a href="#"data-toggle="tab">用户管理</a></li>
+           		<li><a href="yonghu-ss.html" <!--data-toggle="tab"-->用户搜索</a></li>
+           		<li><a href="#"data-toggle="modal" data-target="#mod">用户添加</a></li>
+               </ul>
+                <div class="tab-content">
+                	<table class="table">
+					<thead>
+					<tr>
+						<th>ID</th>
+						<th>用户名</th>
+						<th>邮箱</th>
+						<th>操作</th>
+					</tr>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  </div>
+							</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  </div>
+							</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								</div>
+							</td>
+						</tr>
+					    <tr>
+							<td>4</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  </div>
+							</td>
+						</tr>
+					    <tr>
+							<td>5</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  </div>
+							</td>
+						</tr>
+					    <tr>
+							<td>6</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  </div>
+							</td>
+						</tr>
+					    <tr>
+							<td>7</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  </div>
+							</td>
+						</tr>
+					    <tr>
+							<td>8</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  </div>
+							</td>
+						</tr> 
+					    <tr>
+							<td>9</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  </div>
+							</td>
+						</tr> 
+					    <tr>
+							<td>10</td>
+							<td>悟空</td>
+							<td>12345@893.com</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  </div>
+							</td>
+						</tr>
+					</tbody>
+				</thead>  
+					</table>
+             </div>
+	   		</div>
+	   		<div class="col-lg-4 col-lg-offset-8">
+	   			<nav aria-label="Page navigation">
+			     <ul class="pagination" style="float: right;">
+				<li>
+					<a href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">1</a>
+				</li>
+				<li>
+					<a href="#">2</a>
+				</li>
+				<li>
+					<a href="#">3</a>
+				</li>
+				<li>
+					<a href="#">4</a>
+				</li>
+				<li>
+					<a href="#">5</a>
+				</li>
+				<li>
+					<a href="#">6</a>
+				</li>
+				<li>
+					<a href="#">7</a>
+				</li>
+				<li>
+					<a href="#">...</a>
+				</li>
+				<li>
+					<a href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+			</nav>
+	   		</div>	
+	   	</div>
+	   	
+	   </div>
+       
+	    	<p style="text-align: center;">
+	   		Copyright&copy;2012-2015 www.baidu.com 粤ICP备13014270号-4
+	   	</p>		
+	   	</body>
+</html>

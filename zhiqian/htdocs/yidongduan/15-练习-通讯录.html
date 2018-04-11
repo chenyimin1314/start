@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../public/weui.min.css">
+  <link rel="stylesheet" href="../public/jquery-weui.min.css">
+  <link rel="stylesheet" href="../public/font-awesome/font-awesome.css">
+  <!--<link rel="stylesheet" href="./public/main.css">-->
+  <script type='text/javascript' src="../public/jquery.min.js"></script>
+  <script type='text/javascript' src="../public/jquery-weui.min.js"></script>
+  <style media="screen">
+    .title {
+      color: gray;
+    }
+
+    .app {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      flex: 0 0 30px;
+      background-color: #505050;
+      color: white;
+      padding: 5px 10px;
+      display: flex;
+    }
+
+    header h1 {
+      font-size: 16px;
+      flex: 1;
+    }
+
+    header .r-box {
+      flex: 0 0 60px;
+      display: flex;
+    }
+
+    header .r-box a {
+      color: white;
+      margin-left: 15px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    main {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    main.list .item {
+      flex: 0 0 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    main.f-list {}
+
+    main.f-list .index {
+      flex: 0 0 calc(100vh - 86px);
+      position: fixed;
+      top: 40px;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 999;
+    }
+
+    main.f-list .index.on {
+      background-color: #ccc;
+    }
+
+    main.f-list .index li {
+      line-height: calc((100vh - 86px) / 26);
+      font-size: 12px;
+      list-style: none;
+      text-align: center;
+    }
+
+    footer {
+      flex: 0 0 45px;
+      background-color: #F7F7FA;
+      border-top: 1px solid #ccc;
+      display: flex;
+    }
+
+    footer a {
+      font-size: 12px;
+      color: #aaa;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    footer .fa {
+      font-size: 20px;
+    }
+
+    footer a.on {
+      color: #3cc51f;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+    <header>
+
+    </header>
+    <main class="f-list">
+      <ul class="index">
+        <li class="index-item">A</li>
+        <li class="index-item">B</li>
+        <li class="index-item">C</li>
+        <li class="index-item">D</li>
+        <li class="index-item">E</li>
+        <li class="index-item">F</li>
+        <li class="index-item">G</li>
+        <li class="index-item">H</li>
+        <li class="index-item">I</li>
+        <li class="index-item">J</li>
+        <li class="index-item">K</li>
+        <li class="index-item">L</li>
+        <li class="index-item">M</li>
+        <li class="index-item">N</li>
+        <li class="index-item">O</li>
+        <li class="index-item">P</li>
+        <li class="index-item">Q</li>
+        <li class="index-item">R</li>
+        <li class="index-item">S</li>
+        <li class="index-item">T</li>
+        <li class="index-item">U</li>
+        <li class="index-item">V</li>
+        <li class="index-item">W</li>
+        <li class="index-item">X</li>
+        <li class="index-item">Y</li>
+        <li class="index-item">Z</li>
+      </ul>
+      <div class="box">
+        <div class="weui-cells" id="index-A">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>A</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>A0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>A1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>A2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>A3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>A4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>A5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-B">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>B</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>B0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>B1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>B2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>B3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>B4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>B5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-C">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>C</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>C0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>C1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>C2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>C3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>C4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>C5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-D">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>D</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>D0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>D1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>D2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>D3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>D4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>D5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-E">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>E</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>E0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>E1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>E2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>E3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>E4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>E5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-F">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>F</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>F0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>F1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>F2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>F3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>F4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>F5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-G">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>G</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>G0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>G1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>G2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>G3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>G4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>G5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-H">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>H</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>H0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>H1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>H2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>H3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>H4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>H5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-I">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>I</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>I0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>I1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>I2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>I3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>I4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>I5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-J">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>J</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>J0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>J1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>J2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>J3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>J4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>J5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-K">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>K</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>K0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>K1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>K2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>K3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>K4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>K5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-L">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>L</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>L0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>L1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>L2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>L3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>L4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>L5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-M">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>M</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>M0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>M1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>M2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>M3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>M4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>M5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-N">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>N</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>N0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>N1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>N2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>N3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>N4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>N5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-O">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>O</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>O0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>O1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>O2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>O3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>O4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>O5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-P">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>P</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>P0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>P1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>P2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>P3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>P4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>P5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-Q">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>Q</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Q0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Q1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Q2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Q3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Q4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Q5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-R">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>R</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>R0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>R1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>R2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>R3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>R4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>R5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-S">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>S</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>S0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>S1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>S2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>S3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>S4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>S5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-T">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>T</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>T0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>T1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>T2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>T3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>T4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>T5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-U">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>U</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>U0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>U1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>U2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>U3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>U4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>U5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-V">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>V</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>V0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>V1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>V2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>V3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>V4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>V5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-W">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>W</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>W0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>W1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>W2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>W3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>W4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>W5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-X">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>X</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>X0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>X1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>X2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>X3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>X4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>X5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-Y">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>Y</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Y0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Y1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Y2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Y3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Y4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Y5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+        <div class="weui-cells" id="index-Z">
+          <div class="weui-cell">
+            <div class="weui-cell__bd title">
+              <p>Z</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Z0</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Z1</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Z2</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Z3</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Z4</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <p>Z5</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <footer>
+
+    </footer>
+  </div>
+
+</body>
+<script type='text/javascript'>
+
+// tap事件
+// touch系列事件
+
+  $('.index').on('touchstart', function (e) {
+    $('.index').addClass('on');
+    indexRoute(e);
+  }).on('touchend', function (e) {
+    $('.index').removeClass('on');
+  }).on('touchmove', function (e) {
+    indexRoute(e);
+  })
+
+  function indexRoute(e) {
+    var tag = document.elementFromPoint(e.originalEvent.touches[0].clientX, e.originalEvent.touches[0].clientY);
+
+    if ($(tag).hasClass('index-item')) {
+      var route = 'index-' + tag.innerHTML;
+      location.hash = route;
+    }
+
+  }
+</script>
+
+</html>

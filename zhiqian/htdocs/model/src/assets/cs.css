@@ -1,0 +1,374 @@
+	.clearfix:after{visibility:hidden;display:block;font-size:0;content: " ";clear:both;height:0;}
+	.nav{
+		height: 60px;
+		width: 100%;
+		background:#F5F5F5;
+		position: fixed;
+		left: 0;
+		bottom: 0;
+	}
+	.nav a{
+		color: #797979;
+	}
+	.nav dl{
+		float: left;
+	    margin-top: 10px;
+       	width: 25%;
+        text-align: center;
+        font-size: 10px;
+        display: block;
+	}
+	.nav dl dt img{
+		height: 20px;
+		width: 20px;
+		margin-top: 4px;
+	}
+	.nav dl dt {
+		height: 60%;
+		width: 100%;
+	}
+	.nav dl dd {
+		height: 40%;
+		width: 100%;
+		line-height: 35px;
+	}
+	.nav a.router-link-active{
+        color: darkslategray;
+    }
+ /*尾部*/ 
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.body{
+		overflow:auto;
+	   height: 100vh;
+	}
+	.head{
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 55px;
+		width: 100%;
+		z-index: 1000;
+		background: red;
+	}
+	.head img{
+		height:100%;
+		width: 100%;
+	}
+	.navs{
+		height: 100px;
+		width: 100%;
+		
+	}
+	.navs .kong{
+		height: 50px;
+	}
+	.navs dl{
+		height: 45%;
+		width: 100%;
+		background: white;
+	}
+	.navs dl dt{
+		float: left;
+		height: 100%;
+		width: 60%;
+	}
+	.navs dl dt img{
+        height:75%;
+        margin: 5% auto auto  4%;
+		width: 100%;
+	}
+	.navs dl dd{
+		float: right;
+		height: 100%;
+		width: 40%;
+	}
+	.navs dl dd img{
+		height: 35px;
+		width: 35px;
+		margin: 10px auto auto 70%;
+	}
+   .lou{
+		position: fixed;
+		right: 1px ;
+		bottom: 100px;
+	}
+	.Img{
+		margin-top: 2px;
+		height: 160px;
+		width: 100%;
+	}
+	.Img img{
+		height: 100%;
+		width: 100%;
+	}
+	.shangou{
+	    box-shadow: 0 5px 5px #CCCCCC ;
+	}
+	.table {
+		height: 150px;
+		width: 100%;
+	}
+	.table tr{
+		height: 50%;
+		width: 100%;
+	}
+	.table tr td{
+		height: 50%;
+		width: 25%;
+		text-align: center;
+		font-size: 10px;
+	}
+	.table tr td img{
+		height: 35px;
+		width: 35px;
+	}
+	.trtwo{
+		box-shadow: 0 10px 5px #CCCCCC ;
+	}
+	.table2{
+		height: 200px;
+		width: 100%;
+		 text-align: center;
+	}
+  .table2 .table2tr1{
+  	height: 25%;
+  	width: 100%;
+  	background: #F0F0F0;
+  	color: red;
+   }
+   .table2 .table2tr1 span{
+  	font-size: 1px;
+  	color: #ACACAC;
+   }
+   .table2 .table2tr2{
+  	height: 75%;
+  	width: 100%;
+  	font-size: 13px;
+  	color: #5E5E5E;
+  	background: white;
+   }
+  .table2 .table2tr2 .time{
+  	color: white;
+  	width: 70px;
+  	background: #D91822;
+  	text-align:center;
+  	margin:auto;
+   }
+   .table2 .table2tr2 img{
+     height: 100px;
+     width: 100px;
+    }
+     .table2 .table2tr2 td a{
+      text-decoration: none;
+      color: #92795F;
+    }
+    .ul{
+		height: 200px;
+		width: 100%;
+		 text-align: center;
+		 list-style: none;
+		 border-top: 1px solid #CCCCCC;
+
+    }
+	.ul .ulli1{
+		height: 100%;
+		width: 40%;
+		float: left;
+		  overflow: hidden;
+
+	}
+	.ul .ulli1 img{
+	  height: 200px;
+	  width: 400px;
+	}
+	.ul .ulli2{
+		height: 60%;
+		width: 60%;
+		float: right;
+        border-bottom: 1px solid #C2C2C2;
+	}
+	.ul .ulli2 .line1{
+	   margin-top: 20px;
+	}
+	.ul .ulli2 img{
+		margin-top: 10px;
+	}
+	.ul .ulli3{
+		height: 40%;
+		width: 60%;
+		float: right;
+	}
+	.ul .lin .line1{
+		float: left;
+    font-size: 10px;
+	}
+	.ul .lin .line1 dl{
+		margin: 20px 0 0 20px;
+	}
+	.ul .lin .line1 dl dt{
+		color: #888888;
+		font-weight: bolder;
+	}
+	.ul .lin .line1 dl dd {
+			color: #888888;
+	}
+	.ul .lin .line2{
+		float: right;
+	}
+	.ul .lin img{
+	  height: 90px;
+     width: 100px;
+ 
+	}
+	.ul .ulli3 img{
+	 height: 63px;
+     width: 100px;
+     margin-top: 10px;
+	}
+	.jingxuan{
+		height: 530px;
+		width: 100%;
+		margin-top: 6px;
+	}
+	.jingxuan .jing1{
+		height: 10%;
+		width: 100%;
+		text-align: center;
+		line-height: 50px;
+		background: #f0f0f0;
+		color: #767676;
+		font-weight: bolder;
+	}
+	.jingxuan .jingul1{
+		height: 40%;
+		width: 100%;
+	}
+	.jingxuan .jingul1 li{
+		list-style: none;
+		height: 100%;
+		width: 50%;
+		line-height: 15px;
+		float: left;
+		overflow: hidden;
+	}
+	.jingxuan .jingul1 li img{
+		height: 210px;
+		width: 95%;
+		margin-left: 2.5%;
+	}
+	.jingxuan .jingul1 li dl dd p{
+		font-size: 10px;
+		text-align: center;
+	}
+	.jingxuan .jingul1 li dl dd{
+		height: 35%;
+		width: 50%;
+		text-align: center;
+		position: relative;
+        top: -50px;
+        left: 27%;
+        background: white;
+         background-color:rgba(0,0,0,.5);
+        color: #F4F4F4;
+        font-weight: bolder;
+	}
+	.jingxuan .jingul2{
+		height: 15%;
+		width: 100%;
+	    border: 1px solid #CCCCCC;
+	    margin-top: 2%;
+	}
+	@media only screen and (min-width: 440px) and (max-width: 1000px) {
+	
+	}
+	.jingxuan .jingul2 li{
+	    list-style: none;
+		height: 50%;
+		width: 24.6%;
+		float: left;
+		text-align: center;
+		border-right: 1px solid #CCCCCC;
+		border-bottom: 1px solid #CCCCCC;
+	}
+	.jingxuan .jingul2 li p{
+		font-size: 10px;
+	   border-left:2px solid red ;
+	   height: 25%;
+	   width: 70%;
+	   line-height: 15px;
+	   margin: 15px 0 0 10px;
+	   color: #CCCCCC;
+	}
+	.jingxuan .jingul3{
+		height: 30%;
+		width: 100%;
+		box-shadow: 0 10px 5px #CCCCCC ;
+	}
+	
+	.jingxuan .jingul3 li{
+		list-style: none;
+		height: 100%;
+		width: 33%;
+		float: left;
+		text-align: center;
+		font-size: 10px;
+		color: #C2C2C2;
+	}
+	.jingxuan .jingul3 li dl dd p:last-child{
+		color: red;
+	}
+	.jingxuan .jingul3 li img{
+		height: 90px;
+		width: 100px;
+	}
+	.jingxuan .jingul3 li dl {
+		margin-top: 20px;
+	}
+	.qi{
+		height: 500px;
+		width: 100%;
+		/*margin-top: 5%;*/
+	}
+	.qi .qitable{
+		height: 300px;
+		width: 100%;
+	}
+	.qi .qitable .qitabletr1{
+		height: 40%;
+		width: 100%;
+	}
+	.qi .qitable .qitabletr1 td{
+		height: 80%;
+		width: 100%;
+	}
+	.qi .qitable .qitabletr1 td img{
+	   height:180px;
+	   width: 100%;
+	}
+	.qi .qitable .qitabletr2{
+		height: 60%;
+		width: 100%;
+	}
+	.qi .qitable .qitabletr2 td{
+		height: 100%;
+		width: 33%;
+		text-align: center;
+		font-size: 10px;
+	}
+	.qi .qitable .qitabletr2 td img{
+	    height: 80%;
+		width: 85%;
+		margin-left: 8%;
+		margin-top: 4%;
+	}
+	.qi .qitable .qitabletr2 td dl dd p:last-child{
+	   color: red;
+	   font-weight: bolder;
+	   font-size: 15px;
+	}
+
+	
+	

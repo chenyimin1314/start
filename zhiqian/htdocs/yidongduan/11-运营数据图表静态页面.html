@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="public/main.css" rel="stylesheet">
+  <style lang="">
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      display: none;
+    }
+
+    .loading img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!--这里要加载header.html-->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="javascript:;">Dashboard</a></li>
+          <li><a href="javascript:;">Settings</a></li>
+          <li><a href="javascript:;">Profile</a></li>
+          <li><a href="javascript:;">Help</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="nav-plist"><a href="javascript:;">商品管理</a></li>
+          <li class="nav-olist"><a href="javascript:;">订单管理</a></li>
+          <li class="nav-chart active"><a href="javascript:;">运营数据</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="plist main-content">
+          <h2 class="sub-header">
+            运营数据
+            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+              <select class="form-control" id="daysSelect" style="display:inline-block;float: left;width: auto;margin-right: 5px;">
+                <option value="7">最近7天</option>
+                <option value="30">最近30天</option>
+              </select>
+
+            </div>
+          </h2>
+          <div id="chart-box" style="width:100%;min-height:300px;"></div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="loading">
+    <div class="mask"></div>
+    <img src="../public/loading.gif" alt="">
+  </div>
+
+
+  <script src="../public/jquery.min.js"></script>
+  <script src="./02-canvas插件/public/echarts.min.js"></script>
+  <script type='text/javascript'>
+    
+  </script>
+</body>
+
+</html>

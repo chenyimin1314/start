@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			
+			var info = window.navigator.userAgent;
+			
+			alert(info);//Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
+			
+			//主流浏览器（ie和标准）内核：
+			//trident:IE系列
+			//Mozilla:火狐浏览器
+			//Webkit：chrome浏览器 safiri
+			//opera:欧朋浏览器
+			
+			alert(typeof info);
+			
+			if(info.indexOf("Chrome")!=-1){
+				alert("使用的chrome浏览器");
+			}else if(info.indexOf(" Firefox")){
+				alert("使用的Firefox浏览器");
+			}else{
+				alert("使用的其他浏览器");
+			}
+			
+		</script>
+
+	</body>
+</html>

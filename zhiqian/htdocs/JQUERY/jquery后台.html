@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../public/main.css" rel="stylesheet">
+  <style lang="">
+    .loading{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      /*display: none;*/
+    }
+    .loading img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+    }
+     .mypopup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+    /* display: none;*/
+    }
+    .mypopup-content {
+      box-sizing: border-box;
+      min-width: 300px;
+      position: absolute;
+      top: 320px;
+      left: 50%;
+      margin-left: -150px;
+      background-color: white;
+      border-radius: 6px;
+      box-shadow: 5px 5px 10px #aaa;
+      border: 1px solid #eee;
+      padding: 20px;
+      z-index: 1000;
+      transition: 500ms;
+    }
+   .mypopup-content.on{
+	     top: 50%;
+   }
+    .mypopup-content .head {
+      text-align: center;
+      padding-bottom: 15px;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .mypopup-content .popup-main-content {
+      text-align: center;
+      padding-bottom: 20px;
+      color: #aaa;
+      font-size: 16px;
+    }
+
+    .mypopup-content .foot {
+      text-align: center;
+      padding-top: 5px;
+      border-top: 1px solid #d5d5d6;
+    }
+
+    .mypopup-content .foot button {
+      width: 100%;
+      color: blue;
+      padding: 10px 0;
+      border: none;
+      background-color: white;
+      font-size: 16px;
+    }
+
+    .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+      background-color: rgba(0, 0, 0, .1);
+    }
+    
+	.popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+       display:none;
+     
+     
+    }
+   .popup .popup-content {
+    	height: 250px;
+    	width: 400px;
+      box-sizing: border-box;
+      min-width: 300px;
+      position: absolute;
+      top: 320px;
+      left: 50%;
+      margin-left: -150px;
+      background-color: white;
+      border-radius: 6px;
+      box-shadow: 5px 5px 10px #aaa;
+      border: 1px solid #eee;
+      padding: 20px;
+      z-index: 1000;
+      transition: 750ms;
+       box-shadow: 3px 3px 15px antiquewhite;
+        text-shadow: 3px 3px 3px blue;
+    }
+  #addp .on{
+   height: 250px;
+    	width: 400px;
+      box-sizing: border-box;
+      min-width: 300px;
+      position: absolute;
+      top: 320px;
+      left: 50%;
+      margin-left: -150px;
+      background-color: white;
+      border-radius: 6px;
+      box-shadow: 5px 5px 10px #aaa;
+      border: 1px solid #eee;
+      padding: 20px;
+      z-index: 1000;
+      transition: 750ms;
+       box-shadow: 3px 3px 15px antiquewhite;
+        text-shadow: 2px 2px 4px blue;
+   }
+
+   #addp .on.onss{
+   	 top: 50%;
+   }
+    .popup-content .head {
+      text-align: center;
+      padding-bottom: 15px;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .popup-content .popup-main-content {
+      text-align: center;
+      padding-bottom: 20px;
+      color: #aaa;
+      font-size: 16px;
+    }
+
+    .popup-content .foot {
+    	display: flex;
+    	justify-content:center;
+    	 align-items: center ;
+     text-align: center;
+      padding-top: 5px;
+      border-top: 1px solid #d5d5d6;
+    }
+
+    .popup-content .foot button {
+      width: 100%;
+      color: blue;
+      padding: 10px 0;
+      border: none;
+      background-color: white;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <!--这里要加载header.html-->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <div id="user" class="nav navbar-nav navbar-right">
+          <div style="color:white">欢迎，<span id="username"></span> <button style="color:black" id="logout">登出</button> </div>
+        </div>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar shadow">
+          <li class="nav-plist active"><a href="jquery后台.html">商品管理</a></li>
+          <li class="nav-olist "><a href="11-订单管理静态页面.html">订单管理</a></li>
+          <li class="nav-chart "><a href="11-运营数据图表静态页面.html">运营数据</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="plist main-content">
+          <h2 class="sub-header">
+            商品管理
+            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+              <button type="button" class="btn btn-default newp-btn">新增商品</button>
+              <button type="button" class="btn btn-default plup-btn">批量上架</button>
+              <button type="button" class="btn btn-default pldown-btn">批量下架</button>
+              <button type="button" class="btn btn-default pldel-btn">批量删除</button>
+            </div>
+          </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="check-all"></th>
+                  <th>商品ID</th>
+                  <th>图片</th>
+                  <th>商品名称</th>
+                  <th>商品详情</th>
+                  <th>上下架状态</th>
+                  <th>价格(元)</th>
+                  <th>创建日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="list">
+                
+              </tbody>
+            </table>
+
+            <nav>
+              <ul class="pagination pull-right">
+                  
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="popup" id="addp">
+    <div class="popup-content">
+      <h4 class="sub-headers">商品添加</h4>
+      <form class="form-horizontal">
+        <div class="popup-main-content">
+          <div class="form-group">
+            <label for="inputPName" class="col-sm-2 control-label">商品名称</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputPName" name="name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <labelclass="col-sm-2 control-label">
+              </label>
+              <div class="col-sm-10">
+                <img src="" alt=""   id="apimg" style="max-width:300px">
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品图片</label>
+            <div class="col-sm-10">
+              <input type="file"  id="inputIMG"  name="img">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品详情</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" type="text" rows="3" id="inputDetail" name="detail" required></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputUp" class="col-sm-2 control-label">是否上架</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label>
+              <input type="checkbox" value=""  id="inputUp" name="lock">
+            </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPrice" class="col-sm-2 control-label">价格</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="inputPrice" name="price" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+           <!-- <a class="btn btn-default save-btn"   href="javascript:;">确<!--认保存</a>--->
+            <button type="submit" class="btn btn-default save-btn"   href="javascript:;">确认保存</button>
+            <button  type="submit" class="btn btn-default saves-btn" style='display: none;' href="javascript:;">确认修改</button>
+          <!--  <a class="btn btn-default saves-btn" style='display: none;' href="javascript:;">确认修改</a>-->
+            <a class="btn btn-default cancel-btn" href="javascript:;">取消</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="mask"></div>
+  </div>
+
+  <div class="loading">
+    <div class="mask"></div>
+    <img src="../public/loading.gif" alt="">
+  </div>
+  	 <div class="popup">
+    <div class="popup-content">
+      <div class="head"></div>
+      <div class="popup-main-content"></div>
+      <div class="foot">
+        <button class="ok-btn">确认</button>
+        <button class="cancel-btn">取消</button>
+      </div>
+    </div>
+    <div class="mask"></div>
+  </div>
+  <script src="../jqku/jquery-1.11.3.min.js"></script>
+  <script src="../swiperku/jquery.lazyload.min.js"></script>
+  <script src="../jqku/jquery.validate.js"></script>
+  <script src="com.js"></script>
+  <script type='text/javascript'>	
+	
+   $.mypopup = function (options) {
+      var defaults = {
+        title: '标题'
+      }
+      var contentDiv = '';
+      if (Object.prototype.toString.call(options) == '[object Object]' && options.title) {
+        defaults.title = options.title
+      }
+      if (Object.prototype.toString.call(options) == '[object Object]' && options.content) {
+        contentDiv += '<div class="popup-main-content">' + options.content + '</div>'
+      }
+      var htmls = '';
+      htmls= '<div class="mypopup">\
+    <div class="mypopup-content">\
+      <div class="head">' + defaults.title +'</div>' + contentDiv +'\
+      <div class="foot"><button class="ok-btn">确认</button> <button class="oks-btn">取消</button></div>\
+     </div>\
+    <div class="mask"></div>\
+  </div>';
+      $('html').append(htmls);
+         $('.mypopup-content').css("marginTop",-parseInt($('.mypopup-content').css('height'))/2);
+       $('.mypopup .ok-btn').on('click', function (){
+        $('.mypopup').remove();
+        if (typeof options == 'object' && typeof options.ok == 'function') {
+          options.ok();
+        }
+      })
+      $('.mypopup .oks-btn').on('click', function (){
+        $('.mypopup').remove();
+        if (typeof options == 'object' && typeof options.oks == 'function') {
+          options.oks();
+        }
+      })
+
+    }
+	  	var user=JSON.parse(localStorage.getItem("user"))
+	  	 if(user&&user.account){
+	         $('#username').html();
+	  }
+	  	 
+	  $('#logout').on('click',function(){
+	  	 	 $.fn.popup = function (options) {
+          var defaults = {
+
+        }
+
+      if (Object.prototype.toString.call(options) == '[object Object]' && options.title) {
+ 
+      	$(".head").html(options.title)
+      }
+
+      if (Object.prototype.toString.call(options) == '[object Object]' && options.content) {
+    
+      	$(".popup-main-content").html(options.content)
+      }
+     $(".popup").show();
+      
+      $('.popup .ok-btn').on('click', function () {
+        $('.popup').hide();
+        
+        if (typeof options == 'object' && typeof options.ok == 'function') {
+          options.ok();
+        }
+
+      })
+      $('.popup .cancel-btn').on('click', function () {
+      	 $('.popup').hide();
+      	  if (typeof options == 'object' && typeof options.oks == 'function') {
+          options.oks();
+        }
+      	
+       	 })
+         $(".popup-content").css("marginTop",-parseInt($(".popup-content").css("height"))/2)
+      }
+ 
+       	 $(".popup").popup({
+       	 	title:"提示",
+       	 	content:"您确定要离开页面？",
+       	 	ok:function(){
+       	 		  $.ajax({
+	          type:'get', 
+	          url:'../api/cart/logout.php',
+	          dataType:'json', 
+	          success:function(data){
+	          if(data.status == 1){
+	          localStorage.removeItem('user');
+	          	  location.href="登入jq.html";
+	             }
+			       }
+			     })
+      	}
+      })
+
+   })
+   $(document).ajaxStart(function(){
+      $('.loading').show();
+   })
+    $(document).ajaxComplete(function(){
+      $('.loading').hide();
+     
+   })
+		$(document).ajaxSuccess(function(event,data){
+			 if(data.responseJSON.status==1001){
+			 	  location.href="jq登入.html";
+			 }
+		})
+
+ fn(1);
+  function fn(p) {
+    $.get('../api/cart/admin/product.php', {p:p,pnum:25}, function(data){
+      if(data.status == 1){
+        var list = data.list;
+        var total = data.total;
+        var html = '';
+        var pageHtml = '';
+
+        for (var i = 0; i < list.length; i++) {
+          var item = list[i];
+          var lockText = '上架';
+          var btnText = '<button type="button" class="btn btn-default btn-down">下架</button>';
+          var date = new Date(item.createTime*1000);
+          var dateText = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+
+          if(item.lock == 1){
+            lockText = '下架';
+            btnText = '<button type="button" class="btn btn-defaults btn-up">上架</button>'
+          }
+//                <td><img style="width:60px;" src="../api/cart'+item.img+'" onerror="this.src=\'../public/nopic.png\'" /></td>\
+          html+='<tr id="'+item.id+'">\
+                  <td><input type="checkbox" class="check"></td>\
+                  <td>'+item.id+'</td>\
+                    <td><img style="width:60px;" onerror="this.src=\'../public/nopic.png\'"  data-original="../api/cart'+item.img+'"/></td>\
+                  <td class="name">'+item.name+'</td>\
+                  <td class="detail">'+item.detail+'</td>\
+                  <td class="lock">'+lockText+'</td>\
+                  <td class="price">'+item.price+'</td>\
+                  <td>'+dateText+'</td>\
+                  <td>\
+                    <div class="btn-group btn-group-sm" role="group" aria-label="...">\ <button type="button" class="btn btn-default btn-edit">编辑</button>'+btnText+'\
+                      <button type="button" class="btn btn-default btn-del">删除</button>\
+                    </div>\
+                  </td>\
+                </tr>';
+        }
+        $('#list').html(html);
+	         $('td img').lazyload({
+        	placeholder:'../public/nopic.png'
+        })
+        if(p > 1){
+          pageHtml += '<li><a href="javascript:;" class="prev"><span aria-hidden="true">&laquo;</span></a></li>';
+        }
+
+        for (var i = 1; i <= total; i++) {
+          if(i == p){
+            pageHtml += '<li class="active"><a href="javascript:;" style="color:blue" class="num">'+i+'</a></li>'
+          }else{
+            pageHtml += '<li><a href="javascript:;" class="num">'+i+'</a></li>'
+          }
+          
+          
+        }
+
+        if(p < total){
+          pageHtml += '<li><a href="javascript:;" class="next"><span aria-hidden="true">&raquo;</span></a></li>';
+        }
+        
+        $('.pagination').html(pageHtml);
+
+      }
+    }, 'json')
+  }
+
+$('.pagination').on('click', '.num', function(){
+  var num = parseInt( $(this).html() );
+  fn(num);
+
+}).on('click', '.prev', function(){
+  var num = parseInt( $('li.active .num').html() );
+  fn(num-1);
+  
+}).on('click', '.next', function(){
+  var num = parseInt( $('li.active .num').html() );
+  fn(num+1);
+
+});
+  $(".newp-btn").on('click',function(){
+ 	 $('.sub-headers').text("商品添加");
+       	$("#addp").show();
+       	$('.save-btn').show();
+       	$('.saves-btn').hide();
+       	$('#apimg').hide();
+       clearformdata();
+     
+     });
+     $('#list').on('click', '.btn-edit', function(){
+     	   $('.sub-headers').text("商品编辑");
+          $("#addp").show();
+          $('.saves-btn').show();
+			    $(".save-btn").hide();
+          var tr = $(this).parents('tr');
+          var id=tr.prop('id');
+            
+          var name = tr.find('.name').html();
+          var  detail = tr.find('.detail').html();
+          var lock = tr.find('.lock').prop('checked')?0:1;
+          var price = tr.find('.price').html();
+          var img=tr.find('img').prop('src');
+
+         $('#inputPName').val(name);		  
+         $('#inputDetail').val(detail);		   	
+         $('#apimg').prop('src',img);		   	
+         $('#inputUp').prop('checked',lock);		   	
+         $('#inputPrice').val(price);
+         $('#addp').attr('pid',id);
+    
+      }).on('click', '.btn-down, .btn-up', function(){
+	      var id = $(this).parents('tr').prop('id');
+	      var lock = 0;
+	      if( $(this).hasClass('btn-down') ){
+	        lock = 1;
+	      }
+	      $.ajax({
+	        url:'../api/cart/product/update.php',
+	        type:'PUT',
+	        data:JSON.stringify({id:id, lock:lock}),
+	        dataType:'json',
+	        success:function(data){
+	          if(data.status == 1){
+             var a=parseInt($('.active .num[style]').html());
+                       fn(a);
+	          }
+	          
+	        }
+	      })
+
+    }).on('click', '.btn-del', function(){
+    	   var id = $(this).parents('tr').prop('id');
+			 $.mypopup({
+         title: '提示',
+         content:'确定要删除吗',
+          ok:function(){
+          $.ajax({
+				        url:'../api/cart/product.php',
+				        type:'delete',
+				        data:JSON.stringify({id:id}),
+				        dataType:'json',
+				        success:function(data){
+				          if(data.status == 1){
+				            var a=parseInt($('.active .num[style]').html());
+				                    fn(a);
+				          }
+				        }
+				      })
+          },
+          oks:function(){
+            $('.mypopup').remove();
+          }
+       })
+  
+    
+    }).on('click', '.check', function(){
+      var check = $(this).prop('checked');
+      if(!check){
+        $('#check-all').prop('checked', false);
+      }else{
+        if($('.check').length == $('.check:checked').length){
+          $('#check-all').prop('checked', true);
+        }
+      }
+    })
+	   $("#addp").on('click','.cancel-btn ',function(){
+	   	    $("#addp").hide();
+	   	    clearformdata();
+}).on('click','.saves-btn',function(){
+	   	      var prod = getProductForm();
+			     prod.append('id',$('#addp').attr('pid')); 
+			     $('#apimg').src=$('#inputIMG').src;
+           var url = '../api/cart/product/update.php';
+		      $.ajax({
+		        url:url,
+		        type:'post',
+		        contentType: false,
+		        processData: false,
+		        data:prod,
+		        dataType:'json',
+		        success:function(data){
+		         var a=parseInt($('.active .num[style]').html());
+		          $("#addp").hide();
+		             fn(a);
+		        }
+		      })
+    })
+       $(".form-horizontal").validate({
+			     submitHandler: function (form){   
+			     	if($("#addp .sub-headers").html()=="商品添加"){
+			         $('.save-btn').show();
+			      $(".saves-btn").hide();		    	
+	   	      var prod= getProductForm();
+	
+           var url = '../api/cart/product.php';
+		      $.ajax({
+		        url:url,
+		        type:'post',
+		        contentType: false,
+		        processData: false,
+		        data:prod,
+		        dataType:'json',
+		        success:function(data){
+		         var a=parseInt($('.active .num[style]').html());
+		          $("#addp").hide();
+		             fn(a);
+		        }
+		      })
+
+			      }
+			   }
+     });
+     $('#check-all').on('click',function(){
+         var check=$(this).prop('checked');
+       $(".check").prop('checked','check');
+       if(check){
+       	$(".check").prop('checked',true);
+       }else{
+       	 $(".check").prop('checked',false);
+       }
+  
+     })
+     $('.plup-btn,.pldown-btn').on('click',function(){
+
+     		$('#check-all').prop('checked',false);
+     	    var arr=[];
+     	    $('.check:checked').each(function(index,item){
+     	    	arr.push($(item).parents('tr').prop('id'));
+     	    })
+     	    var ids=arr.join(',');
+     	    var lock=0;
+     	    if($(this).hasClass('pldown-btn')){
+     	    	lock=1;
+     	    }   
+         	    
+      $.ajax({
+        url:'../api/cart/product.php',
+        type:'put',
+        data:JSON.stringify({id:ids, lock:lock}),
+        dataType:'json',
+        success:function(data){
+          if(data.status == 1){
+           var a=parseInt($('.active .num[style]').html());
+	             fn(a);
+          }
+        }
+      })
+     })
+     	$('.pldel-btn').on('click',function(){
+     		$(".mypopup").hide();
+     	  var check=$("#check-all").prop('checked');
+     	  if(check){
+     	  	 	 $.fn.popup = function (options) {
+         var defaults = {
+        title: '标题',
+        content:""
+        }
+
+      if (Object.prototype.toString.call(options) == '[object Object]' && options.title) {
+      	$(".head").html(options.title)
+      }
+
+      if (Object.prototype.toString.call(options) == '[object Object]' && options.content) {
+      	$(".popup-main-content").html(options.content)
+      }
+        $(".popup").show();
+      
+       $('.popup .ok-btn').on('click', function () {
+        $('.popup').hide();
+        
+        if (typeof options == 'object' && typeof options.ok == 'function') {
+          options.ok();
+        }
+
+      })
+      $('.popup .cancel-btn').on('click', function () {
+      	 $('.popup').hide();
+      	  if (typeof options == 'object' && typeof options.oks == 'function') {
+          options.oks();
+        }
+      	
+       	 })
+        $(".popup-content").css("marginTop",-parseInt($(".popup-content").css("height"))/2)
+ 
+      }
+       	 $(".popup").popup({
+       	 	title:"提示",
+       	 	content:"您确定要全部删除吗？",
+       	 	ok:function(){
+       	 		$("#check-all").prop("checked",false);
+       	 				  var arr=[];
+     	    $('.check:checked').each(function(index,item){
+     	    	arr.push($(item).parents('tr').prop('id'));
+     	    })
+     	    var ids=arr.join(',');    
+      $.ajax({
+        url:'../api/cart/product.php',
+        type:'delete',
+        data:JSON.stringify({id:ids}),
+        dataType:'json',
+        success:function(data){
+          if(data.status == 1){
+           var a=parseInt($('.active .num[style]').html());
+	             fn(a);
+          }
+        }
+      })
+       	 	}
+       	 })
+     	  }
+
+     	})
+      function getProductForm(){
+      var name = $('#inputPName').val();
+      var file = $('#inputIMG')[0].files;
+      var detail = $('#inputDetail').val();
+      var lock = $('#inputUp').prop('checked')?0:1;
+     var  price = $('#inputPrice').val();
+         var pro=new FormData();
+             pro.append('name',name);
+             pro.append('detail',detail);
+             pro.append('lock',lock);
+             pro.append('price',price);
+             pro.append("img",img)
+          if(file.length>0){
+             pro.append('file',file[0]);
+        }
+        return pro
+    }
+  function clearformdata(){
+      $('#inputPName').val("");		  
+      $('#inputDetail').val("");		   	
+      $('#inputIMG').val("");		   	
+      $('#inputUp').removeProp('checked');		   	
+      $('#inputPrice').val("");
+   };
+    $(".popup .popup-content").addClass("on");
+    $(".mypopup-content").addClass("on");
+    $(".on").addClass("onss");
+    
+    	   $('.shadow li ').on('click',function(){
+    	   	$(this).addClass('active');
+    	 })
+    
+</script>
+</body>
+
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no" />
+  <title>品类</title>
+  <link rel="stylesheet" href="public/css/style_ios.css">
+  <script src="public/js/fontsize.js" type="text/javascript"></script>
+  <script type="text/javascript" src="public/vue2.min.js"></script>
+  <script type="text/javascript" src="public/vue-resource.js"></script>
+<style lang="">
+  .login-box{
+    display: none;
+  }
+  .login-box.on{
+    display: block;
+  }
+</style>
+</head>
+
+<body class="bf8">
+  <div id="app">
+  
+    <header class="header clearfix">
+
+        <div class="middle"><span class="god bold">商品列表</span></div>
+
+    </header>
+    <div class="h1r"></div>
+
+	<section class="list" @scroll="scrollHandler" ref="listDom">
+    	<ul class=" clearfix">
+        	<li v-for="item in list">
+            	<a href="javascript:;">
+                	<dl>
+                    	<dd><img :src="item.img" onerror="this.src = '../public/nopic.png'"></dd>
+                        <dt>
+                        	<p>Cartier</p>
+                            <p>{{item.name}}</p>
+                        </dt>
+                    </dl>
+                </a>            
+          </li>
+
+            
+        </ul>
+        <section class="list-bottomla clearfix">
+            <div class="itemEnd" v-if="curr <= total">拖动,显示更多珠宝</div>
+            <div class="itemEnd nol" v-else>到底了</div>
+        </section>
+    </section>    
+
+    <nav class="m_nav clearfix">
+    	<a href="index.html">
+        	<dl>
+            	<dd class="ico1"></dd>
+                <dt>首页</dt>
+            </dl>
+        </a>
+        <a href="list.html">
+        	<dl>
+            	<dd class="ico2"></dd>
+                <dt>品类</dt>
+            </dl>
+        </a>
+        <a href="zbox.html">
+        	<dl>
+            	<dd class="ico3"></dd>
+                <dt>珠宝盒</dt>
+            </dl>
+        </a>
+        <a href="zbox-login.html">
+        	<dl>
+            	<dd class="ico4"></dd>
+                <dt>我的</dt>
+            </dl>
+        </a>
+    </nav>
+
+
+<div class="login-box" :class="{'on':user.id == -1}">
+	<div class="out-login">
+    	<div class="po-re">
+        	<a href="###" class="out-del"></a>
+            <div class="lo-topimg"></div>
+            <p class="lo-toptitle">登录</p>
+            <div class="lo-inputbox">
+                <input type="text" placeholder="输入账号" class="lo-input" v-model="user.account">
+                <input type="password" placeholder="输入密码" class="lo-input lo-input1" v-model="user.password">
+                <a href="###" class="lo-dell"></a>
+            </div>
+            <a href="###" class="lo-btn" @click="login">确定</a>
+        </div>
+    </div>
+	<div class="bg1"></div>
+  </div>
+
+
+
+  </div>
+
+  
+
+<script>
+
+
+// ajax拦截器，ajax回调函数
+Vue.http.interceptors.push(function(req, next){
+    this.loading = true;
+    next(function(data){
+      var obj = JSON.parse(data.body);
+      if(obj.status == 1001){
+        // 如果没登录，id就改成-1，这样登录框才可以弹出
+        this.user.id = -1;
+      }
+      this.loading = false;
+    })
+  })
+
+
+    var vm = new Vue({
+      data:{
+        list:[],
+        total:1,
+        curr:1,
+        loading:false,
+        user:{
+          // 初始状态id为0，这样可以避免登录框一开始会显示的bug
+          id:0,
+          account:'',
+          password:''
+        }
+      },
+      created:function(){
+        console.log(this.user.id);
+//      this.$http.get('../api/cart/userCheck.php').then(function(res){
+//        var data = JSON.parse(res.data);
+//        if(data.status == 1){
+//          // 登录成功就覆盖最新的user信息
+//          Object.assign(this.user, data.user)
+//          this.selectProducts()
+//        }
+//      })
+  this.selectProducts()
+      },
+      methods:{
+        // 登录
+        login:function(){
+          this.$http.post('../api/cart/login.php', {account:this.user.account, password:this.user.password}).then(function(res){
+            var data = JSON.parse(res.data);
+            if(data.status == 1){
+              Object.assign(this.user, data.user)
+              this.selectProducts()
+            }
+          })
+        },
+        scrollHandler:function(){
+
+          // 如果正在加载数据，那么就不能再调接口
+          if(this.loading){
+            return
+          }
+
+          if(this.$refs.listDom.scrollHeight - this.$refs.listDom.clientHeight - this.$refs.listDom.scrollTop < 50){
+            this.selectProducts()
+          }
+        },
+        selectProducts:function(){
+
+          // 如果当前页大于最大页数，那么就不能再调接口了
+          if(this.curr > this.total){
+            return
+          }
+
+          this.$http.get('../api/cart/product.php?pnum=6&p='+this.curr).then(function(res){
+            var data = JSON.parse(res.data);
+            if(data.status == 1){
+              data.list.forEach(function(item){
+                item.img = '../api/cart' + item.img
+              })
+              this.list = this.list.concat(data.list);
+              this.total = data.total;
+              this.curr++;
+            }
+          })
+        }
+      }
+    }).$mount('#app')
+
+
+  
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  
+  <ul>
+    
+  </ul>
+
+  <script type="text/javascript">
+    // 浏览器 服务器 数据库 关系
+    // xampp
+    // ajax
+
+    // 增
+    // 删
+    // 改
+    // 查：查找到数据展示找页面上
+
+
+    // 1.通过ajax请求数据(获取数据)
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', '02-http.php');
+    xhr.send();
+    xhr.onreadystatechange = function(){
+      // 后端数据已经返回到浏览器
+      if(xhr.readyState == 4){
+
+        // 2.把数据填写到页面上吧(把数据渲染到页面上)
+        var html = '';
+        var data = JSON.parse( xhr.responseText )
+        for (var i = 0; i < data.length; i++) {
+          var item = data[i];
+          html += '<li><span>id:'+item.id+'</span> <span>name:'+item.name+'</span> <span>price:$'+item.price+'</span></li>';
+          
+        }
+        document.querySelector('ul').innerHTML = html;
+      }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // get请求与json格式字符串
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('get','02-http.php');
+    // xhr.send();
+    // xhr.onreadystatechange = function (){
+    //   if(xhr.readyState == 4){
+    //     if(xhr.status == 200){
+    //       console.log(xhr.response);
+    //     }
+    //   }
+    // }
+    // console.log(222);
+
+
+    // // 练习1 获取商品列表并填写到页面上
+
+    // // 练习2 加上分页功能
+
+
+
+    // // post请求
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('post','02-http.php');
+
+    // // post请求传参需要设置x-www-form-urlencoded编码类型，不然后端拿不到前端传过去的数据
+    // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    // xhr.send("a=1&b=2");
+    // xhr.onreadystatechange = function (){
+    //   if(xhr.readyState == 4){
+    //     if(xhr.status == 200){
+    //       console.log(xhr.response);
+    //     }
+    //   }
+    // }
+
+
+
+    // // put方法 一般用于修改信息
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('put','../api/cart/product.php');
+
+    // xhr.send("id=2&name=22");
+    // xhr.onreadystatechange = function (){
+    //   if(xhr.readyState == 4){
+    //     if(xhr.status == 200){
+    //       console.log(xhr.response);
+    //     }
+    //   }
+    // }
+
+
+    // delete方法 一般用于删除信息
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('delete','../api/cart/product.php');
+    // xhr.send("id=3");
+    // xhr.onreadystatechange = function (){
+    //   if(xhr.readyState == 4){
+    //     if(xhr.status == 200){
+    //       console.log(xhr.response);
+    //     }
+    //   }
+    // }
+
+  </script>
+</body>
+
+</html>

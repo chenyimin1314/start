@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+	</head>
+	<body>
+	<ul></ul>
+	<script>
+      var a=new XMLHttpRequest();
+       a.open('get',"../php/02-http.php");
+       a.send();
+       a.onreadystatechange=function(){
+       	if(a.readyState==4){
+       		var html="";
+     	  var data=JSON.parse(a.responseText); 
+     	  console.log(a.responseText)
+     	 for(var i=0;i<data.length;i++){
+     		var c=data[i];
+     		html+='<li>\
+     		<span>id:'+c.id+'</span> \
+     		<span>name:'+c.name+'</span> \
+     		<span>price:$'+c.price+'</span>\
+     		</li>';
+     	}
+     	document.querySelector("ul").innerHTML=html;
+     }}
+	</script>
+	</body>
+</html>
+

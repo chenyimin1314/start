@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../public/main.css" rel="stylesheet">
+      <style>
+      	#addp{
+      		display: block;
+      	}
+      </style>
+</head>
+
+<body >
+<div id="box">
+  <!--这里要加载header.html-->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="javascript:;">Dashboard</a></li>
+          <li><a href="javascript:;">Settings</a></li>
+          <li><a href="javascript:;">Profile</a></li>
+          <li><a href="javascript:;">Help</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="nav-plist active"><a href="javascript:;">商品管理</a></li>
+          <li class="nav-olist"><a href="javascript:;">订单管理</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="plist main-content">
+          <h2 class="sub-header">
+            商品管理
+            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+              <button type="button" class="btn btn-default newp-btn" v-on:click="xin">新增商品</button>
+              <button type="button" class="btn btn-default plup-btn" @click="bi(0)">批量上架</button>
+              <button type="button" class="btn btn-default pldown-btn" @click="bi(1)">批量下架</button>
+              <button type="button" class="btn btn-default pldel-btn" @click="DEL">批量删除</button>
+            </div>
+          </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox"  v-model="checkAll"  @click="quanx" ></th>
+                  <th>商品ID</th>
+                   <th>商品图片</th>
+                   <th>商品名称</th>
+                    <th>商品详情</th>
+                  <th>上下架状态</th>
+                  <th>价格(元)</th>
+                  <th>创建日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              
+              <tbody id="list" >
+                <tr v-for="(item,index) in list"   >
+                  <td><input type="checkbox"  @click="quan(index)" v-model="item.check"></td>
+                  <td>{{item.id}}</td>
+                  <td><img style="width: 60px; height: 70px;"   @error="img(index)" v-bind:src="item.img" alt="" /></td>
+                   <td>{{item.name}}</td>
+                  <td>{{item.detail}}</td>
+                  <td>{{item.lock?'下架':"上架"}}</td>
+                  <td>{{item.price}}</td>
+                  <td>{{data(item.createTime*1000)}}</td>
+                  <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="..."> 
+                    	<button type="button" class="btn btn-default btn-edit" v-on:click="toggle(index)" >编辑</button>
+                    	<button type="button" class="btn btn-default btn-down" v-on:click="gailock(item.id,index)" >{{item.lock?'上架':'下架'}}</button>                    	
+                      <button type="button" class="btn btn-default btn-del" v-on:click="del(item.id)">删除</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <nav>
+              <ul class="pagination pull-right">
+                <li v-if="cum>1" @click="dian(cum-1)" >
+                  <a href="#" >
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+                </li>
+
+                <li v-for="num in nums" @click="dian(num)" v-bind:class="{'active':num==cum}"> <a href="javascript:;" >{{num}}</a></li>
+
+                <li  v-if="cum<total"  @click="dian(cum+1)" >
+                <a href="#" >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="addp" v-show="isShow"> 
+    <div class="popup-content">
+      <h4 class="sub-header">
+{{text}}
+      </h4>
+      <form class="form-horizontal">
+        <div class="popup-main-content">
+          <div class="form-group">
+            <label for="inputPName" class="col-sm-2 control-label">商品名称</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputPName" v-model="prod.name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品详情</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" id="inputDetail" v-model="prod.detail"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+              <img v-bind:src="prod.img" style="width:120px;height:120px;" v-if="prod.img" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品图片</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control inputImg" ref="pimg">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputUp" class="col-sm-2 control-label">是否上架</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label>
+              <input type="checkbox" value="" id="inputUp" v-model="prod.lock">
+            </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPrice" class="col-sm-2 control-label">价格</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="inputPrice" v-model="prod.price">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+           <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-default save-btn" href="javascript:;" v-on:click="que">确认保存</a>
+            <a class="btn btn-default cancel-btn" href="javascript:;" v-on:click="qu" >取消</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+    <div class="loading" v-show="loading" style="position: fixed;left:0;top: 0;height: 100%;width: 100%;z-index: 9999;">
+	    	<img src="../public/loading.gif" alt="" style="position: absolute;margin: auto; left: 0; top: 0;bottom: 0; right: 0; z-index: 10000;" />
+	      <div class="mask"></div>
+     </div>
+  </div>
+ <script src="vue2.min.js"></script>
+ <script src="vue-resource.js"></script>
+ <script type='text/javascript'>
+// 	/ajax阻止器/
+ 	Vue.http.interceptors.push(function(req,next){
+// 		/ajax开始调用/
+ 		this.loading=true;
+// 		/ajax调用完成/
+ 		next(function(){
+ 			this.loading=false;
+ 		})
+ 	})
+// 	  /vue住框架/
+   var vm=new Vue({
+   	   el:'#box',
+   	   data:{
+   	   	   loading:false,
+	   	   	 isShow:false,
+	   	   	 text:'商品添加',
+	   	   	 ison:false,
+	   	   	 id:80,
+	   	   	 checkAll:false,
+	   	   	 list: [],
+	        prod:{
+	        	id:'',
+	        	name:'',
+	        	detail:'',
+	        	price:'',
+	        	lock:true,
+	          check:false
+	        },
+        cum:1,
+        total:1
+   	   },
+   	  created:function(){
+         this.shu();
+       },
+       computed:{
+       	 nums:function(){
+       	 	var arr=[];
+       	 	for (var i=1;i<=this.total;i++) {
+       	 		arr.push(i);
+       	 	}
+       	 	return arr;
+       	 }
+       },
+   	   methods:{
+   	   	data:function(time){
+   	   		var data=new Date(time);
+   	   		return data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate();
+   	   	},
+   	   	img:function(index){
+   	   		this.list[index].img='../public/nopic.png';
+   	   	},
+   	   	shu:function(){
+           this.$http.get('../api/cart/admin/product.php?pnum=8&p='+this.cum).then(function(da){
+          	var data=JSON.parse(da.data);
+              if(data.status==1){
+              	data.list.forEach(function(item){
+              		item.img='../api/cart/'+item.img;
+              	})
+              	this.list=data.list;
+              	this.total=data.total;
+              }
+         })
+   	   	},
+// 	   	/调用住主页面/
+   	    dian:function(num){
+   	    	this.cum=num;
+   	    	this.shu();
+   	    },
+// 	    /删除单个/
+   	   	del:function(id){
+   	   		this.$http.delete('../api/cart/product.php',{body:{id:id}}).then(function(re){
+   	   			var data=JSON.parse(re.data);
+   	   			if(data.status==1){
+   	   				this.shu();
+   	   			}
+   	   		})
+// 	   		this.list.splice(index,1);
+   	   	},
+// 	   	/上下架/
+   	   	gailock:function(id,index){
+   	   		var locks=!this.list[index].lock;
+   	   		this.$http.put('../api/cart/product/update.php',{id:id,lock:locks}).then(function(re){
+   	   			var data=JSON.parse(re.data);
+   	   			if(data.status==1){
+   	   				this.shu();
+   	   			}
+   	   		})
+   	   	},
+   	   	toggle:function(index){
+   	   		var item=this.list[index];
+           this.isShow = true;
+//       	 for(var j in item){
+//       	 	 this.prod[j]=item[j];
+//       	 }
+         	 this.prod.id = item.id;
+           this.prod.name = item.name;
+           this.prod.detail = item.detail;
+           this.prod.lock = !item.lock;
+           this.prod.price = item.price;
+           this.prod.img = item.img;
+           this.$refs.pimg.value="";
+        	 this.text='商品编辑';
+        	 this.ison=true;
+         },
+         qu:function(){
+         	this.isShow = false;
+         },
+         xin:function(){
+         	this.ison=false;
+          this.isShow = true;
+         	this.prod.id="";
+          this.prod.name="";
+         	this.prod.detail="";
+        	this.prod.price="";
+        	this.prod.lock="";
+          this.prod.img = '';
+          this.$refs.pimg.value="";
+        	this.text='商品添加';
+         },
+         que:function(){
+         	   	var form=new FormData();
+            	var files=this.$refs.pimg.files;
+            	  if(files.length>0){
+            	  	form.append("file",files[0]);
+            	  }
+            	  for (var k in this.prod) {
+            	  	if(k!=='id'&&k!=='check'&&k!=='img'){
+            	  		if(k=='lock'){
+            	  				form.append(k,this.prod[k]?0:1);
+            	  		}else{
+            	  				form.append(k,this.prod[k]);
+            	  		}
+            	  	}
+            	  }
+//          	  /编辑商品确认/
+            if(this.ison==true){
+	            form.append('id',this.prod.id)
+            	this.$http.post('../api/cart/product/update.php',form).then(function(re){
+            		var data=JSON.parse(re.data);
+            		 if(data.status==1){
+            		  	this.shu();
+            		 }
+            	})
+//          	/新增商品确认/
+            }else{
+            	 	this.$http.post('../api/cart/product.php',form).then(function(re){
+            		var data=JSON.parse(re.data);
+            		 if(data.status==1){
+            		  	this.shu();
+            		 }
+            	})
+            }
+            this.isShow = false;
+         },
+//       /全选/
+         quanx:function(){
+          var that = this;
+          this.list.forEach(function(item){
+            item.check = that.checkAll
+          })
+        },
+//      /单选/
+         quan:function(index){
+          // 当我点击商品的复选框，如果是打钩
+          if(this.list[index].check){
+            var newList = this.list.filter(function(item){
+              return item.check
+            })
+            if(newList.length == this.list.length){
+              this.checkAll = true
+            }else{
+              this.checkAll = false
+            }
+            // 当我点击商品的复选框，如果不打钩
+          }else{
+            this.checkAll = false
+           }
+        },
+//      /批量删除/
+        DEL:function(){
+        	var it=this.list.filter(function(item){
+        	 	 return item.check;
+        	})
+	        	it=it.map(function(item){
+	        		return item.id;
+	        	})
+//	        	console.log(it);
+	        var its=it.join(',');
+        	  	this.$http.delete('../api/cart/product.php',{body:{id:its}}).then(function(re){
+   	   			var data=JSON.parse(re.data);
+	   	   			if(data.status==1){
+	   	   				this.shu();
+	   	   			}
+	   	   		})
+        	 this.checkAll = false
+        },
+//      /批量上下架/
+        bi:function(lock){
+//      	this.list.forEach(function(item){
+//      		if(item.check){
+//      			item.lock=lock;
+//      		}
+//      	})
+           this.checkAll = false
+         var it=this.list.filter(function(item){
+        	 	 return item.check;
+        	})
+	        	it=it.map(function(item){
+	        		return item.id;
+	        	})
+	        	 var its=it.join(',');
+        	this.$http.put('../api/cart/product/update.php',{id:its,lock:lock}).then(function(re){
+   	   			var data=JSON.parse(re.data);
+   	   			if(data.status==1){
+   	   				this.shu();
+   	   			}
+   	   		})
+        } 
+       }, 
+   })
+
+ </script>
+</body>
+   
+</html>

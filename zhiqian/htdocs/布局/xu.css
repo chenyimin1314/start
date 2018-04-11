@@ -1,0 +1,214 @@
+	 *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+			.box{
+				height: 100%;
+				width: 100%;
+				font-size: 10px;
+			}
+			.head{
+				height: 60px;
+				width: 100%;
+				background:white;
+				position: fixed;
+				left: 0;
+				top: 0;
+				right: 0;
+				font-size: 2rem;
+				text-align: center;
+				border-bottom: 1px solid #CCCCCC;
+				z-index: 1000;
+	
+			}
+		   .head	.imh{ 
+  	        width: 25px;
+          }
+			.head img{
+				width: 50px;
+			}
+			.head .left{
+				position: absolute;
+				left: 2%;
+				top:15%;
+			}
+			.head .middle img{
+				text-align: center;
+                  margin-top: 4px;
+			}
+			.head .right img{
+				width: 35px;
+			}
+			.head .right{
+				position: absolute;
+				right: 2%;
+				top: 15%;
+
+			}
+			.body{
+				width: 100%;
+				height: 1000px;
+			}
+			.foot div{
+				height: 100%;
+				width: 25%;
+				background: black;
+				color: white;
+				text-align: center;
+				font-size: 1rem;
+			}
+			.foot{
+				display: flex;
+				justify-content: center;
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				height:  70px;
+				width: 100%;
+				background: black;
+				z-index: 1100;
+			}
+			.foot img{
+				width: 30px;
+			}
+			.foot div img{
+				position: relative;
+				top: 9px;
+			}
+			.foot div span{
+				text-align: center;
+				position: relative;
+				top: 7px;
+				display: block;
+			}
+		    .content{
+		     height: 60px;
+		     width: 100%;
+		     display: flex;
+		     font-size: 1.3rem;
+		     text-align: center;
+		     line-height: 50px;
+		     	margin-top: 62px;
+		    }
+		    .content div{
+		    	height: 50px;
+		    	width: 33.33%;
+		    }
+		    .content2 span{
+		    	display: inline-block;
+		    	height: 40px;
+		    	width: 100%;;
+		    	border-left: 1px solid #CCCCCC;
+		    	border-right: 1px solid #CCCCCC;
+		    	line-height: 35px;
+		    }
+		    .swiper-slide img{
+		       	width: 100%;
+				height: 250px;
+		       }
+           .fashion{
+         	height: 300px;
+         	width: 100%;
+         	color: black;
+         }
+          .fashion1{
+         	 border-bottom: 1px solid #CCCCCC;
+         	 height: 70px;
+         	 width: 100%;
+         	 font-size: 1.4rem;
+         	 text-align: center;
+         	 line-height: 70px;
+         }
+          .fashion1 span{
+          	 position: absolute;
+          	 right: 20px;
+          	 color: #CCCCCC;
+          }
+          .table{
+          	 height: 230px;
+         	 width: 100%;
+          }
+           .table img{
+           	display: inline;
+          	width: 90px;
+          	margin-left: 30%;
+          }
+    
+          .table .im{
+          	width: 125px;
+           	display: inline-block;
+           	position: absolute;
+            margin: auto;
+              bottom: 10%;     
+          }
+            .table .ims{
+		  	position: absolute;
+		  	display: inline-block;
+          	width: 30px;
+            left: 22%;  
+            top: 15%;     
+          }
+          .table td{
+          	height: 115px;
+          	width: 33%;
+          	border-left: 1px solid #CCCCCC;
+          	border-bottom: 1px solid  #C0C0C0;
+     	   position: relative;
+          }
+		
+          .s{
+          	height: 2000px;
+          	margin-top: 70px;
+          	
+          }
+      .s div{
+   	     height: 350px;
+   	     width: 100%;
+   	     border: 1px solid #CCCCCC;
+   }
+       .s div span{
+       	 opacity: 0.5;
+       }
+    .s .a1{
+    	background: url('../public/images/list1.png') no-repeat;
+    	background-size: cover;
+    	 font-size: 6.3rem;
+    	  text-align: center;
+    	  line-height: 500px;
+    }
+    .s .a2{
+    	background: url('../public/images/list2.png') no-repeat;
+    	background-size: cover;
+    	 font-size: 6.3rem;
+    	 text-align: center;
+    	   line-height: 500px;
+    }
+    .s .a3{
+    	background: url('../public/images/list3.png') no-repeat;
+    	background-size: cover;
+    	  line-height: 500px;
+    	   font-size: 6.3rem;
+    	 text-align: center;
+    }
+    .s .a4{
+    	background: url('../public/images/list4.png') no-repeat;
+    	background-size: cover;
+    	  line-height: 500px;
+    	   font-size: 6.3rem;
+    	 text-align: center;
+    }
+    .s .a5{
+    	background: url('../public/images/list5.png') no-repeat;
+    	background-size: cover;
+    	  line-height: 500px;
+    	   font-size: 6.3rem;
+    	 text-align: center;
+    }
+  .di{
+ 	 font-size: 3rem;
+ 	 margin-top: 10%;
+   }
+   
+   	

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+ <link href="../../public/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../../public/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!--这里要加载header.html-->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="javascript:;">电商运营平台</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="javascript:;">Dashboard</a></li>
+          <li><a href="javascript:;">Settings</a></li>
+          <li><a href="javascript:;">Profile</a></li>
+          <li><a href="javascript:;">Help</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="nav-plist active"><a href="javascript:;">商品管理</a></li>
+          <li class="nav-olist"><a href="javascript:;">订单管理</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="plist main-content">
+          <h2 class="sub-header">
+            商品管理
+            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="...">
+              <button type="button" class="btn btn-default newp-btn">新增商品</button>
+              <button type="button" class="btn btn-default plup-btn">批量上架</button>
+              <button type="button" class="btn btn-default pldown-btn">批量下架</button>
+              <button type="button" class="btn btn-default pldel-btn">批量删除</button>
+            </div>
+          </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="check-all"></th>
+                  <th>商品ID</th>
+                  <th>商品图片</th>
+                  <th>商品名称</th>
+                  <th>商品详情</th>
+                  <th>上下架状态</th>
+                  <th>价格(元)</th>
+                  <th>创建日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="list">
+
+              </tbody>
+            </table>
+
+            <nav>
+              <ul class="pagination pull-right">
+
+              </ul>
+            </nav>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+  <div class="popup" id="addp">
+    <div class="popup-content">
+      <h4 class="sub-header">
+        商品添加
+      </h4>
+      <form class="form-horizontal">
+        <div class="popup-main-content">
+          <div class="form-group">
+            <label for="inputPName" class="col-sm-2 control-label">商品名称</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputPName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品详情</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" id="inputDetail"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <labelclass="col-sm-2 control-label">
+              </label>
+              <div class="col-sm-10">
+                <img src="" alt="" id="apimg" style="max-width:300px">
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDetail" class="col-sm-2 control-label">商品图片</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control inputImg">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputUp" class="col-sm-2 control-label">是否上架</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label>
+              <input type="checkbox" value="" id="inputUp">
+            </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPrice" class="col-sm-2 control-label">价格</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="inputPrice">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-default save-btn" href="javascript:;">确认保存</a>
+            <a class="btn btn-default save-edit-btn" style="display:none" href="javascript:;">确认修改</a>
+            <a class="btn btn-default cancel-btn" href="javascript:;">取消</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="mask"></div>
+  </div>
+
+  <script src="./public/jquery.min.js"></script>
+  <script type='text/javascript'>
+    renderList(1)
+
+    function renderList(p) {
+
+      // 调接口的准备
+      var xhr = new XMLHttpRequest();
+      xhr.open('get', '../../api/cart/admin/product.php?pnum=4&p=' + p);
+      xhr.send();
+      xhr.onreadystatechange = function () {
+
+        // 如果xhr.readyState = 4 数据就到达浏览器并可以使用
+        if (xhr.readyState == 4) {
+
+          // 如果xhr.status = 200 这次调接口，从浏览器的层面上看是成功
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+
+            // 如果obj.status = 1，从业务逻辑上看，是没问题的
+            if (obj.status == 1) {
+              var list = obj.list;
+              var total = obj.total;
+              var html = '';
+              var pageHtml = '';
+
+              for (var i = 0; i < list.length; i++) {
+                var item = list[i];
+                var upText = '上架';
+                var upBtn = '<button type="button" class="btn btn-default btn-down">下架</button>';
+                var date = new Date(item.createTime * 1000);
+                date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+                if (item.lock == 1) {
+                  upText = '下架';
+                  upBtn = '<button type="button" class="btn btn-default btn-up">上架</button>';
+                }
+
+                // onerror事件，就是图片读取错误会触发，然后替换默认图片
+
+                html += '<tr id="' + item.id +
+                  '">\
+                  <td><input type="checkbox" class="check"></td>\
+                  <td>' +
+                  item.id +
+                  '</td>\
+                  <td><img class="td-img" style="width:80px;" onerror="this.src = \'../../public/nopic.png\'" src="../../api/cart' +
+                  item.img + '" /></td>\
+                  <td class="td-name">' + item.name +
+                  '</td>\
+                  <td class="td-detail">' + item.detail +
+                  '</td>\
+                  <td class="td-lock">' + upText +
+                  '</td>\
+                  <td class="td-price">' + item.price + '</td>\
+                  <td>' +
+                  date +
+                  '</td>\
+                  <td>\
+                    <div class="btn-group btn-group-sm" role="group" aria-label="..."> <button type="button" class="btn btn-default btn-edit">编辑</button>' +
+                  upBtn +
+                  '\
+                      <button type="button" class="btn btn-default btn-del">删除</button>\
+                    </div>\
+                  </td>\
+                </tr>';
+              }
+
+
+
+              document.querySelector('#list').innerHTML = html;
+
+              if (p > 1) {
+                pageHtml +=
+                  '<li><a href="javascript:;" class="prev"><span aria-hidden="true">&laquo;</span></a></li>';
+              }
+
+              for (var i = 1; i <= total; i++) {
+                if (p == i) {
+                  pageHtml += '<li class="active"><a href="javascript:;" class="num">' + i + '</a></li>'
+                } else {
+                  pageHtml += '<li><a href="javascript:;" class="num">' + i + '</a></li>'
+                }
+
+              }
+              if (p < total) {
+                pageHtml +=
+                  '<li><a href="javascript:;" class="next"><span aria-hidden="true">&raquo;</span></a></li>';
+              }
+
+              document.querySelector('.pagination').innerHTML = pageHtml;
+
+              var nums = document.querySelectorAll('.num');
+              for (var i = 0; i < nums.length; i++) {
+                var el = nums[i];
+                el.index = i + 1;
+                el.onclick = function () {
+                  renderList(this.index);
+                }
+              }
+
+              if (p > 1) {
+                document.querySelector('.prev').onclick = function () {
+                  var p = parseInt(document.querySelector('.active .num').innerHTML);
+                  renderList(p - 1);
+                };
+              }
+
+              if (p < total) {
+                document.querySelector('.next').onclick = function () {
+                  var p = parseInt(document.querySelector('.active .num').innerHTML);
+                  renderList(p + 1);
+                };
+              }
+
+              document.querySelector('#check-all').checked = false;
+
+
+            }
+
+          }
+        }
+      }
+    }
+
+    // 事件委托
+    document.querySelector('#list').onclick = function (e) {
+      var tg = e.target;
+//    if (tg.classList.contains('btn-edit')) {
+//      // 进来了说明这是点击了编辑按钮
+//
+//      // 修改编辑弹窗的一些信息
+//      document.querySelector('#addp').style.display = 'block';
+//      document.querySelector('#addp .save-edit-btn').style.display = 'inline-block';
+//      document.querySelector('#addp .save-btn').style.display = 'none';
+//      document.querySelector('#addp .sub-header').innerHTML = '商品编辑';
+//
+//      // 获取我点击编辑的商品的相关信息
+        var tr = tg.parentNode.parentNode.parentNode;
+        document.querySelector('#addp').pid = tr.getAttribute('id');
+        document.querySelector('#inputPName').value = tr.querySelector('.td-name').innerHTML;
+        document.querySelector('#inputDetail').value = tr.querySelector('.td-detail').innerHTML;
+        document.querySelector('#inputUp').checked = tr.querySelector('.td-lock').innerHTML == '上架' ? true : false;
+        document.querySelector('#inputPrice').value = tr.querySelector('.td-price').innerHTML;
+//
+//      
+//
+//      // 删除功能
+//    } else
+      if (tg.classList.contains('btn-del')) {
+        // 获取我点击编辑的商品的相关信息
+        var tr = tg.parentNode.parentNode.parentNode;
+        var id = tr.getAttribute('id');
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', '../../api/cart/product.php');
+        xhr.send(JSON.stringify({
+          id: id
+        }));
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+              var obj = JSON.parse(xhr.response);
+              if (obj.status == 1) {
+                var p = parseInt(document.querySelector('.active .num').innerHTML);
+                renderList(p);
+              }
+            }
+          }
+        }
+        // 上下架功能
+      } else if (tg.classList.contains('btn-up') || tg.classList.contains('btn-down')) {
+        // 获取我点击编辑的商品的相关信息
+        var tr = tg.parentNode.parentNode.parentNode;
+        var id = tr.getAttribute('id');
+
+        // 默认上架
+        var lock = 0;
+        if (tg.classList.contains('btn-down')) {
+          // 如果是下架，那么lock改成1
+          lock = 1
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open('put', '../../api/cart/product/update.php');
+        xhr.send(JSON.stringify({
+          id: id,
+          lock: lock
+        }));
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+              var obj = JSON.parse(xhr.response);
+              if (obj.status == 1) {
+                var p = parseInt(document.querySelector('.active .num').innerHTML);
+                renderList(p);
+              }
+            }
+          }
+        }
+
+        // 点击复选框
+          // 点击复选框
+      } else if (tg.classList.contains('check')) {
+
+        if (!tg.checked) {
+          document.querySelector('#check-all').checked = false;
+        } else {
+
+          // 如果 复选框的总数量 等于 打了勾的复选框的总数量
+          if (document.querySelectorAll('.check').length == document.querySelectorAll('.check:checked').length) {
+            document.querySelector('#check-all').checked = true;
+          }
+        }
+
+      }
+    }
+
+
+
+
+    document.querySelector('.newp-btn').onclick = function () {
+      document.querySelector('#addp').style.display = 'block';
+      document.querySelector('#addp .sub-header').innerHTML = '商品添加';
+      document.querySelector('#addp .save-btn').style.display = 'inline-block';
+      document.querySelector('#addp .save-edit-btn').style.display = 'none';
+    };
+
+    document.querySelector('.cancel-btn').onclick = function () {
+      document.querySelector('#addp').style.display = 'none';
+      clearMsg();
+    };
+
+    // 新增商品，确认保存
+    document.querySelector('.save-btn').onclick = function () {
+      // 1.获取文本框的信息
+      var prod = getMsg();
+
+      // 2.调接口
+      var xhr = new XMLHttpRequest();
+      xhr.open('post', '../../api/cart/product.php');
+      xhr.send(prod);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+            if (obj.status == 1) {
+
+              document.querySelector('#addp').style.display = 'none';
+              clearMsg();
+
+              var p = parseInt(document.querySelector('.active .num').innerHTML);
+              renderList(p);
+            }
+          }
+        }
+      }
+
+
+      // 3.如果成功那么就刷新页面
+
+    };
+
+    // 编辑商品，确认修改按钮
+    document.querySelector('.save-edit-btn').onclick = function () {
+      // 1.获取文本框的信息
+      var prod = getMsg();
+      prod.append("id", document.querySelector('#addp').pid);
+
+      // 2.调接口
+      var xhr = new XMLHttpRequest();
+      xhr.open('post', '../../api/cart/product/update.php');
+      xhr.send(prod);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+            if (obj.status == 1) {
+              var p = parseInt(document.querySelector('.active .num').innerHTML);
+              renderList(p);
+            }
+            document.querySelector('#addp').style.display = 'none';
+            clearMsg();
+          }
+        }
+      }
+
+
+      // 3.如果成功那么就刷新页面
+
+    };
+
+    function getMsg(type) {
+      var name = document.querySelector('#inputPName').value;
+      var detail = document.querySelector('#inputDetail').value;
+      var lock = document.querySelector('#inputUp').checked ? 0 : 1;
+      var price = document.querySelector('#inputPrice').value;
+      var files = document.querySelector('.inputImg').files;
+
+
+
+      // 如果涉及到上传文件，那么就要用FormData把传输的信息打包起来
+      var prod = new FormData();
+      // append方法就是把数据传给FormData对象,第一个参数就是传递给后端的数据的键，第二个参数就是他的值
+      prod.append("name", name);
+      prod.append("detail", detail);
+      prod.append("lock", lock);
+      prod.append("price", price);
+      if (files.length > 0) {
+        prod.append("file", files[0]);
+      }
+
+
+      return prod;
+    }
+
+    function clearMsg() {
+      document.querySelector('#inputPName').value = '';
+      document.querySelector('#inputDetail').value = '';
+      document.querySelector('#inputUp').checked = false;
+      document.querySelector('#inputPrice').value = '';
+      document.querySelector('.inputImg').value = '';
+      document.querySelector('#apimg').src = '';
+    }
+
+    document.querySelector('#check-all').onclick = function () {
+      var check = this.checked;
+      var checks = document.querySelectorAll('.check');
+      for (var i = 0; i < checks.length; i++) {
+        var ck = checks[i];
+        ck.checked = check;
+      }
+    };
+
+    document.querySelector('.pldel-btn').onclick = function () {
+      var checks = document.querySelectorAll('.check:checked');
+      var arr = [];
+      for (var i = 0; i < checks.length; i++) {
+        var check = checks[i];
+        var id = check.parentNode.parentNode.id;
+        arr.push(id);
+      }
+      var ids = arr.join(',');
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('DELETE', '../../api/cart/product.php');
+      xhr.send(JSON.stringify({id: ids}));
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+            if (obj.status == 1) {
+              var p = parseInt(document.querySelector('.active .num').innerHTML);
+              renderList(p);
+            }
+          }
+        }
+      }
+
+    };
+
+    document.querySelector('.plup-btn').onclick = function () {
+      // 获取所有打钩了的复选框
+      var checks = document.querySelectorAll('.check:checked');
+      var arr = [];
+
+      // 把打钩了的复选框的相关商品的id放进arr数组吧
+      for (var i = 0; i < checks.length; i++) {
+        var check = checks[i];
+        var id = check.parentNode.parentNode.id;
+        arr.push(id);
+      }
+      // 通过数组把多个id的字符串拼接好
+      var ids = arr.join(',');
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('put', '../api/cart/product/update.php');
+      xhr.send(JSON.stringify({
+        id: ids,
+        lock:0
+      }));
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            var obj = JSON.parse(xhr.response);
+            if (obj.status == 1) {
+              var p = parseInt(document.querySelector('.active .num').innerHTML);
+              renderList(p);
+            }
+          }
+        }
+      }
+
+    };
+////
+//  document.querySelector('.pldown-btn').onclick = function () {
+////    // 获取所有打钩了的复选框
+//    var checks = document.querySelectorAll('.check:checked');
+//    var arr = [];
+//
+//    // 把打钩了的复选框的相关商品的id放进arr数组吧
+//    for (var i = 0; i < checks.length; i++) {
+//      var check = checks[i];
+//      var id = check.parentNode.parentNode.id;
+//      arr.push(id);
+//    }
+//    // 通过数组把多个id的字符串拼接好
+//    var ids = arr.join(',');
+//
+//    var xhr = new XMLHttpRequest();
+//    xhr.open('put', '../api/cart/product/update.php');
+//    xhr.send(JSON.stringify({
+//      id: ids,
+//      lock:1
+//    }));
+//    xhr.onreadystatechange = function () {
+//      if (xhr.readyState == 4) {
+//        if (xhr.status == 200) {
+//          var obj = JSON.parse(xhr.response);
+//          if (obj.status == 1) {
+//            var p = parseInt(document.querySelector('.active .num').innerHTML);
+//            renderList(p);
+//          }
+//        }
+//      }
+//    }
+//
+//  };
+
+  </script>
+</body>
+
+</html>

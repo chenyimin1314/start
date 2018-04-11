@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #box{
+            width: 400px;
+            background: #FCB66E;
+            margin: 20px auto;
+            padding: 10px 10px;
+        }
+        #txt{
+            width: 350px;
+            height:200px ;
+
+
+        }
+        #shuzi{
+            text-align: right;
+        }
+        #butt{
+            height: 30px;
+            width: 100px;
+            background-color: red;
+            font-size: 20px;
+        }
+        #xian{
+            padding: 15px 22px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="ping">
+        <h4>评论：</h4>
+        <textarea id="txt" ></textarea>
+    </div>
+    <div id="shuzi">
+        <span id="otx">还可以输入</span>
+        <span id="sp">30</span>个字
+    </div>
+    <div id="fabu">
+        <input type="text" id="butt" value="发表留言"/>
+    </div>
+    <div id="xian">
+        <h3>显示留言</h3>
+        <ul id="uls">
+        </ul>
+    </div>
+</div>
+<script>
+    var txt=document.getElementById("txt");
+    var otx=document.getElementById("otx");
+    var sp=document.getElementById("sp");
+    var butt=document.getElementById("butt");
+    var uls=document.getElementById("uls");
+      var time=null;
+       txt.onfocus=function(){
+           time=setInterval(fb,20);
+           function fb(){
+             var a=txt.value.length;
+             var b=30;
+               b=b-a;
+           if(b>0){
+               sp.innerHTML=b;
+           }
+           else if(b<0){
+               b=0-b;
+               sp.innerHTML=b;
+               sp.style.color="red";
+               otx.innerHTML="已超出";
+           }
+
+           }
+       }
+
+    txt.onblur=function(){
+        clearInterval(time);
+    }
+    butt.onclick=function(){
+      var tex=txt.value;
+       if(tex.length!=0) {
+           if (tex.length<30) {
+               var uli = document.createElement("li");
+               uls.appendChild(uli);
+               if (uls.children.length > 0) {
+                   uls.insertBefore(uli, uls.children[0])
+               }
+           }
+           else {
+               alert("已超出内容");
+           }
+           var up = document.createElement("p");
+           up.innerHTML = tex;
+           uli.appendChild(up);
+           var bu = document.createElement("input");
+           console.log(bu)
+           bu.setAttribute('type','button');
+           bu.value = "删除";
+           uli.appendChild(bu);
+             bu.onclick = function () {
+             	console.log(111)
+             uls.removeChild(this.parentNode);
+        }
+
+     } else{
+       alert("否则不能为空");
+    }
+    }
+//
+</script>
+
+</body>
+</html>

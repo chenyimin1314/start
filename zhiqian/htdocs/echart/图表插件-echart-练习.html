@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+
+<body>
+  <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+  <div id="container" style="width: 100%;height:600px;"></div>
+
+  <script src="public/jquery.min.js"></script>
+  <script src="public/echarts.min.js"></script>
+  <script type="text/javascript">
+    $.get('./public/echart.json', function (data) {
+
+      var titleArr = [];
+      var dataArr = [];
+
+      data.forEach(function(val, index){
+        titleArr.push(val.name);
+        dataArr.push({
+            name: val.name,
+            type: 'line',
+            stack: '总量',
+            areaStyle: {
+              normal: {}
+            },
+            data: val.data
+          })
+      })
+
+      var dom = document.getElementById("container");
+      var myChart = echarts.init(dom);
+
+      // 不同的图表区别就在于option，去官网示例可以直接拷贝 - http://echarts.baidu.com/examples.html
+      var option = {};
+
+      option = {
+        title: {
+          text: '销售数据'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: titleArr
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [{
+          type: 'category',
+          boundaryGap: false,
+          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        }],
+        yAxis: [{
+          type: 'value'
+        }],
+        series: dataArr
+      };
+
+
+      myChart.setOption(option);
+
+    })
+  </script>
+</body>
+
+</html>

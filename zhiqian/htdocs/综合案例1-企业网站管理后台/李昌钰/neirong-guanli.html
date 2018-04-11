@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />	
+		<title></title>
+		<style type="text/css">
+			#cao{float: right;}
+		</style>
+		<link rel="stylesheet" href="../css/bootstrap.css" />
+		
+		<script src="jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="../js/bootstrap.js"></script>
+	</head>
+	
+	<body>
+			<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+				<a class="navbar-brand" href="#">Admin</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li >
+						<a href="anli.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 后台首页<span class="sr-only">(current)</span></a>
+					</li>
+					<li >
+						<a href="用户管理.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户管理</a>
+					</li>
+					<li class="active">
+						<a href="#"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 内容管理</a>
+					</li>
+					<li>
+						<a href="标签管理.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> 标签管理</a>
+					</li>
+				</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-screenshot"></span> 前台首页</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-user"></span> 个人主页</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-cog"></span> 个人设置</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-credit-card"></span> 账户中心</a>
+						</li>
+						<li>
+							<a href="#"><span class="glyphicon glyphicon-heart"></span> 我的收藏</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#"><span class="glyphicon glyphicon-off"></span> 退出</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	   
+	   <div class="container">
+	   	<div class="row">
+	   		<div class="col-lg-2">
+	   			<a class="list-group-item active" href="#" role="button">内容管理</a>
+	   			<a class="list-group-item " href="内容添加.html" role="button">内容添加</a>
+	   			
+	   		</div>
+	   		<div class="col-lg-10">
+	   			<ul class="nav nav-tabs">
+                 <li><a href="#">内容管理</a></li>
+                 </ul>
+                <!--用户管理--> 
+                <br />
+               <ul class="nav nav-tabs">
+               	<li class="active"><a href="#"data-toggle="tab">内容管理</a></li>
+           		<li><a href="内容添加.html">内容添加</a></li>
+               </ul>
+               <table class="table">
+                   <thead>
+					<tr>
+						<th>文章标题</th>
+						<th>发布时间</th>
+						<th>发布作者</th>
+						<th>操作</th>
+					</tr>
+					<tbody>
+						<tr>
+							<td>产品经理常犯的7大错误，你造吗？</td>
+							<td>2017-05-25</td>
+							<td>蒋老师</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+									    <li><a href="#">Action</a></li>
+									    <li><a href="#">Another action</a></li>
+									    <li><a href="#">Something else here</a></li>
+									    <li role="separator" class="divider"></li>
+									    <li><a href="#">Separated link</a></li>
+                                     </ul>
+								  </div>
+							</td>
+						</tr>
+						<tbody>
+						<tr>
+							<td>产品经理常犯的7大错误，你造吗？</td>
+							<td>2017-05-25</td>
+							<td>蒋老师</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+									    <li><a href="#">Action</a></li>
+									    <li><a href="#">Another action</a></li>
+									    <li><a href="#">Something else here</a></li>
+									    <li role="separator" class="divider"></li>
+									    <li><a href="#">Separated link</a></li>
+                                     </ul>
+								  </div>
+							</td>
+						</tr>
+						<tbody>
+						<tr>
+							<td>产品经理常犯的7大错误，你造吗？</td>
+							<td>2017-05-25</td>
+							<td>蒋老师</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+									    <li><a href="#">Action</a></li>
+									    <li><a href="#">Another action</a></li>
+									    <li><a href="#">Something else here</a></li>
+									    <li role="separator" class="divider"></li>
+									    <li><a href="#">Separated link</a></li>
+                                     </ul>
+								  </div>
+							</td>
+						</tr>
+						<tbody>
+						<tr>
+							<td>产品经理常犯的7大错误，你造吗？</td>
+							<td>2017-05-25</td>
+							<td>蒋老师</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+									    <li><a href="#">Action</a></li>
+									    <li><a href="#">Another action</a></li>
+									    <li><a href="#">Something else here</a></li>
+									    <li role="separator" class="divider"></li>
+									    <li><a href="#">Separated link</a></li>
+                                     </ul>
+								  </div>
+							</td>
+						</tr>
+						<tbody>
+						<tr>
+							<td>产品经理常犯的7大错误，你造吗？</td>
+							<td>2017-05-25</td>
+							<td>蒋老师</td>
+							<td>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    操作 <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+									    <li><a href="#">Action</a></li>
+									    <li><a href="#">Another action</a></li>
+									    <li><a href="#">Something else here</a></li>
+									    <li role="separator" class="divider"></li>
+									    <li><a href="#">Separated link</a></li>
+                                     </ul>
+								  </div>
+							</td>
+						</tr>
+                </table>
+                </tbody>
+                <nav aria-label="Page navigation" style="float: right;">
+			     <ul class="pagination">
+				<li>
+					<a href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">1</a>
+				</li>
+				<li>
+					<a href="#">2</a>
+				</li>
+				<li>
+					<a href="#">3</a>
+				</li>
+				<li>
+					<a href="#">4</a>
+				</li>
+				<li>
+					<a href="#">5</a>
+				</li>
+				<li>
+					<a href="#">6</a>
+				</li>
+				<li>
+					<a href="#">7</a>
+				</li>
+				<li>
+					<a href="#">...</a>
+				</li>
+				<li>
+					<a href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+			</nav>
+			</div>
+			</div>
+			</div>
+			<p style="text-align: center;">
+	   		Copyright&copy;2012-2015 www.baidu.com 粤ICP备13014270号-4
+	   	</p>	
+	   	</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button >点击一下</button>
+		<script>
+			var flag=true;
+			var i=0;
+			document.querySelector('button').onclick=function(){
+					i++;
+				if(flag){
+					flag=false;
+					setTimeout(function(){
+						flag=true;
+					},300)
+					console.log(i)
+				}else{
+					alert('请勿多次点击')
+				}
+				
+			}
+		</script>
+	</body>
+</html>

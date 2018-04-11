@@ -1,0 +1,344 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no" />
+  <title>珠宝盒</title>
+  <link rel="stylesheet" href="css/swiper.css">
+  <link rel="stylesheet" href="css/style_ios.css">
+  <style lang="">
+    .zbox-list .btn-box {
+      position: absolute;
+      right: 50px;
+      top: 33px;
+    }
+
+    .zbox-list .btn-box .num-text {
+      width: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!--header-->
+  <header class="header clearfix">
+    <div class="left">
+    </div>
+    <div class="middle jewelryBox"><span>珠宝盒</span><em>(6)</em></div>
+  </header>
+
+  <section class="zboxmain">
+    <div class="zboxb borderTop">
+
+
+
+
+    </div>
+  </section>
+
+
+
+  <div class="botnBox clearfix">
+    <div class="left borderRight borderTop">
+      <dl>
+        <dd id="all-check"></dd>
+        <dt>全选</dt>
+      </dl>
+      <div class="rc">合计 : <span class="god1">￥<span id="total"></span></span>
+      </div>
+    </div>
+    <!--<div class="middle borderTop">换</div>-->
+    <div class="right bg-god order-btn">下单</div>
+  </div>
+
+  <nav class="m_nav clearfix">
+    <a href="index.html">
+      <dl>
+        <dd class="ico1"></dd>
+        <dt>首页</dt>
+      </dl>
+    </a>
+    <a href="list-test.html">
+      <dl>
+        <dd class="ico2"></dd>
+        <dt>列表</dt>
+      </dl>
+    </a>
+    <a href="zbox-test.html">
+      <dl>
+        <dd class="ico3"></dd>
+        <dt>购物车</dt>
+      </dl>
+    </a>
+    <a href="order-test.html">
+      <dl>
+        <dd class="ico4"></dd>
+        <dt>我的</dt>
+      </dl>
+    </a>
+  </nav>
+
+  <div class="login-box" style="display:none">
+    <div class="out-login">
+      <div class="po-re">
+        <a href="###" class="out-del"></a>
+        <div class="lo-topimg"></div>
+        <p class="lo-toptitle">登录</p>
+        <div class="lo-inputbox">
+          <input type="text" placeholder="输入账号" id="account" class="lo-input">
+          <input type="password" placeholder="输入密码" id="password" class="lo-input lo-input1">
+          <a href="###" class="lo-dell"></a>
+        </div>
+        <a href="###" class="lo-btn">确定</a>
+      </div>
+    </div>
+    <div class="bg1"></div>
+  </div>
+
+  <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+  <script src="js/fontsize.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/com.js"></script>
+
+  <script>
+    renderCart();
+    console.log(1);
+
+// 下单功能
+$('.order-btn').on('click', function(){
+  var boxs = $('.thrbox .acti').parents('.zbox-list');
+  var pids = [];
+  var nums = [];
+
+  boxs.each(function(index, item){
+    // 获取选中的商品id
+    pids.push( $(item).prop('id') )
+    // 获取选中的商品数量
+    nums.push( $(item).find('.num-text').val() )
+  })
+
+  pids = pids.join(',')
+  nums = nums.join(',')
+
+  $.post('../../api/cart/order.php', JSON.stringify({pids:pids, nums:nums}), function(data){
+    if(data.status == 1){
+      alert('下单成功');
+      renderCart();
+    }
+  }, 'json')
+
+
+})
+
+// 单选
+    $('.zboxb').on('click', '.thrbox span', function () {
+      var check = $(this).hasClass('acti') ? 0 : 1;
+      var pid = $(this).parents('.zbox-list').prop('id');
+
+      $.ajax({
+        url: '../../api/cart/cart.php',
+        type: 'put',
+        data: JSON.stringify({
+          pid: pid,
+          check: check
+        }),
+        dataType: 'json',
+        success: function (data) {
+          if (data.status == 1) {
+            renderCart();
+          }
+        }
+      })
+
+// 数量减少功能
+    }).on('click', '.jian', function () {
+      var pid = $(this).parents('.zbox-list').prop('id');
+      var cnum = parseInt($(this).siblings('.num-text').val()) - 1;
+      if (cnum >= 1) {
+        $.ajax({
+          url: '../../api/cart/cart.php',
+          type: 'put',
+          data: JSON.stringify({
+            pid: pid,
+            cnum: cnum
+          }),
+          dataType: 'json',
+          success: function (data) {
+            if (data.status == 1) {
+              renderCart();
+            }
+          }
+        })
+      }
+
+// 数量增加
+    }).on('click', '.jia', function () {
+      var pid = $(this).parents('.zbox-list').prop('id');
+      var cnum = parseInt($(this).siblings('.num-text').val()) + 1;
+      $.ajax({
+        url: '../../api/cart/cart.php',
+        type: 'put',
+        data: JSON.stringify({
+          pid: pid,
+          cnum: cnum
+        }),
+        dataType: 'json',
+        success: function (data) {
+          if (data.status == 1) {
+            renderCart();
+          }
+        }
+      })
+
+// 文本框修改数量
+    }).on('blur', '.num-text', function () {
+      var pid = $(this).parents('.zbox-list').prop('id');
+      var cnum = parseInt($(this).val());
+      $.ajax({
+        url: '../../api/cart/cart.php',
+        type: 'put',
+        data: JSON.stringify({
+          pid: pid,
+          cnum: cnum
+        }),
+        dataType: 'json',
+        success: function (data) {
+          if (data.status == 1) {
+            renderCart();
+          }
+        }
+      })
+
+// 删除功能
+    }).on('click', '.del-btn', function () {
+      var pid = $(this).parents('.zbox-list').prop('id');
+      $.ajax({
+        url: '../../api/cart/cart.php',
+        type: 'delete',
+        data: JSON.stringify({
+          pid: pid
+        }),
+        dataType: 'json',
+        success: function (data) {
+          if (data.status == 1) {
+            renderCart();
+          }
+        }
+      })
+
+    })
+
+    $('#all-check').on('click', function () {
+      var check = $(this).hasClass('hover');
+      if (check) {
+        $(this).removeClass('hover')
+        check = 0
+      } else {
+        $(this).addClass('hover')
+        check = 1
+      }
+
+      var ids = [];
+
+      $('.zbox-list').each(function (index, item) {
+        ids.push($(item).prop('id'))
+      })
+
+      ids = ids.join(',')
+
+      $.ajax({
+        url: '../../api/cart/cart.php',
+        type: 'put',
+        data: JSON.stringify({
+          pid: ids,
+          check: check
+        }),
+        dataType: 'json',
+        success: function (data) {
+          if (data.status == 1) {
+            renderCart();
+          }
+        }
+      })
+
+    })
+
+    function renderCart() {
+
+      $.get('../../api/cart/cart.php', function (data) {
+        if (data.status == 1) {
+          var list = data.list;
+          var html = '';
+          var total = 0;
+          // 是否全选默认为true
+          var isAll = true;
+          for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+            var checkClass = '';
+            if (item.check == 1) {
+              checkClass = 'acti'
+              total += parseFloat(item.price * item.cnum);
+            } else {
+              // 只要有不打钩的,那么isAll就为false
+              isAll = false;
+            }
+
+            html += '<div id="' + item.pid +
+              '" class="zbox-list borderBottom">\
+                <div class="thrbox clearfix">\
+                    <div class="left"><span class="' +
+              checkClass +
+              '"></span></div>\
+                    <div class="middle">\
+                        <dl class="clearfix">\
+                            <dd><img src="../../api/cart' +
+              item.img +
+              '"  onerror="this.src = \'../../public/nopic.png\'" ></dd>\
+                            <dt>\
+                                <p class="title"><a href="###">' +
+              item.name +
+              '</a></p>\
+                                <p class="tow"><a href="###">15克拉</a></p>\
+                                <p class="god1 f24">￥' +
+              item.price +
+              '</p>\
+                            </dt>\
+                        </dl>\
+                    </div>\
+                    <div class="btn-box">\
+                      <button class="jian">-</button>\
+                      <input type="text" value="' +
+              item.cnum +
+              '" class="num-text">\
+                      <button class="jia">+</button>\
+                      <button class="del-btn">删除</button>\
+                    </div>\
+                    <div class="right"><span></span></div>\
+                </div>\
+            </div>'
+
+          }
+
+          $('.zboxb').html(html)
+          $('#total').html(total)
+          // 如果是否全选为true,那么就给最下边的全选样式打钩
+          if (isAll) {
+            $('#all-check').addClass('hover')
+          } else {
+            $('#all-check').removeClass('hover')
+          }
+
+        }
+      }, 'json')
+
+    }
+
+    login();
+
+  </script>
+</body>
+
+</html>
